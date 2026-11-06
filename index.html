@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ascenso · Inglés B1–C2</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.png">
+<meta name="theme-color" content="#245f8f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Ascenso">
+<style>
+:root{--bg:#f7f7f5;--card:#fff;--ink:#1c2420;--mut:#5f6b64;--line:#dfe3de;--pri:#245f8f;--pri2:#1b4a71;--bad:#b83a30;--ok:#2a7d4f}
+@media(prefers-color-scheme:dark){:root{--bg:#111517;--card:#1a2024;--ink:#e6ecef;--mut:#92a0a7;--line:#2b363c;--pri:#5aa3d8;--pri2:#7ab8e6;--bad:#ea7b70;--ok:#5cc08a}}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 Georgia,'Times New Roman',serif;background:var(--bg);color:var(--ink)}
+.ui,button,nav,input,textarea,table,.tag,.chip{font-family:system-ui,Segoe UI,sans-serif}
+header{padding:14px 16px;background:var(--card);border-bottom:1px solid var(--line)}
+header h1{font-size:18px;margin:0;font-family:system-ui,sans-serif}
+header span{color:var(--mut);font-weight:400;font-size:14px}
+main{max-width:760px;margin:0 auto;padding:16px}
+nav{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+nav button{flex:1;min-width:84px}
+button{font:inherit;font-family:system-ui,sans-serif;font-size:15px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 14px;border-radius:8px}
+button.pri{background:var(--pri);color:#fff;border-color:var(--pri2);font-weight:600}
+button.on{border-color:var(--pri);box-shadow:inset 0 0 0 1px var(--pri);font-weight:600}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:12px}
+h2{margin:0 0 8px;font-size:21px}h3{margin:14px 0 6px;font-size:17px}
+.mut{color:var(--mut);font-size:14px}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;font-family:inherit;font-size:16px}
+.opt.sel{border-color:var(--pri);background:color-mix(in srgb,var(--pri) 10%,var(--card))}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,var(--card))}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--card))}
+.fb{padding:12px;border-radius:8px;margin-top:10px;border:1px solid var(--line)}
+.fb.ok{border-left:4px solid var(--ok)}.fb.no{border-left:4px solid var(--bad)}
+input[type=text],textarea{width:100%;font:inherit;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;min-height:44px}.words button{padding:6px 10px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.sp{flex:1}
+.passage{background:var(--bg);border-left:3px solid var(--line);padding:10px 14px;margin:10px 0;font-size:16px}
+.tag{font-size:12px;padding:2px 8px;border-radius:4px;background:var(--pri);color:#fff}
+table{width:100%;border-collapse:collapse}td,th{padding:6px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
+.bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden;min-width:60px}.bar>i{display:block;height:100%;background:var(--pri)}
+.teach p,.teach li{margin:6px 0}.teach .ex{font-style:italic;color:var(--pri)}
+.teach table td:first-child{width:38%}
+.unit{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.unit .t{flex:1}
+.big{font-size:42px;font-weight:700;font-family:system-ui,sans-serif}
+details{margin:8px 0}summary{cursor:pointer;font-family:system-ui,sans-serif}
+</style>
+</head>
+<body>
+<header><h1>Ascenso <span>· Inglés B1 → C2 · preparación de examen</span></h1></header>
+<main>
+<nav id="nav"></nav>
+<div id="view"></div>
+</main>
+<script>
+/* ================= CONTENIDO =================
+ Cada unidad: explicación breve (teach) + ejercicios con explicación de cada respuesta.
+ Tipos: mc, gap, wf (word formation), kw (transformación), ro (ordenar), lis (escucha), read (lectura). */
+const LV={B1:{n:'B1 · Preliminary',d:'Comunicación básica en situaciones cotidianas.'},
+B2:{n:'B2 · First',d:'Argumentar con fluidez y entender textos complejos.'},
+C1:{n:'C1 · Advanced',d:'Uso flexible y preciso en contextos académicos y profesionales.'},
+C2:{n:'C2 · Proficiency',d:'Dominio casi nativo: matiz, registro e implicaturas.'}};
+const U=[
+{id:'b1-gram',l:'B1',t:'Gramática clave',teach:`
+<p><b>Tres estructuras que más se confunden en B1:</b></p>
+<table><tr><td><b>Segundo condicional</b></td><td>If + pasado simple, would + infinitivo<br><span class="ex">If I had more time, I would learn Italian.</span></td></tr>
+<tr><td><b>since / for</b></td><td>since + momento de inicio; for + duración<br><span class="ex">since 2019 · for five years</span></td></tr>
+<tr><td><b>Estilo indirecto</b></td><td>El orden vuelve a ser afirmativo, sin do/did<br><span class="ex">He asked where I lived.</span></td></tr>
+<tr><td><b>be used to + -ing</b></td><td>estar acostumbrado a<br><span class="ex">I'm used to getting up early.</span></td></tr></table>`,
+ q:[
+ {k:'gap',p:'If I ___ more time, I would learn Italian.',a:['had'],e:'Segundo condicional: If + pasado simple, would + infinitivo.'},
+ {k:'mc',p:'She has lived here ___ 2019.',o:['for','since','from','during'],a:1,e:'«since» + punto de inicio; «for» + duración.'},
+ {k:'mc',p:"I'm not used to ___ up so early.",o:['get','getting','got','be get'],a:1,e:'«be used to» + gerundio (-ing).'},
+ {k:'gap',p:'The report ___ (write) by the time you arrive.',a:['will have been written','will be written'],e:'Pasiva en futuro: will have been + participio.'},
+ {k:'mc',p:'He asked me where ___.',o:['did I live','I lived','do I live','I do live'],a:1,e:'Estilo indirecto: orden de oración afirmativa.'},
+ {k:'ro',p:'Ordena la frase',w:'have you ever been to London ?'.split(' '),a:'have you ever been to London ?',e:'Present perfect en pregunta: have + sujeto + participio.'}]},
+{id:'b1-voc',l:'B1',t:'Vocabulario y falsos amigos',teach:`
+<p>Un error típico de hispanohablantes es traducir palabra por palabra. Aprende <b>colocaciones</b> (palabras que van juntas) y vigila los <b>falsos amigos</b>:</p>
+<table><tr><td><b>actually</b></td><td>= en realidad (no «actualmente», que es <i>currently</i>)</td></tr>
+<tr><td><b>embarrassed</b></td><td>= avergonzado (no «embarazada», que es <i>pregnant</i>)</td></tr>
+<tr><td><b>make / do</b></td><td><span class="ex">make an appointment, make a mistake · do homework, do the shopping</span></td></tr>
+<tr><td><b>borrow / lend</b></td><td>borrow = tomar prestado · lend = prestar</td></tr>
+<tr><td><b>advice</b></td><td>incontable: <span class="ex">some advice</span>, nunca «an advice» ni «advices»</td></tr></table>`,
+ q:[
+ {k:'mc',p:'The opposite of "borrow" is…',o:['lend','steal','win','spend'],a:0,e:'Borrow = tomar prestado; lend = prestar.'},
+ {k:'mc',p:'I need to ___ an appointment with the dentist.',o:['do','make','take','have to'],a:1,e:'Colocación: make an appointment.'},
+ {k:'gap',p:'Could you give me some ___ (advice) about universities?',a:['advice'],e:'«advice» es incontable: sin «a/an» ni plural.'},
+ {k:'mc',p:'"Fed up" means…',o:['hungry','tired of something','very full','angry at food'],a:1,e:'Fed up with = harto de.'},
+ {k:'wf',p:'He is a very ___ person. (RELY)',a:['reliable'],e:'rely → reliable (adjetivo).'},
+ {k:'mc',p:'"Actually" in English means…',o:['actualmente','en realidad','finalmente','exactamente'],a:1,e:'Falso amigo: actually = en realidad; actualmente = currently.'},
+ {k:'mc',p:'"I was embarrassed" means…',o:['Estaba embarazada','Me dio vergüenza','Estaba enfadado','Estaba cansado'],a:1,e:'Falso amigo: embarrassed = avergonzado.'}]},
+{id:'b1-lis',l:'B1',t:'Estrategias de escucha',teach:`
+<p><b>Cómo escuchar en el examen:</b></p>
+<ul><li>Lee las preguntas <b>antes</b> de oír el audio y subraya qué te piden (hora, motivo, lugar…).</li>
+<li>La respuesta casi nunca usa las mismas palabras: se <b>parafrasea</b> (<span class="ex">half past nine = 9:30</span>).</li>
+<li>Cuidado con los <b>distractores</b>: suelen mencionarse varias opciones y el hablante se corrige.</li>
+<li>Al terminar, lee la transcripción y localiza lo que no entendiste: así se entrena el oído.</li></ul>`,
+ q:[
+ {k:'lis',s:'The train to Manchester leaves at half past nine from platform four.',p:'¿A qué hora sale el tren?',o:['9:00','9:30','10:30','4:00'],a:1,e:'Half past nine = 9:30.'},
+ {k:'lis',s:"I'd rather stay at home tonight because I'm feeling a bit under the weather.",p:'¿Por qué se queda en casa?',o:['Hace mal tiempo','Está algo enfermo','Tiene trabajo','Está de vacaciones'],a:1,e:'Under the weather = encontrarse mal.'},
+ {k:'lis',s:"Could you turn the music down? I'm trying to concentrate on my homework.",p:'¿Qué pide el hablante?',o:['Subir la música','Bajar la música','Apagar la luz','Ayuda con los deberes'],a:1,e:'Turn down = bajar el volumen.'}]},
+{id:'b2-gram',l:'B2',t:'Gramática avanzada',teach:`
+<table><tr><td><b>Tercer condicional invertido</b></td><td>Had + sujeto + participio, would have + participio<br><span class="ex">Had I known, I would have left earlier.</span></td></tr>
+<tr><td><b>Verbo + gerundio</b></td><td>suggest, enjoy, avoid, admit, regret + -ing<br><span class="ex">She suggested postponing the meeting.</span></td></tr>
+<tr><td><b>wish + past perfect</b></td><td>lamentar el pasado<br><span class="ex">I wish I had studied harder.</span></td></tr>
+<tr><td><b>Pasiva impersonal</b></td><td>It is said that… / He is said to be…<br><span class="ex">He is said to be a genius.</span></td></tr>
+<tr><td><b>Relativas no restrictivas</b></td><td>con comas, usa which/who (nunca that)</td></tr></table>`,
+ q:[
+ {k:'mc',p:'Had I known about the delay, I ___ earlier.',o:['would leave','would have left','had left','will leave'],a:1,e:'Inversión del tercer condicional.'},
+ {k:'mc',p:'She suggested ___ the meeting.',o:['to postpone','postponing','postpone','to postponing'],a:1,e:'suggest + gerundio.'},
+ {k:'kw',p:'"I regret not studying harder." → I wish I ___ harder. (STUDIED)',a:['had studied'],e:'wish + past perfect para lamentar el pasado.'},
+ {k:'gap',p:'By next June, she ___ (work) here for ten years.',a:['will have been working','will have worked'],e:'Futuro perfecto continuo/simple.'},
+ {k:'mc',p:'The film, ___ was directed by a newcomer, won three awards.',o:['that','which','what','who'],a:1,e:'Relativa no restrictiva: which (con comas).'},
+ {k:'kw',p:'"People say he is a genius." → He ___ a genius. (SAID)',a:['is said to be'],e:'Pasiva impersonal: is said to be.'}]},
+{id:'b2-use',l:'B2',t:'Use of English',teach:`
+<p><b>Word formation:</b> identifica primero la categoría gramatical que falta (sustantivo, adjetivo, adverbio, verbo) y luego decide si necesita prefijo negativo.</p>
+<table><tr><td>implement → <b>implementation</b></td><td>-tion / -ment / -ness forman sustantivos</td></tr>
+<tr><td>popular → <b>unpopular</b></td><td>un-, in-, im-, dis-, ir-: sentido contrario</td></tr></table>
+<p><b>Phrasal verbs frecuentes:</b> put up with (soportar), set up (establecer), call off (cancelar), run out of (quedarse sin), carry out (llevar a cabo).</p>`,
+ q:[
+ {k:'wf',p:'The ___ of the new law was criticised. (IMPLEMENT)',a:['implementation'],e:'implement → implementation (sustantivo).'},
+ {k:'wf',p:'It was an ___ decision. (POPULAR)',a:['unpopular'],e:'popular → unpopular.'},
+ {k:'mc',p:"He couldn't ___ with the noise any longer.",o:['put up','keep up','give up','make up'],a:0,e:'Put up with = soportar.'},
+ {k:'mc',p:'The company decided to ___ its operations abroad.',o:['carry out','set up','take off','call off'],a:1,e:'Set up = establecer; call off = cancelar.'},
+ {k:'gap',p:'We ran ___ of milk, so I went to the shop.',a:['out'],e:'Run out of = quedarse sin.'}]},
+{id:'b2-read',l:'B2',t:'Comprensión lectora',teach:`
+<ul><li>Lee el texto una vez completo para la <b>idea general</b> antes de mirar las preguntas.</li>
+<li>La opción correcta <b>parafrasea</b> el texto; la incorrecta suele repetir palabras literales pero cambia el sentido.</li>
+<li>Localiza la frase exacta que justifica tu respuesta. Si no puedes señalarla, es una suposición.</li></ul>`,
+ q:[
+ {k:'read',x:'Remote working has changed how companies think about offices. Many firms now offer "hybrid" contracts, where staff spend two or three days at home. Supporters say it improves work–life balance; critics argue that it weakens team spirit and makes it harder for newcomers to learn from colleagues.',p:'¿Cuál es la postura de los críticos?',o:['Mejora el equilibrio personal','Debilita la cohesión y el aprendizaje de los recién llegados','Reduce los salarios','Elimina las oficinas'],a:1,e:'El texto: «weakens team spirit… harder for newcomers to learn».'},
+ {k:'read',x:'The author argues that social media, despite its reputation for superficiality, has revived interest in long-form reading: book recommendations circulate faster than ever, and communities form around shared titles.',p:'La idea central del autor es que las redes sociales…',o:['destruyen la lectura','han impulsado el interés por leer','solo sirven para publicidad','sustituyen a las bibliotecas'],a:1,e:'«despite its reputation… has revived interest in long-form reading».'}]},
+{id:'c1-gram',l:'C1',t:'Estructuras de C1',teach:`
+<p><b>Inversión tras expresiones negativas o restrictivas</b> (verbo auxiliar antes del sujeto):</p>
+<table><tr><td>Not only / Never / Rarely</td><td><span class="ex">Not only did he arrive late, but…</span></td></tr>
+<tr><td>Hardly / Scarcely … when</td><td><span class="ex">Hardly had we entered when the alarm went off.</span></td></tr>
+<tr><td>Not until</td><td><span class="ex">Not until it was too late did he realise.</span></td></tr></table>
+<p><b>It's (high) time + pasado:</b> <span class="ex">It is high time we took action.</span> · <b>In spite of</b> + sustantivo o -ing.</p>`,
+ q:[
+ {k:'mc',p:'Not only ___ late, but he also forgot the documents.',o:['he arrived','did he arrive','he did arrive','arrived he'],a:1,e:'Inversión tras expresión negativa al inicio.'},
+ {k:'mc',p:'It is high time we ___ the problem seriously.',o:['take','took','will take','have taken'],a:1,e:"It's (high) time + pasado."},
+ {k:'kw',p:'"He only realised the danger when it was too late." → Not until it ___ too late did he realise the danger. (WAS)',a:['was'],e:'Not until + cláusula, luego inversión en la principal.'},
+ {k:'kw',p:'"Despite her protests, they sold the house." → In spite of her ___ , the house was sold. (OBJECTED)',a:['objecting','having objected'],e:'In spite of + sustantivo/gerundio.'},
+ {k:'mc',p:'Hardly ___ the building when the alarm went off.',o:['we had entered','had we entered','we entered','did we entered'],a:1,e:'Hardly… when + past perfect invertido.'}]},
+{id:'c1-voc',l:'C1',t:'Léxico y colocaciones',teach:`
+<p>En C1 se evalúa la <b>precisión léxica</b>: la palabra correcta suele venir impuesta por la colocación, no por el significado.</p>
+<table><tr><td>mounting <b>pressure</b></td><td>presión creciente (no «weight»)</td></tr>
+<tr><td>a <b>plethora</b> of</td><td>una abundancia de</td></tr>
+<tr><td><b>ambivalent</b> about</td><td>con sentimientos encontrados</td></tr>
+<tr><td>notorious <b>for</b></td><td>conocido (negativamente) por</td></tr></table>
+<p>Anota siempre la palabra <b>con su preposición y compañeros habituales</b>.</p>`,
+ q:[
+ {k:'mc',p:'The government faces mounting ___ to resign.',o:['pressure','weight','stress','load'],a:0,e:'Colocación: mounting pressure.'},
+ {k:'mc',p:'A ___ of evidence supports the theory.',o:['plethora','plenty','large','crowd'],a:0,e:'A plethora of = abundancia de.'},
+ {k:'wf',p:'The results were ___ with previous studies. (CONSISTENT)',a:['inconsistent'],e:'consistent → inconsistent.'},
+ {k:'mc',p:'She was ___ about the offer, unsure whether to accept.',o:['ambivalent','indifferent','adamant','oblivious'],a:0,e:'Ambivalent = con sentimientos encontrados.'},
+ {k:'mc',p:"He's notorious ___ never meeting deadlines.",o:['for','of','by','at'],a:0,e:'Notorious for.'}]},
+{id:'c1-lis',l:'C1',t:'Escucha avanzada',teach:`
+<p>En C1 el hablante suele <b>matizar o negar</b> lo que parece decir. Escucha la actitud, no solo la información.</p>
+<ul><li><span class="ex">I wouldn't go so far as to call it…</span> → no lo dice tan fuerte.</li>
+<li><span class="ex">Had X been…, it might have…</span> → hipótesis sobre el pasado: no ocurrió.</li></ul>`,
+ q:[
+ {k:'lis',s:"I wouldn't go so far as to call it a failure, but it certainly fell short of our expectations.",p:'¿Qué opina el hablante?',o:['Fue un éxito total','Fue un fracaso rotundo','No fue un fracaso, pero decepcionó','No tiene opinión'],a:2,e:'Fell short of expectations, pero sin llamarlo failure.'},
+ {k:'lis',s:'Had the committee been better informed, it might well have reached a different conclusion.',p:'¿Qué implica?',o:['El comité decidió bien','El comité no estaba bien informado','El comité cambió de opinión','Nadie dijo nada'],a:1,e:'Tercer condicional invertido: no estaban bien informados.'}]},
+{id:'c2-gram',l:'C2',t:'Precisión y matiz',teach:`
+<table><tr><td><b>Were it not for…</b></td><td>= si no fuera por… <span class="ex">Were it not for your help, we would have failed.</span></td></tr>
+<tr><td><b>might / could have + participio</b></td><td>posibilidad pasada <span class="ex">She might have misread it.</span></td></tr>
+<tr><td><b>as though + pasado</b></td><td>irreal en presente <span class="ex">He spoke as though he knew everything.</span></td></tr>
+<tr><td><b>whose</b></td><td>posesivo relativo para personas y cosas</td></tr></table>`,
+ q:[
+ {k:'mc',p:'Scarcely ___ the speech when the audience erupted.',o:['he had finished','had he finished','he finished','did he finished'],a:1,e:'Scarcely… when con inversión.'},
+ {k:'mc',p:'"Were it not for your help, we ___ failed." Elige la forma correcta.',o:['would have','will have','had','would'],a:0,e:'Were it not for + would have + participio.'},
+ {k:'kw',p:'"It is possible that she misread the instructions." → She ___ the instructions. (MIGHT)',a:['might have misread'],e:'Deducción pasada: might have + participio.'},
+ {k:'mc',p:'The proposal, ___ merits are debatable, was approved.',o:['whose','which','that','of which the'],a:0,e:'whose = posesivo relativo.'},
+ {k:'mc',p:'He spoke as though he ___ the whole truth.',o:['knew','knows','had known','would know'],a:0,e:'As though + pasado (irreal en presente).'}]},
+{id:'c2-reg',l:'C2',t:'Registro y matices',teach:`
+<p>En C2 debes elegir el <b>registro</b> correcto (formal/informal) y entender <b>modismos</b> y tono irónico.</p>
+<table><tr><td>tongue-in-cheek</td><td>en broma, irónico</td></tr>
+<tr><td>not hold water</td><td>no sostenerse (un argumento)</td></tr>
+<tr><td>mealy-mouthed</td><td>evasivo, que no habla claro</td></tr></table>
+<p>Formal: <span class="ex">I would like to take this opportunity to express my gratitude.</span> · Informal: <span class="ex">Thanks a lot!</span></p>`,
+ q:[
+ {k:'mc',p:'Which is the most formal?',o:["I'd like to take this opportunity to express my gratitude.",'Thanks a lot, mate.','Cheers for that!','Ta very much.'],a:0,e:'Registro formal: take this opportunity to express…'},
+ {k:'mc',p:'"His remarks were tongue-in-cheek" means…',o:['He was angry','He was being ironic/not serious','He was lying','He was shy'],a:1,e:'Tongue-in-cheek = en broma, irónico.'},
+ {k:'mc',p:'"Her argument doesn\'t hold water" means…',o:["It's very clear","It's not logical or convincing","It's too long","It's emotional"],a:1,e:'Not hold water = no se sostiene.'},
+ {k:'wf',p:'The ___ of the evidence cast doubt on the verdict. (RELIABLE)',a:['unreliability'],e:'reliable → unreliability.'},
+ {k:'mc',p:'A "mealy-mouthed" answer is…',o:['honest and direct','evasive and unwilling to speak plainly','very loud','poetic'],a:1,e:'Mealy-mouthed = evasivo.'}]},
+{id:'b1-tenses',l:'B1',t:'Tiempos verbales',teach:`
+<table><tr><td><b>Pasado simple / continuo</b></td><td>La acción en curso se interrumpe con el pasado simple<br><span class="ex">I was watching TV when the phone rang.</span></td></tr>
+<tr><td><b>Present perfect</b></td><td>Experiencias y acciones que llegan al presente<br><span class="ex">She has been to Paris three times.</span></td></tr>
+<tr><td><b>will / going to</b></td><td>going to = plan o predicción con evidencia<br><span class="ex">Look at those clouds! It's going to rain.</span></td></tr>
+<tr><td><b>used to</b></td><td>hábito pasado que ya no existe<br><span class="ex">I used to play outside every day.</span></td></tr>
+<tr><td><b>Primer condicional</b></td><td>If + presente, will + infinitivo</td></tr></table>`,
+ q:[
+ {k:'mc',p:'I ___ TV when the phone rang.',o:['watched','was watching','have watched','watch'],a:1,e:'Pasado continuo para la acción en curso interrumpida.'},
+ {k:'mc',p:'She ___ to Paris three times.',o:['went','has been','was','is going'],a:1,e:'Present perfect para experiencias: has been to.'},
+ {k:'mc',p:'Look at those clouds! It ___ rain.',o:['will','is going to','is','rains'],a:1,e:'going to: predicción basada en evidencia presente.'},
+ {k:'gap',p:'When I was a child, I ___ to play outside every day.',a:['used'],e:'used to + infinitivo: hábito pasado.'},
+ {k:'mc',p:'I ___ him since Monday.',o:["haven't seen","didn't see","don't see","wasn't seeing"],a:0,e:'since + present perfect.'},
+ {k:'gap',p:'Right now, they ___ (study) for the exam.',a:['are studying'],e:'Presente continuo: acción en este momento.'},
+ {k:'mc',p:'If it rains tomorrow, we ___ at home.',o:['stay','will stay','would stay','stayed'],a:1,e:'Primer condicional: If + presente, will + infinitivo.'},
+ {k:'ro',p:'Ordena la frase',w:'she has been working here since 2020 .'.split(' '),a:'she has been working here since 2020 .',e:'Present perfect continuo + since + año.'}]},
+{id:'b1-prep',l:'B1',t:'Preposiciones',teach:`
+<table><tr><td><b>Tiempo</b></td><td>at + hora (<span class="ex">at 6 o'clock</span>) · on + día (<span class="ex">on Monday</span>) · in + mes/año (<span class="ex">in 1998</span>)</td></tr>
+<tr><td><b>arrive</b></td><td>arrive at + lugar concreto · arrive in + ciudad/país</td></tr>
+<tr><td><b>Adjetivo + preposición</b></td><td>interested <b>in</b>, good <b>at</b>, afraid <b>of</b>, fond <b>of</b>, keen <b>on</b></td></tr>
+<tr><td><b>Verbo + preposición</b></td><td>wait <b>for</b>, depend <b>on</b>, listen <b>to</b>, look <b>at</b></td></tr></table>`,
+ q:[
+ {k:'mc',p:'The meeting is ___ Monday morning.',o:['at','on','in','by'],a:1,e:'on + días de la semana.'},
+ {k:'mc',p:"I'll see you ___ 6 o'clock.",o:['at','on','in','for'],a:0,e:'at + hora.'},
+ {k:'mc',p:'She was born ___ 1998.',o:['at','on','in','from'],a:2,e:'in + año.'},
+ {k:'mc',p:"I'm interested ___ photography.",o:['in','on','at','for'],a:0,e:'interested in.'},
+ {k:'mc',p:'He is very good ___ maths.',o:['at','in','on','with'],a:0,e:'good at.'},
+ {k:'gap',p:'We arrived ___ the airport two hours early.',a:['at'],e:'arrive at + lugar concreto; arrive in + ciudad o país.'},
+ {k:'mc',p:'She is afraid ___ spiders.',o:['of','from','about','with'],a:0,e:'afraid of.'},
+ {k:'gap',p:"I'm waiting ___ the bus.",a:['for'],e:'wait for.'}]},
+{id:'b2-phrasal',l:'B2',t:'Phrasal verbs',teach:`
+<table><tr><td>look up</td><td>buscar información</td></tr><tr><td>take off</td><td>despegar / quitarse</td></tr>
+<tr><td>come up with</td><td>idear, proponer</td></tr><tr><td>take after</td><td>parecerse a (un familiar)</td></tr>
+<tr><td>call off</td><td>cancelar</td></tr><tr><td>give up</td><td>rendirse, dejar de</td></tr>
+<tr><td>get on with</td><td>llevarse bien con</td></tr></table>
+<p>Aprende cada phrasal verb <b>dentro de una frase</b>; el significado casi nunca se deduce de las partes.</p>`,
+ q:[
+ {k:'mc',p:'Can you ___ this word in the dictionary?',o:['look up','look after','look for it','look at up'],a:0,e:'Look up = buscar (una palabra).'},
+ {k:'mc',p:'The plane ___ at 8 a.m.',o:['took off','took out','took over','took in'],a:0,e:'Take off = despegar.'},
+ {k:'mc',p:'We need to ___ with a solution by Friday.',o:['come up','get along','break down','turn off'],a:0,e:'Come up with = idear.'},
+ {k:'mc',p:'She ___ her grandmother; they have the same eyes.',o:['takes after','takes up','takes on','takes off'],a:0,e:'Take after = parecerse a un familiar.'},
+ {k:'mc',p:'The match was ___ because of the storm.',o:['called off','called up','called in','called for'],a:0,e:'Call off = cancelar.'},
+ {k:'gap',p:"I can't ___ up my mind between the two jobs.",a:['make'],e:'Make up your mind = decidirse.'},
+ {k:'mc',p:'He finally ___ smoking last year.',o:['gave up','gave in','gave out','gave away'],a:0,e:'Give up + gerundio = dejar de.'},
+ {k:'mc',p:'I get ___ well with my colleagues.',o:['on','up','off','in'],a:0,e:'Get on well with = llevarse bien con.'}]},
+{id:'b2-wf',l:'B2',t:'Formación de palabras',teach:`
+<p>Pregúntate primero <b>qué categoría falta</b> (sustantivo, adjetivo, adverbio, verbo) y después si el sentido pide un <b>prefijo negativo</b>.</p>
+<table><tr><td>Sustantivos</td><td>-tion, -ment, -ness, -ity, -ance/-ence</td></tr>
+<tr><td>Adjetivos</td><td>-able, -ful, -ive, -ous, -al, -ing/-ed</td></tr>
+<tr><td>Adverbios</td><td>-ly (enthusiastic → enthusiastically)</td></tr>
+<tr><td>Negativos</td><td>un-, in-, im-, il-, ir-, dis-</td></tr></table>`,
+ q:[
+ {k:'wf',p:'Her ___ to the project was outstanding. (CONTRIBUTE)',a:['contribution'],e:'Sustantivo: contribute → contribution.'},
+ {k:'wf',p:'He spoke ___ about his experience. (ENTHUSIASM)',a:['enthusiastically'],e:'Adverbio: enthusiasm → enthusiastically.'},
+ {k:'wf',p:'The film was surprisingly ___. (ENTERTAIN)',a:['entertaining'],e:'Adjetivo: entertain → entertaining.'},
+ {k:'wf',p:'It is ___ to predict the weather here. (POSSIBLE)',a:['impossible'],e:'Prefijo negativo: im- delante de p.'},
+ {k:'wf',p:'The ___ of the building took two years. (CONSTRUCT)',a:['construction'],e:'Sustantivo: construct → construction.'},
+ {k:'wf',p:'It was ___ of him to leave the door open. (RESPONSIBLE)',a:['irresponsible'],e:'Prefijo negativo ir- delante de r.'},
+ {k:'wf',p:'Their ___ with the service was obvious. (SATISFY)',a:['dissatisfaction'],e:'Sentido negativo + sustantivo: dissatisfaction.'},
+ {k:'wf',p:'The company made a ___ profit this year. (CONSIDER)',a:['considerable'],e:'Adjetivo: consider → considerable.'}]},
+{id:'b2-lis',l:'B2',t:'Escucha: hipótesis y causa',teach:`
+<p>En B2 aparecen <b>causas</b> (owing to, because of), <b>condiciones</b> (unless, provided that) y <b>hipótesis irreales</b> (I'd have called, but…). Escucha qué <b>no</b> ocurrió y por qué.</p>`,
+ q:[
+ {k:'lis',s:"The conference has been moved from Tuesday to Thursday owing to the speaker's illness.",p:'¿Por qué se cambió la fecha?',o:['Mal tiempo','Enfermedad del ponente','Falta de público','Error de reserva'],a:1,e:"Owing to = debido a; the speaker's illness."},
+ {k:'lis',s:"I'd have called you earlier, but my phone ran out of battery.",p:'¿Por qué no llamó antes?',o:['Se olvidó','No tenía batería','Estaba ocupado','No tenía el número'],a:1,e:'Ran out of battery = se quedó sin batería.'},
+ {k:'lis',s:"Unless we leave now, we'll miss the last train.",p:'¿Qué pasará si no salen ya?',o:['Llegarán pronto','Perderán el último tren','Cogerán un taxi','Irán andando'],a:1,e:'Unless = a menos que (if not).'}]},
+{id:'c1-read',l:'C1',t:'Lectura: inferencia y actitud',teach:`
+<ul><li>En C1 muchas preguntas piden <b>inferir</b> la actitud del autor (escéptica, crítica, elogiosa), no localizar un dato.</li>
+<li>Palabras de actitud: <i>admittedly, arguably, regrettably, ostensibly, unduly</i>.</li>
+<li>Descarta opciones <b>demasiado extremas</b> (always, never, completely) salvo que el texto lo diga.</li></ul>`,
+ q:[
+ {k:'read',x:'Admittedly, the new policy has reduced waiting times in some hospitals. Yet critics point out that these gains were achieved largely by redirecting resources from preventive care, a trade-off that, arguably, will prove costly in the long run.',p:'¿Cuál es la actitud del autor hacia la política?',o:['Totalmente a favor','Reconoce un logro pero duda de su coste futuro','La rechaza por completo','Es indiferente'],a:1,e:'«Admittedly… Yet… arguably costly»: reconoce y matiza.'},
+ {k:'read',x:'Far from being a mere technical upgrade, the platform ostensibly offers users greater control over their data. In practice, however, the settings are so deeply buried that few people ever change them.',p:'¿Qué sugiere «ostensibly»?',o:['Que es verdad y comprobado','Que lo aparente no coincide con la realidad','Que es muy costoso','Que es opcional'],a:1,e:'Ostensibly = aparentemente; «In practice, however» lo contradice.'},
+ {k:'read',x:'The study found no evidence that homework improves attainment in primary schools, though it did note a modest benefit in secondary education. The authors caution against drawing sweeping conclusions from a single dataset.',p:'¿Qué concluye prudentemente el estudio?',o:['Los deberes son inútiles siempre','Los deberes ayudan algo en secundaria, no hay pruebas en primaria','Los deberes mejoran todo','Hay que prohibirlos'],a:1,e:'«no evidence» en primaria, «modest benefit» en secundaria; «caution» ante conclusiones generales.'}]},
+{id:'c1-idioms',l:'C1',t:'Modismos y expresiones',teach:`
+<table><tr><td>beat around the bush</td><td>andarse por las ramas</td></tr>
+<tr><td>a blessing in disguise</td><td>un mal que resulta bueno</td></tr>
+<tr><td>the tip of the iceberg</td><td>solo una pequeña parte visible de un problema mayor</td></tr>
+<tr><td>bite the bullet</td><td>afrontar algo desagradable con valentía</td></tr>
+<tr><td>once in a blue moon</td><td>muy rara vez</td></tr>
+<tr><td>cut corners</td><td>hacer algo a medias para ahorrar</td></tr></table>`,
+ q:[
+ {k:'mc',p:'"Stop beating around the bush" means…',o:['Stop running','Get to the point','Be quiet','Go outside'],a:1,e:'Beat around the bush = andarse por las ramas.'},
+ {k:'mc',p:'Losing that job turned out to be a ___ in disguise.',o:['blessing','problem','lesson','risk'],a:0,e:'A blessing in disguise.'},
+ {k:'mc',p:'The scandal is only the ___ of the iceberg.',o:['top','tip','edge','head'],a:1,e:'The tip of the iceberg.'},
+ {k:'mc',p:'I hate going to the dentist, but I\'ll just have to ___ the bullet.',o:['bite','shoot','catch','take'],a:0,e:'Bite the bullet = afrontarlo.'},
+ {k:'mc',p:'"We see each other once in a blue moon" means…',o:['every month','very rarely','every night','never'],a:1,e:'Once in a blue moon = muy rara vez.'},
+ {k:'mc',p:'The builders ___ corners to save money, and the wall collapsed.',o:['cut','turned','took','rounded'],a:0,e:'Cut corners = hacer mal por ahorrar.'}]},
+{id:'c1-use',l:'C1',t:'Transformaciones (key word)',teach:`
+<p>Debes reescribir la frase con la palabra dada, <b>sin cambiarla</b>, usando de 2 a 5 palabras. Identifica la estructura que se pide: pasiva, condicional, inversión, estilo indirecto…</p>`,
+ q:[
+ {k:'kw',p:'"I haven\'t seen her for a week." → The last time ___ a week ago. (SAW)',a:['i saw her'],e:'The last time + pasado simple.'},
+ {k:'kw',p:'"Please don\'t smoke here." → You ___ smoke here. (MUST)',a:['must not',"mustn't"],e:'Prohibición: must not.'},
+ {k:'kw',p:'"They say the company is losing money." → The company ___ losing money. (SAID)',a:['is said to be'],e:'Pasiva impersonal: is said to be + -ing.'},
+ {k:'kw',p:'"Although she was tired, she kept working." → ___ tired, she kept working. (SPITE)',a:['in spite of being'],e:'In spite of + gerundio.'},
+ {k:'kw',p:'"I\'m sure he forgot." → He ___ forgotten. (MUST)',a:['must have'],e:'Deducción pasada: must have + participio.'},
+ {k:'kw',p:'"Someone cleans the office every day." → The office ___ every day. (CLEANED)',a:['is cleaned'],e:'Pasiva en presente simple.'}]},
+{id:'c2-vocab',l:'C2',t:'Léxico avanzado',teach:`
+<table><tr><td>ubiquitous</td><td>omnipresente</td></tr><tr><td>ephemeral</td><td>efímero</td></tr>
+<tr><td>exacerbate</td><td>agravar</td></tr><tr><td>candid</td><td>sincero, franco</td></tr>
+<tr><td>mitigate</td><td>mitigar, atenuar</td></tr><tr><td>scrupulous</td><td>escrupuloso</td></tr>
+<tr><td>cogent</td><td>convincente (argumento)</td></tr></table>`,
+ q:[
+ {k:'mc',p:'Smartphones have become ___: you see them everywhere.',o:['ubiquitous','ephemeral','scrupulous','reluctant'],a:0,e:'Ubiquitous = omnipresente.'},
+ {k:'mc',p:'Fame can be ___; it vanishes quickly.',o:['ephemeral','cogent','candid','tenacious'],a:0,e:'Ephemeral = efímero.'},
+ {k:'mc',p:'The new tax will only ___ the housing crisis.',o:['exacerbate','alleviate','dismiss','foresee'],a:0,e:'Exacerbate = agravar.'},
+ {k:'mc',p:'Her ___ remarks surprised the committee, who expected diplomacy.',o:['candid','ephemeral','ubiquitous','frugal'],a:0,e:'Candid = franco, sin rodeos.'},
+ {k:'mc',p:'Measures were taken to ___ the environmental damage.',o:['mitigate','aggravate','provoke','ignore'],a:0,e:'Mitigate = atenuar.'},
+ {k:'mc',p:'He is ___ about keeping accurate records.',o:['scrupulous','careless','indifferent','oblivious'],a:0,e:'Scrupulous = meticuloso y honesto.'},
+ {k:'mc',p:'She presented a ___ argument that convinced everyone.',o:['cogent','vague','trivial','tentative'],a:0,e:'Cogent = convincente.'}]},
+{id:'c2-use',l:'C2',t:'Transformaciones avanzadas',teach:`
+<p>En C2 las transformaciones combinan <b>inversión, subjuntivo y estructuras impersonales</b>. Revisa: <i>Little did…, Not until…, It is believed to…, I'd prefer it if…</i></p>`,
+ q:[
+ {k:'kw',p:'"She had no idea that the plan would fail." → Little ___ that the plan would fail. (KNOW)',a:['did she know'],e:'Little + inversión: Little did she know.'},
+ {k:'kw',p:'"People believe that the painting is a forgery." → The painting is ___ a forgery. (BELIEVED)',a:['believed to be'],e:'Pasiva impersonal: is believed to be.'},
+ {k:'kw',p:'"I would rather you didn\'t tell anyone." → I\'d ___ you didn\'t tell anyone. (PREFER)',a:['prefer it if'],e:"I'd prefer it if + pasado."},
+ {k:'kw',p:'"No matter how hard he tried, he couldn\'t open it." → However ___ , he couldn\'t open it. (HARD)',a:['hard he tried'],e:'However + adjetivo + sujeto + verbo.'},
+ {k:'kw',p:'"It was only after the meeting that I understood." → Not ___ the meeting did I understand. (UNTIL)',a:['until after'],e:'Not until after + inversión en la principal.'}]},
+{id:'c2-read',l:'C2',t:'Lectura: matiz y tono',teach:`
+<p>En C2 se piden <b>tono, implicaturas e ironía</b>. Pregúntate: ¿qué quiere que sienta el lector aunque no lo diga?</p>`,
+ q:[
+ {k:'read',x:'The minister\'s statement was a masterclass in saying nothing at length. Each sentence, polished and sonorous, circled the question without ever landing on it.',p:'¿Cuál es el tono del autor?',o:['Admirativo sin reservas','Irónico y crítico','Neutro e informativo','Compasivo'],a:1,e:'«masterclass in saying nothing» es sarcasmo: la declaración no dijo nada.'},
+ {k:'read',x:'It would be tempting to dismiss the findings as a statistical quirk. That the effect recurs across four independent samples, however, suggests something more stubborn than coincidence.',p:'¿Qué sugiere el autor?',o:['Es una casualidad','El efecto parece real y persistente','Los datos son erróneos','No se puede concluir nada'],a:1,e:'«however… more stubborn than coincidence»: apoya que el efecto es real.'}]},
+{id:'c2-lis',l:'C2',t:'Escucha: implicaturas',teach:`
+<p>En C2 lo importante suele ser lo <b>implícito</b>: eufemismos, ironía, rechazo cortés. Pregúntate qué quiere decir realmente el hablante.</p>`,
+ q:[
+ {k:'lis',s:"Well, it's certainly an ambitious proposal. I'm sure the board will give it all the attention it deserves.",p:'¿Qué insinúa el hablante?',o:['Que le encanta la propuesta','Que probablemente no la considera buena','Que la aprobará sin dudar','Que no la ha leído'],a:1,e:'«All the attention it deserves» es irónico: poca atención merece.'},
+ {k:'lis',s:"I don't suppose you'd happen to know where I might find a decent plumber at this hour?",p:'¿Cuál es el registro?',o:['Muy formal y distante','Cortés e indirecto','Agresivo','Tajante'],a:1,e:'«I don\'t suppose you\'d happen to…» es una petición muy indirecta y cortés.'},
+ {k:'lis',s:"With the benefit of hindsight, one might argue that the decision was, if not wrong, then at least premature.",p:'¿Cómo valora la decisión el hablante?',o:['Fue perfecta','Fue prematura, quizá errónea','Fue tardía','No opina'],a:1,e:'«if not wrong, then at least premature»: crítica atenuada.'}]}
+];
+const WRITING={
+B1:{tasks:['Escribe un correo informal a un amigo invitándole a tu cumpleaños (100–120 palabras).','Describe tu fin de semana ideal (100–120 palabras).'],min:100,max:120,
+ phrases:['I\'m writing to invite you to…','It would be great if you could…','Let me know if you can come.','First of all… / Also… / Finally…'],
+ model:'Hi Laura, I\'m writing to invite you to my birthday party on Saturday 14th at my house. We\'ll start at seven o\'clock and there will be food and music. It would be great if you could come early to help me with the decorations! Let me know if you can make it. Bye for now, Marta.'},
+B2:{tasks:['Ensayo: «¿Deberían prohibirse los móviles en las aulas?» (140–190 palabras).','Reseña de una película o serie reciente (140–190 palabras).'],min:140,max:190,
+ phrases:['It is often argued that…','On the one hand… On the other hand…','Furthermore, / Moreover, / In addition,','Having considered both sides, I believe…'],
+ model:'It is often argued that mobile phones should be banned in classrooms. On the one hand, they distract students and make it harder to concentrate. On the other hand, they can be useful tools for research and for learning languages. Having considered both sides, I believe schools should regulate their use rather than ban them completely.'},
+C1:{tasks:['Informe formal sobre el impacto del turismo masivo en una ciudad (220–260 palabras).','Ensayo a favor o en contra de la semana laboral de cuatro días (220–260 palabras).'],min:220,max:260,
+ phrases:['The aim of this report is to…','It is widely acknowledged that…','This has given rise to…','In light of the above, it is recommended that…'],
+ model:'The aim of this report is to assess the impact of mass tourism on the city. It is widely acknowledged that tourism brings substantial revenue; however, this has given rise to rising rents and overcrowding in the historic centre. In light of the above, it is recommended that the council introduce visitor limits.'},
+C2:{tasks:['Crítica razonada sobre el papel de la IA en la creatividad, con registro formal y matices (280–320 palabras).','Discurso persuasivo ante un público académico sobre el valor del multilingüismo (280–320 palabras).'],min:280,max:320,
+ phrases:['One could be forgiven for assuming that…','Be that as it may,','This is by no means to suggest that…','Ultimately, the crux of the matter is…'],
+ model:'One could be forgiven for assuming that artificial intelligence threatens human creativity. Be that as it may, history suggests that new tools rarely replace artists; they redefine what art can be. This is by no means to suggest that the concerns are unfounded. Ultimately, the crux of the matter is who retains authorship.'}};
+const SPEAK={B1:['Háblame de tu familia y de dónde vives.','Describe una foto de unas vacaciones: qué se ve y qué están haciendo.','¿Qué haces normalmente los fines de semana?'],
+B2:['Compara dos fotos de personas trabajando: una en oficina y otra desde casa. ¿Cuál preferirías?','Con un compañero, decidid qué actividad es mejor para un grupo de estudiantes extranjeros.','¿Crees que viajar es la mejor forma de aprender sobre otras culturas?'],
+C1:['Habla 2 minutos sobre: «¿Hasta qué punto la tecnología nos hace más aislados?»','Discute y llega a una decisión: ¿cómo debería una ciudad reducir el tráfico?','¿Qué responsabilidad tienen las empresas con el medio ambiente?'],
+C2:['Expón y defiende una postura matizada sobre la educación bilingüe obligatoria.','Responde a: «Algunos opinan que el éxito depende más de la suerte que del esfuerzo».','Analiza el papel de los medios en la formación de la opinión pública.']};
+const RUBRIC=['Contenido: respondí a todos los puntos de la tarea','Organización: párrafos claros y conectores variados','Léxico: variedad y precisión, sin repetir palabras','Gramática: estructuras variadas y corrección','Registro adecuado al tipo de texto'];
+const SRUBRIC=['Hablé sin pausas largas ni muletillas excesivas','Usé conectores y ideas ordenadas','Variedad de vocabulario y estructuras','Pronunciación y entonación comprensibles','Respondí a la tarea con ejemplos'];
+/* ================= ESTADO ================= */
+const KEY='ascenso-v2';
+let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+S=S||{level:'B1',placed:false,done:{},cards:{},stats:{},hist:[],drafts:[]};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=s=>s.toLowerCase().replace(/[’']/g,"'").replace(/\s+/g,' ').trim();
+const today=()=>new Date().toISOString().slice(0,10);
+const ORD=['B1','B2','C1','C2'];
+/* ================= REPETICIÓN ESPACIADA ================= */
+const BOX=[0,1,3,7,14,30];
+const qid=(u,i)=>u.id+'#'+i;
+function review(id,ok){const c=S.cards[id]||{b:0};c.b=ok?Math.min(5,c.b+1):0;c.due=new Date(Date.now()+BOX[c.b]*864e5).toISOString().slice(0,10);S.cards[id]=c}
+function dueList(){const t=today(),o=[];U.forEach(u=>u.q.forEach((q,i)=>{const c=S.cards[qid(u,i)];if(c&&c.due<=t)o.push({u,q,i})}));return o}
+function stat(cat,ok){const s=S.stats[cat]||{ok:0,n:0};s.n++;if(ok)s.ok++;S.stats[cat]=s}
+function weak(){return Object.entries(S.stats).filter(([,s])=>s.n>=3&&s.ok/s.n<.7).sort((a,b)=>a[1].ok/a[1].n-b[1].ok/b[1].n).map(([c,s])=>({c,p:Math.round(100*s.ok/s.n),n:s.n}))}
+const unitPct=u=>{const d=S.done[u.id];return d?Math.round(100*d.best/u.q.length):0};
+/* ================= NAVEGACIÓN ================= */
+let tab='hoy';
+function nav(){const t=[['hoy','Hoy'],['aprender','Lecciones'],['repaso','Repaso ('+dueList().length+')'],['examen','Simulacro'],['write','Escritura'],['speak','Speaking'],['stats','Diagnóstico']];
+ $('#nav').innerHTML=t.map(([k,l])=>`<button class="${tab===k?'on':''}" onclick="go('${k}')">${l}</button>`).join('')}
+function go(t){if(run&&run.iv)clearInterval(run.iv);run=null;tab=t;nav();({hoy:vHoy,aprender:vLearn,repaso:vReview,examen:vExam,write:vWrite,speak:vSpeak,stats:vStats})[t]()}
+/* ================= HOY ================= */
+function nextUnit(){const w=weak();if(w.length){const u=U.find(x=>x.t===w[0].c);if(u)return {u,why:'Es tu punto más débil ('+w[0].p+'% de aciertos).'}}
+ const start=ORD.indexOf(S.level);for(let i=start;i<4;i++){const u=U.filter(x=>x.l===ORD[i]).find(x=>unitPct(x)<70);if(u)return {u,why:'Siguiente unidad de tu nivel.'}}return null}
+function vHoy(){
+ let h=UPD.avail||UPD.state!=='idle'?updCard():'';
+ if(!S.placed)h+=`<div class="card"><h2>Empieza por un diagnóstico</h2><p>Un buen profesor evalúa antes de enseñar. Son 10 preguntas que abarcan B1–C2 y sirven para ajustar tu ruta.</p><button class="pri" onclick="placement()">Hacer el diagnóstico</button> <button onclick="S.placed=true;save();go('hoy')">Saltar (empezar en B1)</button></div>`;
+ const d=dueList(),n=nextUnit();
+ h+=`<div class="card"><h2>Plan de hoy</h2><p class="mut">Sesión recomendada de 20–30 minutos.</p><ol>
+ <li><b>Repaso</b> (${d.length?d.length+' ejercicios pendientes':'nada pendiente'}) ${d.length?'<button class="pri" onclick="startRun(dueList().slice(0,15),\'Repaso\',{})">Repasar</button>':''}</li>
+ <li><b>Lección nueva</b>${n?': '+esc(n.u.t)+' ('+n.u.l+') <span class="mut">'+n.why+'</span> <button class="pri" onclick="teach(\''+n.u.id+'\')">Abrir lección</button>':': completaste todas'}</li>
+ <li><b>Producción</b>: una tarea corta de <a href="#" onclick="go('write');return false">escritura</a> o <a href="#" onclick="go('speak');return false">speaking</a> (2–3 veces por semana).</li></ol></div>`;
+ h+=`<div class="card"><h3 style="margin-top:0">Tu método</h3><ul class="mut"><li>Primero entiendes la regla, luego practicas, y vuelves a ella en intervalos crecientes (1, 3, 7, 14, 30 días).</li><li>Cada fallo se explica y se repite al final de la sesión.</li><li>Un simulacro por semana con cronómetro, sin pistas.</li></ul></div>`;
+ $('#view').innerHTML=h}
+/* ================= LECCIONES ================= */
+function vLearn(){
+ $('#view').innerHTML=ORD.map(L=>`<div class="card"><h2>${LV[L].n}</h2><div class="mut">${LV[L].d}</div>${U.filter(u=>u.l===L).map(u=>{const p=unitPct(u);return `<div class="unit"><div class="t"><b>${esc(u.t)}</b><div class="bar"><i style="width:${p}%"></i></div></div><span class="mut">${p?p+'%':'—'}</span><button onclick="teach('${u.id}')">Abrir</button></div>`}).join('')}</div>`).join('')}
+function teach(id){const u=U.find(x=>x.id===id);tab='aprender';nav();
+ $('#view').innerHTML=`<div class="card teach"><span class="tag">${u.l}</span> <h2>${esc(u.t)}</h2>${u.teach}<p class="mut">Lee con calma y fíjate en los ejemplos. Después practicarás ${u.q.length} ejercicios; los fallos se repiten al final.</p><div class="row"><button class="pri" onclick="lesson('${u.id}')">Empezar práctica</button><button onclick="go('aprender')">Volver</button></div></div>`}
+function lesson(id){const u=U.find(x=>x.id===id);startRun(u.q.map((q,i)=>({u,q,i})),u.t,{unit:u})}
+/* ================= MOTOR DE EJERCICIOS ================= */
+let run=null;
+function startRun(items,title,opt){run={items:items.map(x=>({...x})),title,opt:opt||{},n:0,log:[],miss:[],done:false,ans:null,built:[]};
+ if(run.opt.timer){run.t0=Date.now();run.iv=setInterval(tick,1000)}ex()}
+const fmt=s=>Math.max(0,Math.floor(s/60))+':'+String(Math.max(0,s%60)).padStart(2,'0');
+function tick(){if(!run||!run.opt.timer)return;const left=run.opt.timer-Math.floor((Date.now()-run.t0)/1000);const el=$('#clock');if(el)el.textContent=fmt(left);if(left<=0)finish()}
+function speak(t,rate){if(window.AndroidTTS){try{AndroidTTS.speak(t,rate||.9);return}catch(e){}}try{const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=rate||.9;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function ex(){
+ if(run.n>=run.items.length)return finish();
+ const it=run.items[run.n],{u,q}=it;run.ans=null;run.built=[];run.done=false;
+ let h=`<div class="card"><div class="row"><span class="tag">${u.l}</span><b class="sp">${esc(run.title)}${it.retry?' · repetición del fallo':''}</b>${run.opt.timer?'<span class="chip" id="clock">'+fmt(run.opt.timer)+'</span>':''}<button onclick="go(tab)">Salir</button></div><div class="bar" style="margin:10px 0"><i style="width:${100*run.n/run.items.length}%"></i></div>`;
+ if(q.k==='read')h+=`<div class="passage">${esc(q.x)}</div>`;
+ if(q.k==='lis')h+=`<div class="row"><button class="pri" onclick="speak(run.items[run.n].q.s)">Escuchar</button><button onclick="speak(run.items[run.n].q.s,.6)">Más lento</button></div><p class="mut">Audio generado por la voz del navegador (inglés británico). Puedes escucharlo las veces que quieras; en el examen real solo se oye dos veces.</p>`;
+ h+=`<h3 style="margin-top:6px">${esc(q.p)}</h3>`;
+ if(q.o)h+=q.o.map((o,j)=>`<button class="opt" onclick="pick(${j})">${esc(o)}</button>`).join('');
+ else if(q.k==='ro'){const sh=[...q.w].sort(()=>Math.random()-.5);h+=`<div class="words" id="built"></div><div class="words">${sh.map(w=>`<button onclick="addw(this,this.textContent)">${esc(w)}</button>`).join('')}</div>`}
+ else h+=`<input type="text" id="inp" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Escribe tu respuesta" onkeydown="if(event.key==='Enter')check()">`;
+ h+=`<div id="fb"></div><div class="row" style="margin-top:10px"><span class="sp"></span><button class="pri" id="chk" onclick="check()">${run.opt.exam?'Siguiente':'Comprobar'}</button></div></div>`;
+ $('#view').innerHTML=h;const i=$('#inp');if(i)i.focus();
+ if(q.k==='lis')setTimeout(()=>speak(q.s),300)}
+function pick(j){if(run.done)return;run.ans=j;document.querySelectorAll('.opt').forEach((b,k)=>b.classList.toggle('sel',k===j))}
+function addw(b,w){if(run.done)return;run.built.push(w);b.disabled=true;$('#built').insertAdjacentHTML('beforeend',`<button>${esc(w)}</button>`)}
+function check(){
+ if(run.done)return next();
+ const it=run.items[run.n],{u,q,i}=it;let ok;
+ if(q.o){if(run.ans===null)return;ok=run.ans===q.a}
+ else if(q.k==='ro'){if(!run.built.length)return;ok=norm(run.built.join(' '))===norm(q.a)}
+ else{const v=norm($('#inp').value);if(!v)return;ok=q.a.some(a=>norm(a)===v)}
+ const ans=q.o?q.o[q.a]:(q.k==='ro'?q.a:q.a[0]);
+ if(!it.retry){run.log.push({u,ok});review(qid(u,i),ok);stat(u.t,ok);if(!ok){run.miss.push({p:q.p,ans,e:q.e,s:q.s});if(!run.opt.exam)run.items.push({...it,retry:true})}}
+ run.done=true;
+ if(run.opt.exam){next();return}
+ if(q.o)document.querySelectorAll('.opt').forEach((b,k)=>{b.disabled=true;if(k===q.a)b.classList.add('right');else if(k===run.ans)b.classList.add('wrong')});
+ $('#fb').innerHTML=`<div class="fb ${ok?'ok':'no'}"><b>${ok?'Correcto.':'Respuesta correcta: '+esc(ans)}</b><div>${esc(q.e||'')}</div>${q.s?'<div class="mut">Transcripción: '+esc(q.s)+'</div>':''}${ok||run.items[run.n].retry?'':'<div class="mut">Volverá a aparecer al final de la sesión.</div>'}</div>`;
+ $('#chk').textContent='Continuar';save()}
+function next(){run.n++;ex()}
+function finish(){
+ if(!run)return;if(run.iv)clearInterval(run.iv);
+ const r=run,n=r.log.length,ok=r.log.filter(x=>x.ok).length,pct=n?Math.round(100*ok/n):0;
+ if(r.opt.placement)return placementEnd();
+ if(r.opt.unit){const d=S.done[r.opt.unit.id]||{best:0};d.best=Math.max(d.best,ok);S.done[r.opt.unit.id]=d}
+ S.hist.push({d:today(),t:r.title,pct,n});save();
+ const by={};r.log.forEach(x=>{by[x.u.t]=by[x.u.t]||[0,0];by[x.u.t][1]++;if(x.ok)by[x.u.t][0]++});
+ $('#view').innerHTML=`<div class="card"><div class="big">${pct}%</div><h2>${ok} de ${n} correctas a la primera</h2>
+ ${Object.keys(by).length>1?`<table>${Object.entries(by).map(([c,v])=>`<tr><td>${esc(c)}</td><td>${v[0]}/${v[1]}</td></tr>`).join('')}</table>`:''}
+ ${r.miss.length?`<h3>Revisa estos errores</h3>${r.miss.map(m=>`<div class="fb no"><div>${esc(m.p)}</div><b>${esc(m.ans)}</b><div class="mut">${esc(m.e||'')}</div></div>`).join('')}`:'<p>Sin errores. Buen trabajo.</p>'}
+ <div class="row" style="margin-top:12px"><button class="pri" onclick="go('hoy')">Volver a Hoy</button><button onclick="go('stats')">Ver diagnóstico</button></div></div>`;
+ run=null}
+/* ================= DIAGNÓSTICO DE NIVEL ================= */
+function placement(){
+ const items=[];ORD.forEach((L,k)=>{const pool=U.filter(u=>u.l===L).flatMap(u=>u.q.map((q,i)=>({u,q,i}))).filter(x=>x.q.k!=='lis'&&x.q.k!=='ro').sort(()=>Math.random()-.5);items.push(...pool.slice(0,k<2?3:2))});
+ startRun(items,'Diagnóstico de nivel',{placement:true,exam:true})}
+function placementEnd(){
+ const sc={B1:[0,0],B2:[0,0],C1:[0,0],C2:[0,0]};run.log.forEach(x=>{sc[x.u.l][1]++;if(x.ok)sc[x.u.l][0]++});
+ let lvl='B1';ORD.forEach(L=>{if(sc[L][1]&&sc[L][0]/sc[L][1]>=.6)lvl=L});
+ S.level=lvl;S.placed=true;save();run=null;
+ $('#view').innerHTML=`<div class="card"><div class="big">${lvl}</div><h2>Nivel estimado</h2><table>${ORD.map(L=>`<tr><td>${L}</td><td>${sc[L][0]}/${sc[L][1]}</td></tr>`).join('')}</table><p class="mut">Es una estimación orientativa con muy pocas preguntas, no un resultado oficial. Empezarás por ${lvl}; puedes trabajar cualquier nivel en Lecciones.</p><button class="pri" onclick="go('hoy')">Ver mi plan</button></div>`}
+/* ================= REPASO ================= */
+function vReview(){const d=dueList();
+ $('#view').innerHTML=d.length?`<div class="card"><h2>Repaso espaciado</h2><p class="mut">${d.length} ejercicio(s) toca(n) hoy. Lo que fallas vuelve pronto; lo que dominas, cada vez más tarde.</p><button class="pri" onclick="startRun(dueList().slice(0,15),'Repaso',{})">Repasar ahora</button></div>`:`<div class="card"><h2>Todo al día</h2><p class="mut">No hay repasos pendientes. Haz una lección nueva.</p></div>`}
+/* ================= SIMULACRO ================= */
+function vExam(){
+ $('#view').innerHTML=`<div class="card"><h2>Simulacro con cronómetro</h2><p class="mut">15 ejercicios mezclados de un nivel, 1 minuto por ejercicio, sin pistas ni explicaciones hasta el final. Así entrenas el ritmo del examen.</p>${ORD.map(L=>`<button class="opt" onclick="mock('${L}')"><b>${LV[L].n}</b><div class="mut">${LV[L].d}</div></button>`).join('')}</div>`}
+function mock(L){const items=U.filter(u=>u.l===L).flatMap(u=>u.q.map((q,i)=>({u,q,i}))).sort(()=>Math.random()-.5).slice(0,15);
+ startRun(items,'Simulacro '+L,{timer:items.length*60,exam:true})}
+/* ================= ESCRITURA ================= */
+let wLvl=null;
+function vWrite(){const L=wLvl||S.level,W=WRITING[L],t=W.tasks[Math.floor(Math.random()*W.tasks.length)];
+ $('#view').innerHTML=`<div class="card"><div class="row"><h2 class="sp">Escritura</h2>${ORD.map(x=>`<button class="${x===L?'on':''}" onclick="wLvl='${x}';vWrite()">${x}</button>`).join('')}</div>
+ <p><b>Tarea:</b> ${esc(t)}</p><textarea id="wr" rows="10" placeholder="Write your answer here…" oninput="wc(${W.min},${W.max})"></textarea>
+ <div class="row"><span class="chip" id="wc">0 palabras (objetivo ${W.min}–${W.max})</span><span class="sp"></span><button class="pri" onclick="evalW('${L}',${JSON.stringify(t).replace(/"/g,'&quot;')})">Terminé: revisar</button></div><div id="rub"></div></div>`}
+function wc(a,b){const n=($('#wr').value.trim().match(/\S+/g)||[]).length;$('#wc').textContent=n+' palabras (objetivo '+a+'–'+b+')'}
+function evalW(L,t){const W=WRITING[L],tx=$('#wr').value,n=(tx.trim().match(/\S+/g)||[]).length;
+ if(n<20){$('#rub').innerHTML='<p class="mut">Escribe al menos 20 palabras.</p>';return}
+ const rep={};tx.toLowerCase().match(/[a-z']{5,}/g)?.forEach(w=>rep[w]=(rep[w]||0)+1);const reps=Object.entries(rep).filter(([,c])=>c>=3).map(([w,c])=>w+' ('+c+')');
+ $('#rub').innerHTML=`<h3>Comprobaciones automáticas</h3><ul><li>Extensión: ${n} palabras ${n<W.min?'(corta: faltan '+(W.min-n)+')':n>W.max?'(te pasas por '+(n-W.max)+')':'(dentro del objetivo)'}</li><li>Palabras repetidas 3+ veces: ${reps.length?esc(reps.join(', ')):'ninguna'} ${reps.length?'<span class="mut">— busca sinónimos</span>':''}</li></ul>
+ <details open><summary><b>Frases útiles de este nivel</b></summary><ul>${W.phrases.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></details>
+ <details><summary><b>Ejemplo de apertura modelo</b></summary><p class="passage">${esc(W.model)}</p></details>
+ <h3>Revisa tu texto con la rúbrica</h3>${RUBRIC.map(r=>`<label style="display:block;margin:6px 0"><input type="checkbox" class="rb"> ${esc(r)}</label>`).join('')}
+ <button class="pri" onclick="doneW('${L}')">Guardar práctica</button><p class="mut">La app no corrige tu gramática. Para una corrección detallada, pega el texto en Claude.</p>`}
+function doneW(L){const k=[...document.querySelectorAll('.rb')].filter(c=>c.checked).length;S.hist.push({d:today(),t:'Escritura '+L,pct:k*20,n:5});save();$('#rub').insertAdjacentHTML('beforeend',`<p><b>${k}/5 criterios.</b> ${k<4?'Reescribe la parte que no marcaste.':'Buen trabajo.'}</p>`)}
+/* ================= SPEAKING ================= */
+let sLvl=null,rec=null,sIv=null;
+function vSpeak(){const L=sLvl||S.level,ps=SPEAK[L],p=ps[Math.floor(Math.random()*ps.length)];
+ $('#view').innerHTML=`<div class="card"><div class="row"><h2 class="sp">Speaking</h2>${ORD.map(x=>`<button class="${x===L?'on':''}" onclick="sLvl='${x}';vSpeak()">${x}</button>`).join('')}</div>
+ <p><b>Tema:</b> ${esc(p)}</p><p class="mut">Prepara 30 segundos, luego habla 1–2 minutos. Grábate y escúchate después: es la forma más útil de detectar tus fallos.</p>
+ <div class="row"><button class="pri" id="rbtn" onclick="recToggle()">Empezar a grabar</button><span class="chip" id="stimer">0:00</span></div><div id="player"></div>
+ <h3>Autoevaluación</h3>${SRUBRIC.map(r=>`<label style="display:block;margin:6px 0"><input type="checkbox" class="rb"> ${esc(r)}</label>`).join('')}
+ <button onclick="doneS('${L}')">Guardar práctica</button></div>`}
+async function recToggle(){
+ if(rec){rec.stop();return}
+ try{const st=await navigator.mediaDevices.getUserMedia({audio:true});const ch=[];rec=new MediaRecorder(st);
+  rec.ondataavailable=e=>ch.push(e.data);
+  rec.onstop=()=>{clearInterval(sIv);st.getTracks().forEach(t=>t.stop());const url=URL.createObjectURL(new Blob(ch,{type:rec.mimeType}));rec=null;$('#rbtn').textContent='Grabar de nuevo';$('#player').innerHTML=`<p class="mut">Escúchate y anota qué no suena natural:</p><audio controls src="${url}"></audio>`};
+  const t0=Date.now();sIv=setInterval(()=>{const s=Math.floor((Date.now()-t0)/1000);$('#stimer').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0')},500);
+  rec.start();$('#rbtn').textContent='Parar'}catch(e){$('#player').innerHTML='<p class="mut">No se pudo acceder al micrófono. Puedes hablar igualmente y usar la rúbrica.</p>'}}
+function doneS(L){const k=[...document.querySelectorAll('.rb')].filter(c=>c.checked).length;S.hist.push({d:today(),t:'Speaking '+L,pct:k*20,n:5});save();$('#player').insertAdjacentHTML('beforeend',`<p><b>${k}/5 criterios.</b> Guardado.</p>`)}
+/* ================= DIAGNÓSTICO ================= */
+function vStats(){
+ const w=weak(),cats=Object.entries(S.stats).sort((a,b)=>a[1].ok/a[1].n-b[1].ok/b[1].n);
+ $('#view').innerHTML=`<div class="card"><h2>Diagnóstico por categoría</h2>${cats.length?`<table>${cats.map(([c,s])=>{const p=Math.round(100*s.ok/s.n);return `<tr><td>${esc(c)}</td><td style="width:40%"><div class="bar"><i style="width:${p}%"></i></div></td><td>${p}% (${s.n})</td></tr>`}).join('')}</table>`:'<p class="mut">Aún no hay datos. Completa alguna lección.</p>'}
+ ${w.length?`<p><b>Puntos débiles:</b> ${w.map(x=>esc(x.c)).join(', ')}. La pestaña Hoy te los recomienda primero.</p>`:''}</div>
+ <div class="card"><h3 style="margin-top:0">Últimas sesiones</h3>${S.hist.length?`<table>${S.hist.slice(-10).reverse().map(h=>`<tr><td>${h.d}</td><td>${esc(h.t)}</td><td>${h.pct}%</td></tr>`).join('')}</table>`:'<p class="mut">Sin sesiones todavía.</p>'}</div>
+ ${updCard()}
+ <div class="card"><button onclick="if(confirm('¿Borrar todo el progreso?')){localStorage.removeItem(KEY);location.reload()}">Reiniciar progreso</button></div>`}
+/* ================= ACTUALIZACIONES (solo en la app de Android) ================= */
+const APP=window.AscensoApp||null;
+const UPD={avail:null,state:'idle',pct:0,msg:''};
+function updInner(){
+ if(!APP)return'';
+ let h='<div class="mut">Versión instalada: '+esc(APP.versionName())+'</div>';
+ if(UPD.state==='checking')h+='<p>Buscando actualizaciones…</p>';
+ else if(UPD.state==='downloading')h+='<p>Descargando… '+UPD.pct+'%</p><div class="bar"><i style="width:'+UPD.pct+'%"></i></div>';
+ else if(UPD.state==='ready')h+='<p><b>Versión '+esc(UPD.avail.versionName)+' lista.</b></p><button class="pri" onclick="updInstall()">Instalar ahora</button>';
+ else if(UPD.avail)h+='<p><b>Hay una versión nueva: '+esc(UPD.avail.versionName)+'</b></p>'+(UPD.avail.notes&&UPD.avail.notes.length?'<ul class="mut">'+UPD.avail.notes.map(n=>'<li>'+esc(n)+'</li>').join('')+'</ul>':'')+'<button class="pri" onclick="updDownload()">Descargar e instalar</button>';
+ else h+='<button onclick="updCheck(true)">Buscar actualizaciones</button>';
+ if(UPD.msg)h+='<p class="mut">'+esc(UPD.msg)+'</p>';
+ return h}
+function updCard(){return APP?'<div class="card" id="updbox">'+updInner()+'</div>':''}
+function updRefresh(){const b=$('#updbox');if(b)b.innerHTML=updInner()}
+function updCheck(manual){UPD.state='checking';UPD.msg='';updRefresh();APP.checkUpdate()}
+window.__updCheck=r=>{UPD.state='idle';
+ if(!r.ok){UPD.msg=r.error||'No se pudo comprobar.';}
+ else if(r.info.versionCode>r.current){UPD.avail=r.info;UPD.msg=''}
+ else{UPD.avail=null;UPD.msg='Tienes la última versión.'}
+ try{localStorage.setItem('ascenso-lastcheck',String(Date.now()))}catch(e){}
+ updRefresh()};
+function updDownload(){UPD.state='downloading';UPD.pct=0;UPD.msg='';updRefresh();APP.downloadUpdate(UPD.avail.apk,UPD.avail.sha256||'')}
+window.__updProgress=p=>{UPD.pct=p;updRefresh()};
+window.__updDone=r=>{if(r.ok){UPD.state='ready'}else{UPD.state='idle';UPD.msg=r.error||'Falló la descarga.'}updRefresh()};
+function updInstall(){if(!APP.canInstall()){UPD.msg='Android pide permiso para instalar: actívalo para Ascenso y vuelve a pulsar «Instalar ahora».';updRefresh();APP.allowInstall();return}APP.install()}
+if(APP){let last=0;try{last=+localStorage.getItem('ascenso-lastcheck')||0}catch(e){}if(Date.now()-last>6*36e5)setTimeout(()=>{UPD.state='checking';APP.checkUpdate()},1500)}
+if('serviceWorker' in navigator&&location.protocol==='https:'&&!window.AscensoApp)navigator.serviceWorker.register('sw.js').catch(()=>{});
+go('hoy');
+</script>
+</body>
+</html>
