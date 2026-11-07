@@ -1,11 +1,10 @@
 {
- "versionCode": 10,
- "versionName": "1.9.0",
+ "versionCode": 11,
+ "versionName": "2.0.0",
  "apk": "Ascenso.apk",
- "size": 1007779,
- "sha256": "270f48cc1aea3655fa116df9b3c75cdd2ca966f0b4557bce153519c753612c1e",
+ "size": 30166276,
+ "sha256": "ee397b9b6bf0a90076eb2890aeea6aac248fdd322e2b05a236631afbd50746c6",
  "notes": [
-  "Correcciones: opciones barajadas, examen cuenta preguntas sin contestar, botón atrás de Android, tolerancia a puntuación",
-  "vocabulario C2 y más A2"
+  "Voces naturales incluidas sin conexión (4 voces), 3 temas nuevos (Tokio, Aurora, Cristal líquido), temas con interfaz propia, más contenido, resumen semanal y corrector de escritura"
  ]
 }
