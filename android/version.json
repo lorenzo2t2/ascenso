@@ -1,10 +1,10 @@
 {
- "versionCode": 11,
- "versionName": "2.0.0",
+ "versionCode": 12,
+ "versionName": "2.0.1",
  "apk": "Ascenso.apk",
- "size": 30166276,
- "sha256": "ee397b9b6bf0a90076eb2890aeea6aac248fdd322e2b05a236631afbd50746c6",
+ "size": 30166249,
+ "sha256": "64d32a3fcd7aa77defc348afb7a65f441956b6f57ed9aed57e0aa827c55102a6",
  "notes": [
-  "Voces naturales incluidas sin conexión (4 voces), 3 temas nuevos (Tokio, Aurora, Cristal líquido), temas con interfaz propia, más contenido, resumen semanal y corrector de escritura"
+  "Menú inferior en todos los temas"
  ]
 }
