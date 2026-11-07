@@ -157,6 +157,8 @@
 :root[data-skin="aeropuerto"] .opt .k,:root[data-skin="terminal"] .opt .k{border-radius:2px;font-family:var(--ff)}
 :root[data-skin="montana"] .run .bar>i::after{content:"";float:right;width:0;height:0;border-left:12px solid var(--pri);border-top:6px solid transparent;border-bottom:6px solid transparent;margin-top:-2px}
 
+.steps{display:flex;gap:4px;margin-bottom:12px}.steps span{flex:1;text-align:center;font-size:.68rem;padding:6px 2px;border-radius:99px;background:var(--surf2);color:var(--mut);white-space:nowrap}.steps .on{background:var(--pri);color:var(--pri-ink);font-weight:800}.steps .ok{color:var(--ok);font-weight:700}
+.try .opt{width:100%;text-align:left}.hintbox{margin:10px 0;padding:10px 12px;border-radius:var(--rb);background:var(--surf2);border:1px dashed var(--pri)}
 /* ===== Tokio de noche, Aurora boreal y Cristal líquido ===== */
 :root[data-skin="tokio"]{--bg:#05061a;--surf:#0c0a22;--surf2:#1a1238;--ink:#f4f2ff;--mut:#b4b6dc;--line:rgba(255,70,180,.5);--sh:0 0 16px rgba(255,70,180,.18);--pri:#3cf0ff;--pri-ink:#03141c;--ok:#4ae89a;--bad:#ff7a9a;--b1:#4ae89a;--b2:#3cf0ff;--c1:#c9a4ff;--c2:#ff9ad0;--r:18px;--rb:12px;--rb2:12px;--rh:20px;--ff:"Yu Gothic UI","Meiryo","Segoe UI",sans-serif;color-scheme:dark}
 :root[data-skin="aurora"]{--bg:#050b1a;--surf:#0e1a33;--surf2:#17284d;--ink:#f1f6ff;--mut:#adbedf;--line:rgba(255,255,255,.22);--sh:0 8px 30px rgba(0,0,0,.35);--pri:#3dffb0;--pri-ink:#03261a;--ok:#3dffb0;--bad:#ff8a9a;--b1:#3dffb0;--b2:#6cb8ff;--c1:#b49bff;--c2:#ffc27a;--r:22px;--rb:16px;--rb2:16px;--rh:26px;--ff:"Segoe UI Variable","Trebuchet MS",sans-serif;color-scheme:dark}
@@ -440,8 +442,10 @@ function teach(id){const u=U.find(x=>x.id===id);tab='aprender';renderNav();docum
  <div class="card teach"><h2 style="margin-bottom:6px">${esc(u.t)}</h2>${u.teach}<p class="mut sm">${ic('vol')} Toca un ejemplo en cursiva para oírlo.</p></div>
  <div class="actionbar"><div><button class="btn pri block" onclick="clase('${u.id}')">Empezar la clase · explicación y ${u.q.length} ejercicios</button></div></div>`)}
 document.addEventListener('click',e=>{const x=e.target.closest&&e.target.closest('.ex');if(x)speak(x.textContent)});
+const STEPS=['Palabras','Explicación','Ejemplo','Pruébalo','Práctica'];
+function stepper(n,id){const skip=!(PRE[id]||[]).length;return `<div class="steps" aria-label="Fases de la clase">${STEPS.map((t,i)=>skip&&i===0?'':`<span class="${i===n?'on':i<n?'ok':''}">${i<n?'✓ ':''}${t}</span>`).join('')}</div>`}
 function preWords(id){const u=U.find(x=>x.id===id),ws=PRE[id];if(!ws||!ws.length)return lesson(id);
- show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="teach('${id}')" aria-label="Volver">${ic('left')}</button><span class="lv ${u.l}">${u.l}</span></div>
+ show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="teach('${id}')" aria-label="Volver">${ic('left')}</button><span class="lv ${u.l}">${u.l}</span></div>${stepper(0,id)}
  <div class="card"><h2>Palabras nuevas de esta lección</h2><p class="mut">Aprende estas palabras antes de empezar: aparecerán en los ejercicios. Toca el altavoz para oír la pronunciación.</p>
  ${ws.map((w,i)=>`<button class="tile" onclick="speak(PRE['${id}'][${i}][0])"><div class="ico">${ic('vol')}</div><div class="t"><b>${esc(w[0])}</b><span class="mut">${esc(w[1])}</span></div></button>`).join('')}</div>
  <div class="actionbar"><div><button class="btn pri block" onclick="claseExp('${id}',0)">Entendido, seguimos con la explicación</button></div></div>`)}
@@ -458,19 +462,29 @@ function teachSteps(u){const d=document.createElement('div');d.innerHTML=u.teach
 const PROF=['Fíjate bien en esto:','Vamos con el siguiente punto:','Ahora mira este caso:','Esto es muy importante:','Y no olvides esto:'];
 function claseExp(id,k){const u=U.find(x=>x.id===id),st=teachSteps(u);if(k>=st.length)return claseEj(id);
  const shown=st.slice(0,k+1).map((h,i)=>`<div class="card teach ${i===k?'':'past'}" style="${i===k?'':'opacity:.55'}">${i===k?`<div class="mut sm" style="margin-bottom:4px"><b>${PROF[i%PROF.length]}</b></div>`:''}${h}</div>`).join('');
- show(`<div class="row" style="margin-bottom:10px"><span class="lv ${u.l}">${u.l}</span><b>${esc(u.t)}</b><span class="sp"></span><span class="chip">${k+1}/${st.length}</span></div>${shown}
+ show(`<div class="row" style="margin-bottom:10px"><span class="lv ${u.l}">${u.l}</span><b>${esc(u.t)}</b><span class="sp"></span><span class="chip">${k+1}/${st.length}</span></div>${stepper(1,id)}<div class="bar" style="margin-bottom:10px;flex:none"><i style="width:${Math.round(100*(k+1)/st.length)}%"></i></div>${shown}
  <p class="mut sm">${ic('vol')} Toca un ejemplo en cursiva para oírlo.</p>
  <div class="actionbar"><div class="row" style="flex-wrap:nowrap">${k?`<button class="btn" onclick="claseExp('${id}',${k-1})">Atrás</button>`:''}<button class="btn pri" style="flex:1" onclick="claseExp('${id}',${k+1})">${k+1<st.length?'Entendido, siguiente':'Entendido, veamos un ejemplo'}</button></div></div>`);
  window.scrollTo(0,document.body.scrollHeight)}
 function claseEj(id){const u=U.find(x=>x.id===id),q=u.q.find(x=>x.k==='mc'||x.k==='gap'||x.k==='wf')||u.q[0];
  const ans=q.o?q.o[q.a]:(q.k==='ro'?q.a:q.a[0]);
- show(`<div class="row" style="margin-bottom:10px"><span class="lv ${u.l}">${u.l}</span><b>${esc(u.t)}</b></div>
+ show(`<div class="row" style="margin-bottom:10px"><span class="lv ${u.l}">${u.l}</span><b>${esc(u.t)}</b></div>${stepper(2,id)}
  <div class="card"><div class="mut sm"><b>Ejemplo resuelto por el profesor</b></div>
  ${q.k==='read'?`<div class="passage">${esc(q.x)}</div>`:''}<div class="q">${esc(q.p)}</div>
  ${q.o?q.o.map((o,j)=>`<div class="opt ${j===q.a?'right':''}" style="cursor:default"><span class="k">${'ABCD'[j]}</span><span>${esc(o)}</span></div>`).join(''):''}
  <div class="fb ok"><b>${ic('check')} Respuesta: ${esc(ans)}</b><div style="margin-top:6px"><b>Por qué:</b> ${esc(q.e||'')}</div></div></div>
- <p class="mut">Ahora te toca a ti. Si dudas, vuelve a leer la explicación: después de cada fallo te explicaré el motivo.</p>
- <div class="actionbar"><div class="row" style="flex-wrap:nowrap"><button class="btn" onclick="claseExp('${id}',0)">Repasar explicación</button><button class="btn pri" style="flex:1" onclick="lesson('${id}')">Empezar mis ejercicios</button></div></div>`)}
+ <p class="mut">Fíjate en cómo se razona: primero la regla, luego la respuesta. Ahora harás tú uno parecido, con ayuda.</p>
+ <div class="actionbar"><div class="row" style="flex-wrap:nowrap"><button class="btn" onclick="claseExp('${id}',0)">Repasar explicación</button><button class="btn pri" style="flex:1" onclick="claseTry('${id}')">Ahora pruébalo tú</button></div></div>`)}
+function claseTry(id,n){const u=U.find(x=>x.id===id),first=u.q.find(x=>x.k==='mc'||x.k==='gap'||x.k==='wf')||u.q[0];
+ const cand=u.q.filter(x=>x.k==='mc'&&x!==first);n=n||0;const q=cand[0];if(!q)return lesson(id);
+ const opts=q.o.map((o,j)=>({o,j})).sort(()=>Math.random()-.5);
+ window.__try=function(j,el){const ok=j===q.a;document.querySelectorAll('.try .opt').forEach(b=>{b.disabled=true;if(+b.dataset.j===q.a)b.classList.add('right')});if(!ok)el.classList.add('wrong');
+  $('#tryfb').innerHTML=`<div class="fb ${ok?'ok':'no'}"><b>${ok?'¡Muy bien!':'Casi. La respuesta es: '+esc(q.o[q.a])}</b><div style="margin-top:6px">${esc(q.e||'')}</div></div>`;$('#trygo').style.display='';$('#hint').style.display='none'};
+ show(`<div class="row" style="margin-bottom:10px"><span class="lv ${u.l}">${u.l}</span><b>${esc(u.t)}</b></div>${stepper(3,id)}
+ <div class="card try"><div class="mut sm"><b>Ahora tú, con ayuda</b></div><div class="q">${esc(q.p)}</div>
+ ${opts.map(x=>`<button class="opt" data-j="${x.j}" onclick="__try(${x.j},this)"><span>${esc(x.o)}</span></button>`).join('')}
+ <div id="hint" class="hintbox"><b>Pista:</b> piensa en la regla que acabamos de ver. <button class="btn sm" onclick="claseExp('${id}',0)">Releer la explicación</button></div><div id="tryfb"></div></div>
+ <div class="actionbar"><div><button id="trygo" style="display:none" class="btn pri block" onclick="lesson('${id}')">Muy bien, a mis ejercicios</button></div></div>`)}
 function lesson(id){const u=U.find(x=>x.id===id);startRun(u.q.map((q,i)=>({u,q,i})),u.t,{unit:u})}
 
 /* ================= EXAMEN FINAL DE NIVEL ================= */

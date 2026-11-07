@@ -1,10 +1,11 @@
 {
- "versionCode": 18,
- "versionName": "2.0.5",
+ "versionCode": 19,
+ "versionName": "2.1.0",
  "apk": "Ascenso.apk",
- "size": 30166511,
- "sha256": "a5403273c15eb28cb36fe73ed9ce2776b29be9e071fa8010700b8cce4805570c",
+ "size": 30167185,
+ "sha256": "6d94ec0221ba0dc0cadf881b879ce10b59a3d2d67678fe164cfa18eb96cdc0bd",
  "notes": [
-  "Explicación más clara de does/do en negativas"
+  "Clases más intuitivas: barra de fases (palabras, explicación, ejemplo, pruébalo, práctica), progreso por paso y mini ejercicio guiado antes de la práctica",
+  "explicación de does/do más clara"
  ]
 }

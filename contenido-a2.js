@@ -9,7 +9,7 @@ U.push(
 {k:'mc',p:'She ___ to school by bus.',o:['go','goes','going','is go'],a:1,e:'Con she/he/it el verbo añade -s: goes.'},
 {k:'mc',p:'___ you like pizza?',o:['Does','Do','Are','Is'],a:1,e:'Con you/I/we/they la pregunta se forma con Do.'},
 {k:'mc',p:'My brother ___ football on Sundays.',o:['play','plays','playing','does play'],a:1,e:'Brother = he, así que el verbo lleva -s: plays.'},
-{k:'gap',p:'He ___ (not/play) tennis on Mondays.',a:["doesn't play","does not play"],e:'Negativa con he: doesn\'t + verbo base, sin -s (play, no plays).'},
+{k:'gap',p:'He ___ (not/play) tennis on Mondays.',a:["doesn't play","does not play"],e:'Con he/she/it el auxiliar es does: doesn\'t (o does not) + verbo base, sin -s. «Do not / don\'t» solo va con I, you, we, they.'},
 {k:'gap',p:'___ she work here? (Do/Does)',a:['Does'],e:'She necesita Does; el verbo work vuelve a la forma base.'},
 {k:'gap',p:'I ___ (always/drink) tea in the morning. Escribe solo: always drink',a:['always drink'],e:'El adverbio de frecuencia va antes del verbo: I always drink.'},
 {k:'ro',p:'Ordena las palabras para formar una frase.',w:['I','get','up','at','seven'],a:'I get up at seven',e:'Orden básico: sujeto + verbo + complemento de tiempo.'},
