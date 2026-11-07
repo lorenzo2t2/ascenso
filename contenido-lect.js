@@ -1,0 +1,23 @@
+/* Lecturas y escuchas largas (input comprensible). Explicaciones en español. */
+const T1='Last year, Maria moved from a small village to Manchester to study engineering. At first she felt lonely because everyone spoke quickly and she missed her family. However, she joined a climbing club and soon made friends. Now she says the best decision was to leave her comfort zone, although she still calls her mother every Sunday.';
+const T2='Many cities are introducing low-emission zones to reduce air pollution. Supporters argue that the measures improve public health and encourage people to use public transport. Critics, on the other hand, claim that small businesses suffer because customers avoid the centre. Recent data suggests that pollution has fallen by almost a fifth, but shop owners remain unconvinced.';
+const A1='Good morning, everyone. Before we start the trip, a few reminders. The coach leaves the hotel at half past eight, so please be in the lobby ten minutes earlier. We will visit the castle first, then have lunch in the old town. Remember to bring a raincoat, because the forecast says it will rain after lunch.';
+const A2='Thanks for calling the city library. Our opening hours have changed. From next month we will open at ten instead of nine on weekdays, but we will stay open until eight on Thursdays. If you want to renew a book, you can do it online or by pressing two now.';
+U.push(
+{id:'b1-lect',l:'B1',t:'Lectura y escucha extensas',teach:`<p><b>Estrategia:</b> lee o escucha una vez para la idea general y otra para los detalles. Subraya mentalmente conectores como <i>at first</i>, <i>however</i>, <i>although</i>: señalan contraste y cambio.</p>`,q:[
+{k:'read',x:T1,p:'¿Por qué se sentía sola María al principio?',o:['Echaba de menos a su familia y todos hablaban rápido','No le gustaba la ingeniería','No encontraba piso','Odiaba Manchester'],a:0,e:'El texto dice que todos hablaban rápido y echaba de menos a su familia.'},
+{k:'read',x:T1,p:'¿Qué hizo para hacer amigos?',o:['Se apuntó a un club de escalada','Cambió de universidad','Volvió al pueblo','Aprendió francés'],a:0,e:'«She joined a climbing club and soon made friends».'},
+{k:'read',x:T1,p:'¿Qué hace todavía cada domingo?',o:['Escala','Llama a su madre','Visita el pueblo','Estudia con amigos'],a:1,e:'«She still calls her mother every Sunday».'},
+{k:'lis',s:A1,p:'¿A qué hora debe estar el grupo en el vestíbulo?',o:['8:30','8:20','8:00','9:00'],a:1,e:'El autocar sale a las 8:30 y piden estar diez minutos antes: 8:20.'},
+{k:'lis',s:A1,p:'¿Qué visitarán primero?',o:['La ciudad vieja','El castillo','Un museo','El hotel'],a:1,e:'«We will visit the castle first».'},
+{k:'lis',s:A1,p:'¿Por qué hay que llevar impermeable?',o:['Hará frío','Lloverá después de comer','Habrá viento','Entrarán en un río'],a:1,e:'«It will rain after lunch».'},
+{k:'dic',s:'Now she says the best decision was to leave her comfort zone.',p:'Escucha y escribe la frase.',a:['Now she says the best decision was to leave her comfort zone'],e:'Comfort zone = zona de confort.'}]},
+
+{id:'b2-lect',l:'B2',t:'Lectura y escucha extensas',teach:`<p><b>Estrategia:</b> en textos argumentativos identifica quién opina qué (<i>supporters</i>, <i>critics</i>) y qué datos usan. Distingue la opinión del hecho.</p>`,q:[
+{k:'read',x:T2,p:'¿Qué defienden los partidarios de las zonas de bajas emisiones?',o:['Mejoran la salud y fomentan el transporte público','Aumentan las ventas','Reducen los impuestos','Aumentan el tráfico'],a:0,e:'«improve public health and encourage people to use public transport».'},
+{k:'read',x:T2,p:'¿Qué critican los detractores?',o:['El coste de la medida','Que los pequeños negocios pierden clientes','La contaminación creciente','La falta de datos'],a:1,e:'Dicen que los clientes evitan el centro y los negocios sufren.'},
+{k:'read',x:T2,p:'¿Qué dicen los datos recientes?',o:['La contaminación bajó casi una quinta parte','No hubo cambios','Subió un poco','No hay datos'],a:0,e:'«fallen by almost a fifth» = ha bajado casi un 20 %.'},
+{k:'lis',s:A2,p:'¿Qué cambia en el horario de la biblioteca?',o:['Abrirá a las diez entre semana','Cerrará los jueves','Abrirá los domingos','Cerrará a las ocho siempre'],a:0,e:'Desde el mes que viene abren a las diez en lugar de a las nueve; los jueves cierran a las ocho.'},
+{k:'lis',s:A2,p:'¿Cómo se puede renovar un libro?',o:['Solo en persona','En línea o pulsando dos','Por correo','No se puede'],a:1,e:'«online or by pressing two now».'},
+{k:'dic',s:'Critics claim that small businesses suffer.',p:'Escucha y escribe la frase.',a:['Critics claim that small businesses suffer'],e:'Claim = afirmar/sostener; critics = detractores.'}]}
+);

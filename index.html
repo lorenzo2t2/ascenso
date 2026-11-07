@@ -125,6 +125,7 @@ label.chk{display:flex;gap:10px;align-items:flex-start;margin:10px 0;cursor:poin
 <script src="contenido-temas.js"></script>
 <script src="contenido-a2.js"></script>
 <script src="contenido-voc.js"></script>
+<script src="contenido-lect.js"></script>
 <script>
 /* ================= ESTADO Y AJUSTES ================= */
 const KEY='ascenso-v2';
@@ -158,7 +159,7 @@ function ring(p,size,sw,label){const r=(size-sw)/2,c=2*Math.PI*r;return `<svg cl
 const unitIcon=u=>/-dic$|-lis$/.test(u.id)?'phones':/-read$/.test(u.id)?'book':'pen';
 /* ================= NAVEGACIÓN ================= */
 let tab='hoy',run=null,sub=null;
-function renderNav(){const d=dueList().length,t=[['hoy','home','Hoy'],['aprender','book','Aprender'],['practicar','target','Practicar'],['progreso','chart','Progreso'],['ajustes','sliders','Ajustes']];
+function renderNav(){const d=dueList().length+vDueAll(),t=[['hoy','home','Hoy'],['aprender','book','Aprender'],['practicar','target','Practicar'],['progreso','chart','Progreso'],['ajustes','sliders','Ajustes']];
  $('#nav').innerHTML='<div>'+t.map(([k,i,l])=>`<button class="${tab===k?'on':''}" onclick="go('${k}')" aria-label="${l}">${ic(i)}${l}${k==='practicar'&&d?`<span class="badge">${d>99?'99+':d}</span>`:''}</button>`).join('')+'</div>';
  $('#lvchip').innerHTML=`<span class="lv ${S.level}">${S.level}</span> nivel`}
 function show(html){const v=$('#view');v.className='';v.innerHTML=html;void v.offsetWidth;v.className='view';window.scrollTo(0,0)}
@@ -173,7 +174,8 @@ function vHoy(){
  if(!S.placed)h+=`<div class="card"><h3>Empieza con un diagnóstico</h3><p class="mut">10 preguntas de B1 a C2 para ajustar tu ruta. Un buen profesor evalúa antes de enseñar.</p><div class="row"><button class="btn pri" onclick="placement()">Hacer el diagnóstico</button><button class="btn ghost" onclick="S.placed=true;save();go('hoy')">Saltar</button></div></div>`;
  h+=`<div class="card"><button class="tile" onclick="${d.length?"startRun(dueList().slice(0,15),'Repaso',{})":"go('aprender')"}"><div class="ico">${ic('refresh')}</div><div class="t"><b>1 · Repaso</b><span class="mut">${d.length?d.length+' ejercicios pendientes de repasar':'Nada pendiente hoy'}</span></div>${ic('right')}</button>
  ${n?`<button class="tile" onclick="teach('${n.u.id}')"><div class="ico" style="--c:var(--${n.u.l.toLowerCase()})">${ic(unitIcon(n.u))}</div><div class="t"><b>2 · ${esc(n.u.t)}</b><span class="mut">${n.u.l} · ${n.why}</span></div>${ic('right')}</button>`:''}
- <button class="tile" onclick="go('practicar')"><div class="ico">${ic('pen')}</div><div class="t"><b>3 · Producción</b><span class="mut">Escritura o speaking, 2–3 veces por semana</span></div>${ic('right')}</button></div>`;
+ <button class="tile" onclick="go('practicar')"><div class="ico">${ic('pen')}</div><div class="t"><b>3 · Producción</b><span class="mut">Escritura o speaking, 2–3 veces por semana</span></div>${ic('right')}</button>
+ ${vDueAll()?`<button class="tile" onclick="vVoc()"><div class="ico">${ic('book')}</div><div class="t"><b>Vocabulario</b><span class="mut">${vDueAll()} tarjetas para repasar hoy</span></div>${ic('right')}</button>`:''}</div>`;
  if(finalReady(S.level)&&!S.passed[S.level])h+=`<div class="card"><button class="tile" onclick="lvSel='${S.level}';go('aprender')"><div class="ico">${ic('target')}</div><div class="t"><b>Examen final ${S.level} desbloqueado</b><span class="mut">Apruébalo para pasar al siguiente nivel</span></div>${ic('right')}</button></div>`;
  const w=weak();if(w.length)h+=`<div class="card"><h3>Puntos débiles</h3><p class="mut">Menos del 70 % de aciertos:</p><div class="row" style="margin-top:6px">${w.slice(0,5).map(x=>`<span class="chip">${esc(x.c)} · ${x.p}%</span>`).join('')}</div></div>`;
  h+=`<div class="card"><button class="tile" onclick="vReal()"><div class="ico">${ic('file')}</div><div class="t"><b>Exámenes reales</b><span class="mut">Material oficial de Cambridge y corrección</span></div>${ic('right')}</button>
@@ -220,7 +222,7 @@ function vPractice(){const d=dueList().length,e=errList().length;
  show(`<div class="card"><div class="grid2">
  <button class="gt" onclick="${d?"startRun(dueList().slice(0,15),'Repaso',{})":""}" ${d?'':'style="opacity:.55"'}><div class="ico">${ic('refresh')}</div><b>Repaso</b><span class="mut sm">${d?d+' pendientes':'Al día'}</span></button>
  <button class="gt" onclick="${e?"vErrors()":""}" ${e?'':'style="opacity:.55"'}><div class="ico" style="--c:var(--bad)">${ic('alert')}</div><b>Mis errores</b><span class="mut sm">${e?e+' por corregir':'Sin errores'}</span></button>
- <button class="gt" onclick="vVoc()"><div class="ico">${ic('book')}</div><b>Vocabulario</b><span class="mut sm">Tarjetas con voz</span></button>
+ <button class="gt" onclick="vVoc()"><div class="ico">${ic('book')}</div><b>Vocabulario</b><span class="mut sm">${vDueAll()?vDueAll()+' para repasar':'Tarjetas con voz'}</span></button>
  <button class="gt" onclick="dictMix()"><div class="ico">${ic('phones')}</div><b>Dictado</b><span class="mut sm">Oído y ortografía</span></button>
  <button class="gt" onclick="vExam()"><div class="ico">${ic('clock')}</div><b>Simulacro</b><span class="mut sm">Con cronómetro</span></button>
  <button class="gt" onclick="vWrite()"><div class="ico">${ic('pen')}</div><b>Escritura</b><span class="mut sm">Con rúbrica</span></button>
@@ -306,17 +308,30 @@ function vErrors(){tab='practicar';renderNav();const by={};errList().forEach(x=>
  <div style="margin-top:8px">${ks.map(k=>`<button class="tile" style="--c:var(--bad)" onclick="errTopic(${JSON.stringify(k).replace(/"/g,'&quot;')})"><div class="ico">${ic('alert')}</div><div class="t"><b>${esc(k)}</b><span class="mut">${by[k][0].u.l} · ${by[k].length} por corregir</span></div>${ic('right')}</button>`).join('')}</div></div>`)}
 function errTopic(k){startRun(errList().filter(x=>x.u.t===k).slice(0,15),'Errores: '+k,{})}
 /* ================= VOCABULARIO ================= */
-let vl=null,vi=0,vflip=false;
+let vl=null,vflip=false,vcur=null;
 function vLv(){return vl||(VOC[S.level]?S.level:'A2')}
-function vVoc(){tab='practicar';renderNav();const L=vLv(),ws=VOC[L],w=ws[vi%ws.length];S.voc=S.voc||{};
- show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('practicar')" aria-label="Volver">${ic('left')}</button><h2>Vocabulario</h2></div>
- <div class="seg">${Object.keys(VOC).map(x=>`<button class="${x===L?'on':''}" onclick="vl='${x}';vi=0;vflip=false;vVoc()">${x}</button>`).join('')}</div>
- <div class="card" style="text-align:center;padding:28px 16px"><div class="mut sm">${vi%ws.length+1} / ${ws.length} · ${Object.keys(S.voc).filter(k=>k.startsWith(L)).length} conocidas</div>
+const vk=(L,w)=>L+'|'+w[0];
+function vQueue(L){S.vocc=S.vocc||{};const t=today(),due=[],fresh=[];
+ VOC[L].forEach(w=>{const c=S.vocc[vk(L,w)];if(!c)fresh.push(w);else if(c.due<=t)due.push(w)});
+ return {due,fresh}}
+function vDueAll(){S.vocc=S.vocc||{};const t=today();return Object.values(S.vocc).filter(c=>c.due<=t).length}
+function vVoc(){tab='practicar';renderNav();const L=vLv(),q=vQueue(L);
+ const w=vcur&&vcur.L===L&&!vflip?vcur.w:(vflip&&vcur?vcur.w:(q.due[0]||q.fresh[0]||null));
+ if(w)vcur={L,w};
+ const known=Object.keys(S.vocc).filter(k=>k.startsWith(L+'|')).length;
+ let body;
+ if(!w)body=`<div class="card" style="text-align:center"><h3>Todo al día</h3><p class="mut">No quedan tarjetas de ${L} por ver ni repasar hoy. Vuelve mañana: el repaso espaciado funciona mejor con pausas.</p></div>`;
+ else body=`<div class="card" style="text-align:center;padding:28px 16px"><div class="mut sm">${q.due.length} para repasar · ${q.fresh.length} nuevas · ${known}/${VOC[L].length} vistas</div>
  <div class="big" style="font-size:2.2rem;margin:14px 0 4px">${esc(w[0])}</div>
- <button class="btn sm" onclick="speak(VOC[vLv()][vi%VOC[vLv()].length][0])">${ic('vol')} Escuchar</button>
+ <button class="btn sm" onclick="speak(vcur.w[0])">${ic('vol')} Escuchar</button>
  ${vflip?`<div style="margin-top:16px;font-size:1.3rem;font-weight:700;color:var(--pri)">${esc(w[1])}</div><p class="ex" style="margin:8px 0 0">${esc(w[2])}</p>`:`<div style="margin-top:16px"><button class="btn pri" onclick="vflip=true;vVoc()">Ver significado</button></div><p class="mut sm">Piensa primero qué significa y luego comprueba.</p>`}</div>
- ${vflip?`<div class="grid2"><button class="btn" onclick="vMark(false)">${ic('x')} A repasar</button><button class="btn pri" onclick="vMark(true)">${ic('check')} La sabía</button></div>`:''}`)}
-function vMark(ok){const L=vLv(),w=VOC[L][vi%VOC[L].length];S.voc=S.voc||{};if(ok)S.voc[L+w[0]]=1;else delete S.voc[L+w[0]];save();vi++;vflip=false;vVoc()}
+ ${vflip?`<div class="grid2"><button class="btn" onclick="vMark(false)">${ic('x')} No la sabía</button><button class="btn pri" onclick="vMark(true)">${ic('check')} La sabía</button></div>`:''}`;
+ show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('practicar')" aria-label="Volver">${ic('left')}</button><h2>Vocabulario</h2></div>
+ <div class="seg">${Object.keys(VOC).map(x=>`<button class="${x===L?'on':''}" onclick="vl='${x}';vflip=false;vcur=null;vVoc()">${x}</button>`).join('')}</div>${body}`)}
+function vMark(ok){const {L,w}=vcur;S.vocc=S.vocc||{};const k=vk(L,w),c=S.vocc[k]||{b:0};
+ c.b=ok?Math.min(5,c.b+1):0;c.due=ok?new Date(Date.now()+BOX[c.b]*864e5).toISOString().slice(0,10):today();
+ if(!ok)c.due=new Date(Date.now()+864e5).toISOString().slice(0,10);
+ S.vocc[k]=c;stat('Vocabulario',ok);save();renderNav();vflip=false;vcur=null;vVoc()}
 /* ================= EXÁMENES REALES (material oficial de Cambridge) ================= */
 const CAM='https://www.cambridgeenglish.org/exams-and-tests/qualifications/';
 const OFI={A2:{x:'A2 Key',u:CAM+'key/preparation/'},B1:{x:'B1 Preliminary',u:CAM+'preliminary/preparation/'},B2:{x:'B2 First',u:CAM+'first/preparation/'},C1:{x:'C1 Advanced',u:CAM+'advanced/preparation/'},C2:{x:'C2 Proficiency',u:CAM+'proficiency/preparation/'}};
