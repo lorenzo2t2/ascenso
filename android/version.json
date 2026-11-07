@@ -1,10 +1,10 @@
 {
- "versionCode": 15,
- "versionName": "2.0.4",
+ "versionCode": 16,
+ "versionName": "2.0.5",
  "apk": "Ascenso.apk",
- "size": 30166533,
- "sha256": "fb151a7aab5454f63e25c00a566b628ce6e462398d51baa26d8482c76e5d8c3e",
+ "size": 30166532,
+ "sha256": "04d80173281e676b5eeab7a1e76a08ac69ec631f4a29f06cacfdba8c673d672b",
  "notes": [
-  "Corrige el botón Empezar de las clases en los temas Montaña, Tokio y Aurora (el menú lo tapaba)"
+  "Explicación más clara de does/do en negativas"
  ]
 }
