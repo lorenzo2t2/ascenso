@@ -139,7 +139,7 @@ S.set=Object.assign({theme:'auto',accent:'ocean',font:1,rate:.9,voice:''},S.set|
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const norm=s=>s.toLowerCase().replace(/[’']/g,"'").replace(/\s+/g,' ').trim();
+const norm=s=>s.toLowerCase().replace(/[’']/g,"'").replace(/\s+/g,' ').trim().replace(/[.!?,;]+$/,'').trim();
 const nd=s=>s.toLowerCase().replace(/[’']/g,'').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
 const today=()=>new Date().toISOString().slice(0,10);
 const ORD=['A2','B1','B2','C1','C2'];
@@ -164,7 +164,9 @@ let tab='hoy',run=null,sub=null;
 function renderNav(){const d=dueList().length+vDueAll(),t=[['hoy','home','Hoy'],['aprender','book','Aprender'],['practicar','target','Practicar'],['progreso','chart','Progreso'],['ajustes','sliders','Ajustes']];
  $('#nav').innerHTML='<div>'+t.map(([k,i,l])=>`<button class="${tab===k?'on':''}" onclick="go('${k}')" aria-label="${l}">${ic(i)}${l}${k==='practicar'&&d?`<span class="badge">${d>99?'99+':d}</span>`:''}</button>`).join('')+'</div>';
  $('#lvchip').innerHTML=`<span class="lv ${S.level}">${S.level}</span> nivel`}
-function show(html){const v=$('#view');v.className='';v.innerHTML=html;void v.offsetWidth;v.className='view';window.scrollTo(0,0)}
+let curHome=false;
+window.__back=function(){if(run){quitRun();return true}if(!curHome){go('hoy');return true}return false};
+function show(html){curHome=false;const v=$('#view');v.className='';v.innerHTML=html;void v.offsetWidth;v.className='view';window.scrollTo(0,0)}
 function go(t,s){if(run&&run.iv)clearInterval(run.iv);if(rIv){clearInterval(rIv);rIv=null}run=null;document.body.classList.remove('focus');tab=t;sub=s||null;renderNav();({hoy:vHoy,aprender:vLearn,practicar:vPractice,progreso:vStats,ajustes:vSettings})[t](s)}
 /* ================= HOY ================= */
 function nextUnit(){const w=weak();if(w.length){const u=U.find(x=>x.t===w[0].c);if(u)return {u,why:'Es tu punto más débil ('+w[0].p+'% de aciertos)'}}
@@ -182,7 +184,7 @@ function vHoy(){
  const w=weak();if(w.length)h+=`<div class="card"><h3>Puntos débiles</h3><p class="mut">Menos del 70 % de aciertos:</p><div class="row" style="margin-top:6px">${w.slice(0,5).map(x=>`<span class="chip">${esc(x.c)} · ${x.p}%</span>`).join('')}</div></div>`;
  h+=`<div class="card"><button class="tile" onclick="vReal()"><div class="ico">${ic('file')}</div><div class="t"><b>Exámenes reales</b><span class="mut">Material oficial de Cambridge y corrección</span></div>${ic('right')}</button>
  <button class="tile" onclick="vGuide()"><div class="ico">${ic('book')}</div><div class="t"><b>Conoce tu examen</b><span class="mut">Qué se evalúa en cada nivel</span></div>${ic('right')}</button></div>`;
- show(h)}
+ show(h);curHome=true}
 /* ================= APRENDER ================= */
 let lvSel=null;
 function vLearn(){const L=lvSel||S.level,us=unitsOf(L);
@@ -271,7 +273,8 @@ const fmt=s=>Math.max(0,Math.floor(s/60))+':'+String(Math.max(0,s%60)).padStart(
 function speak(t,rate){rate=rate||S.set.rate;if(window.AndroidTTS){try{AndroidTTS.setVoice(S.set.voice||'');AndroidTTS.speak(t,rate);return}catch(e){}}try{const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=rate;const v=speechSynthesis.getVoices().find(x=>x.name===S.set.voice)||speechSynthesis.getVoices().find(x=>/en-GB/i.test(x.lang))||speechSynthesis.getVoices().find(x=>/^en/i.test(x.lang));if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
 const TYPE={mc:'Elige la opción correcta',gap:'Completa la frase',wf:'Formación de palabras',kw:'Transformación',ro:'Ordena la frase',lis:'Comprensión oral',read:'Comprensión lectora',dic:'Dictado'};
 const HOW={mc:'Lee la pregunta y toca la opción correcta (también puedes pulsar 1–4).',gap:'Escribe en inglés la palabra o palabras que faltan en el hueco (___). Respeta lo que indica el paréntesis.',wf:'Transforma la palabra en MAYÚSCULAS (entre paréntesis) para que encaje en la frase y escribe solo la nueva palabra.',kw:'Reescribe la idea con la palabra clave indicada, sin cambiar el significado. Escribe solo las palabras que faltan.',ro:'Toca las palabras en el orden correcto para formar la frase. Toca una palabra de arriba para quitarla.',lis:'Pulsa «Escuchar», oye el audio (puedes repetirlo o ponerlo más lento) y elige la respuesta a la pregunta.',read:'Lee el texto y elige la opción que responde a la pregunta.',dic:'Pulsa «Escuchar» y escribe en inglés exactamente lo que oyes. No importan las mayúsculas ni la puntuación.'};
-function startRun(items,title,opt){if(!items.length)return;run={items:items.map(x=>({...x})),title,opt:opt||{},n:0,log:[],miss:[],done:false,ans:null,bi:[]};
+function shufQ(q){if(!q.o)return q;const idx=q.o.map((_,i)=>i).sort(()=>Math.random()-.5);return {...q,o:idx.map(i=>q.o[i]),a:idx.indexOf(q.a)}}
+function startRun(items,title,opt){if(!items.length)return;run={items:items.map(x=>({...x,q:shufQ(x.q)})),title,opt:opt||{},n:0,log:[],miss:[],done:false,ans:null,bi:[]};
  if(run.opt.timer){run.t0=Date.now();run.iv=setInterval(tick,1000)}ex()}
 function tick(){if(!run||!run.opt.timer)return;const left=run.opt.timer-Math.floor((Date.now()-run.t0)/1000);const el=$('#clock');if(el)el.innerHTML=ic('clock')+' '+fmt(left);if(left<=0)finish()}
 function quitRun(){if(!run||confirm('¿Salir de la sesión? Se pierde el progreso de esta tanda.'))go(tab)}
@@ -311,7 +314,7 @@ document.addEventListener('keydown',e=>{if(!run)return;const t=e.target.tagName;
  if(e.key==='Enter'){e.preventDefault();check()}else if(/^[1-4]$/.test(e.key)&&!run.done)pick(+e.key-1)});
 function finish(){
  if(!run)return;if(run.iv)clearInterval(run.iv);
- const r=run,n=r.log.length,ok=r.log.filter(x=>x.ok).length,pct=n?Math.round(100*ok/n):0;
+ const r=run,ok=r.log.filter(x=>x.ok).length,n=(r.opt.exam&&!r.opt.placement)?r.items.length:r.log.length,pct=n?Math.round(100*ok/n):0;
  document.body.classList.remove('focus');
  if(r.opt.placement)return placementEnd();
  if(r.opt.final)return finalEnd(r,ok,n,pct);

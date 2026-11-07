@@ -1,10 +1,11 @@
 {
- "versionCode": 9,
- "versionName": "1.8.0",
+ "versionCode": 10,
+ "versionName": "1.9.0",
  "apk": "Ascenso.apk",
- "size": 1006956,
- "sha256": "73e6ddb6caff078471223069cd1212689fba9e2882b750e5baa3bfeaa3f28545",
+ "size": 1007779,
+ "sha256": "270f48cc1aea3655fa116df9b3c75cdd2ca966f0b4557bce153519c753612c1e",
  "notes": [
-  "Clases guiadas como en el instituto: palabras nuevas, explicación paso a paso, ejemplo resuelto por el profesor y luego tus ejercicios"
+  "Correcciones: opciones barajadas, examen cuenta preguntas sin contestar, botón atrás de Android, tolerancia a puntuación",
+  "vocabulario C2 y más A2"
  ]
 }
