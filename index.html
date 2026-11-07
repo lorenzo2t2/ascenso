@@ -2,497 +2,389 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ascenso · Inglés B1–C2</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ascenso · Inglés A2–C2</title>
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon.png">
-<meta name="theme-color" content="#245f8f">
+<meta name="theme-color" content="#2f6fed">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Ascenso">
+<meta name="color-scheme" content="light dark">
 <style>
-:root{--bg:#f7f7f5;--card:#fff;--ink:#1c2420;--mut:#5f6b64;--line:#dfe3de;--pri:#245f8f;--pri2:#1b4a71;--bad:#b83a30;--ok:#2a7d4f}
-@media(prefers-color-scheme:dark){:root{--bg:#111517;--card:#1a2024;--ink:#e6ecef;--mut:#92a0a7;--line:#2b363c;--pri:#5aa3d8;--pri2:#7ab8e6;--bad:#ea7b70;--ok:#5cc08a}}
-*{box-sizing:border-box}body{margin:0;font:16px/1.55 Georgia,'Times New Roman',serif;background:var(--bg);color:var(--ink)}
-.ui,button,nav,input,textarea,table,.tag,.chip{font-family:system-ui,Segoe UI,sans-serif}
-header{padding:14px 16px;background:var(--card);border-bottom:1px solid var(--line)}
-header h1{font-size:18px;margin:0;font-family:system-ui,sans-serif}
-header span{color:var(--mut);font-weight:400;font-size:14px}
-main{max-width:760px;margin:0 auto;padding:16px}
-nav{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap}
-nav button{flex:1;min-width:84px}
-button{font:inherit;font-family:system-ui,sans-serif;font-size:15px;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 14px;border-radius:8px}
-button.pri{background:var(--pri);color:#fff;border-color:var(--pri2);font-weight:600}
-button.on{border-color:var(--pri);box-shadow:inset 0 0 0 1px var(--pri);font-weight:600}
-.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:12px}
-h2{margin:0 0 8px;font-size:21px}h3{margin:14px 0 6px;font-size:17px}
-.mut{color:var(--mut);font-size:14px}
-.opt{display:block;width:100%;text-align:left;margin:6px 0;font-family:inherit;font-size:16px}
-.opt.sel{border-color:var(--pri);background:color-mix(in srgb,var(--pri) 10%,var(--card))}
-.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,var(--card))}
-.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--card))}
-.fb{padding:12px;border-radius:8px;margin-top:10px;border:1px solid var(--line)}
-.fb.ok{border-left:4px solid var(--ok)}.fb.no{border-left:4px solid var(--bad)}
-input[type=text],textarea{width:100%;font:inherit;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
-.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;min-height:44px}.words button{padding:6px 10px}
-.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.sp{flex:1}
-.passage{background:var(--bg);border-left:3px solid var(--line);padding:10px 14px;margin:10px 0;font-size:16px}
-.tag{font-size:12px;padding:2px 8px;border-radius:4px;background:var(--pri);color:#fff}
-table{width:100%;border-collapse:collapse}td,th{padding:6px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}
-.bar{height:8px;border-radius:4px;background:var(--line);overflow:hidden;min-width:60px}.bar>i{display:block;height:100%;background:var(--pri)}
-.teach p,.teach li{margin:6px 0}.teach .ex{font-style:italic;color:var(--pri)}
-.teach table td:first-child{width:38%}
-.unit{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
-.unit .t{flex:1}
-.big{font-size:42px;font-weight:700;font-family:system-ui,sans-serif}
-details{margin:8px 0}summary{cursor:pointer;font-family:system-ui,sans-serif}
+:root{--bg:#f3f5fb;--surf:#fff;--surf2:#eef2fb;--ink:#12203d;--mut:#5a6786;--line:#e1e6f2;--sh:0 1px 2px rgba(18,32,61,.06),0 8px 24px rgba(18,32,61,.07);
+--pri:#2f6fed;--pri-ink:#fff;--ok:#16996a;--bad:#d8453b;--a2:#e0a21b;--b1:#25a06a;--b2:#2f6fed;--c1:#8456f2;--c2:#e8602c;--r:18px}
+:root[data-accent="forest"]{--pri:#1f9d6b}:root[data-accent="sunset"]{--pri:#e0662a}:root[data-accent="violet"]{--pri:#7c4dff}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1120;--surf:#151c30;--surf2:#1c2540;--ink:#e9eeff;--mut:#97a4c6;--line:#25304c;--sh:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);--ok:#3ecf9a;--bad:#ff7d72;--b1:#44c58a;--b2:#6c9bff;--c1:#a78bfa;--c2:#ff9a5c;--pri:#6c9bff;--pri-ink:#0c1120}
+:root:not([data-theme="light"])[data-accent="forest"]{--pri:#4cc795}:root:not([data-theme="light"])[data-accent="sunset"]{--pri:#ff9a5c}:root:not([data-theme="light"])[data-accent="violet"]{--pri:#a78bfa}}
+:root[data-theme="dark"]{--bg:#0c1120;--surf:#151c30;--surf2:#1c2540;--ink:#e9eeff;--mut:#97a4c6;--line:#25304c;--sh:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);--ok:#3ecf9a;--bad:#ff7d72;--b1:#44c58a;--b2:#6c9bff;--c1:#a78bfa;--c2:#ff9a5c;--pri:#6c9bff;--pri-ink:#0c1120}
+:root[data-theme="dark"][data-accent="forest"]{--pri:#4cc795}:root[data-theme="dark"][data-accent="sunset"]{--pri:#ff9a5c}:root[data-theme="dark"][data-accent="violet"]{--pri:#a78bfa}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{font-size:calc(16px*var(--fs,1))}
+body{margin:0;font:1rem/1.55 Inter,"Segoe UI",system-ui,-apple-system,Roboto,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+body.focus{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+svg.i{width:1.25em;height:1.25em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.25em;flex:none}
+main{max-width:720px;margin:0 auto;padding:16px 16px 8px}
+h1,h2,h3{margin:0;line-height:1.25;letter-spacing:-.01em}h2{font-size:1.35rem}h3{font-size:1.05rem}
+a{color:var(--pri)}
+.mut{color:var(--mut);font-size:.9rem}.sm{font-size:.85rem}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--pri),color-mix(in srgb,var(--pri) 55%,#000));display:grid;place-items:center;color:var(--pri-ink)}
+.top b{font-size:1.05rem}.sp{flex:1}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:12px;box-shadow:var(--sh)}
+.hero{background:linear-gradient(135deg,var(--pri),color-mix(in srgb,var(--pri) 60%,#1a0f4d));color:var(--pri-ink);border:0;border-radius:24px;padding:20px;margin-bottom:14px;box-shadow:var(--sh);display:flex;gap:16px;align-items:center}
+.hero .mut{color:inherit;opacity:.85}.hero h2{font-size:1.5rem}
+.btn{font:inherit;font-weight:600;font-size:.95rem;border:1px solid var(--line);background:var(--surf);color:var(--ink);padding:11px 16px;border-radius:12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .08s,background .15s;text-decoration:none}
+.btn:active{transform:scale(.97)}.btn.pri{background:var(--pri);color:var(--pri-ink);border-color:transparent}.btn.ghost{background:transparent}.btn.block{width:100%}.btn.sm{padding:7px 12px;font-size:.85rem}
+button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid color-mix(in srgb,var(--pri) 55%,transparent);outline-offset:2px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:color-mix(in srgb,var(--surf) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;justify-content:center;padding:6px 8px calc(6px + env(safe-area-inset-bottom));z-index:10}
+.nav div{display:flex;max-width:720px;width:100%;gap:2px}
+.nav button{flex:1;background:none;border:0;color:var(--mut);font:inherit;font-size:.72rem;font-weight:600;padding:6px 0;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;position:relative}
+.nav button svg{width:1.5em;height:1.5em}.nav button.on{color:var(--pri)}.nav button.on::before{content:"";position:absolute;top:-7px;width:26px;height:3px;border-radius:3px;background:var(--pri)}
+.nav .badge{position:absolute;top:2px;left:calc(50% + 6px);background:var(--bad);color:#fff;border-radius:99px;font-size:.65rem;padding:0 5px;min-width:16px;text-align:center}
+body.focus .nav{display:none}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:99px;background:var(--surf2);font-size:.8rem;font-weight:600}
+.lv{color:#fff;border-radius:8px;padding:2px 9px;font-size:.75rem;font-weight:700;display:inline-block}
+.lv.A2{background:#e0a21b}.lv.B1{background:var(--b1)}.lv.B2{background:var(--b2)}.lv.C1{background:var(--c1)}.lv.C2{background:var(--c2)}
+.bar{height:8px;border-radius:99px;background:var(--surf2);overflow:hidden;flex:1}.bar>i{display:block;height:100%;border-radius:99px;background:var(--pri);transition:width .35s}
+.seg{display:flex;background:var(--surf2);border-radius:14px;padding:4px;gap:4px;margin-bottom:12px}
+.seg button{flex:1;border:0;background:none;font:inherit;font-weight:600;font-size:.9rem;color:var(--mut);padding:8px 4px;border-radius:10px;cursor:pointer}
+.seg button.on{background:var(--surf);color:var(--ink);box-shadow:var(--sh)}
+.tile{display:flex;align-items:center;gap:12px;padding:12px 4px;border-top:1px solid var(--line);cursor:pointer;background:none;border-left:0;border-right:0;border-bottom:0;width:100%;text-align:left;font:inherit;color:inherit;text-decoration:none}
+.tile:first-child{border-top:0}
+.ico{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:color-mix(in srgb,var(--c,var(--pri)) 14%,var(--surf));color:var(--c,var(--pri));flex:none}
+.tile .t{flex:1;min-width:0}.tile .t b{display:block}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gt{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding:14px;border-radius:16px;background:var(--surf);border:1px solid var(--line);box-shadow:var(--sh);cursor:pointer;font:inherit;color:inherit;text-align:left}
+.gt b{font-size:.98rem}
+.teach p,.teach li{margin:8px 0}.teach table{width:100%;border-collapse:collapse;margin:8px 0}.teach td{padding:9px 6px;border-top:1px solid var(--line);vertical-align:top;font-size:.95rem}.teach td:first-child{width:36%}
+.ex{color:var(--pri);font-style:italic;cursor:pointer;border-bottom:1px dotted var(--pri)}
+.run{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.icon{background:var(--surf);border:1px solid var(--line);width:40px;height:40px;border-radius:12px;color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.how{display:flex;gap:8px;align-items:flex-start;margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--surf2);color:var(--mut);font-size:.88rem}
+.q{font-size:1.2rem;font-weight:600;margin:10px 0 14px;line-height:1.4}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;margin:8px 0;padding:13px 14px;border-radius:14px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font:inherit;font-size:1rem;cursor:pointer;transition:border-color .15s,background .15s}
+.opt .k{width:28px;height:28px;border-radius:9px;background:var(--surf2);display:grid;place-items:center;font-weight:700;font-size:.85rem;flex:none}
+.opt.sel{border-color:var(--pri);background:color-mix(in srgb,var(--pri) 10%,var(--surf))}.opt.sel .k{background:var(--pri);color:var(--pri-ink)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 13%,var(--surf))}.opt.right .k{background:var(--ok);color:#fff}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,var(--surf))}.opt.wrong .k{background:var(--bad);color:#fff}
+input[type=text],input[type=number],textarea{width:100%;font:inherit;padding:13px 14px;border-radius:14px;border:2px solid var(--line);background:var(--surf);color:var(--ink)}
+input[type=text]:focus,input[type=number]:focus,textarea:focus{border-color:var(--pri);outline:0}
+.passage{background:var(--surf2);border-radius:14px;padding:14px 16px;margin:6px 0 4px;font-size:1rem;line-height:1.65}
+.words{display:flex;flex-wrap:wrap;gap:8px;min-height:50px;padding:8px;border-radius:14px}
+.words.built{background:var(--surf2);border:2px dashed var(--line)}
+.w{font:inherit;padding:8px 13px;border-radius:11px;border:1px solid var(--line);background:var(--surf);color:var(--ink);cursor:pointer;font-weight:500}.w:disabled{opacity:.3}
+.fb{border-radius:14px;padding:14px;margin-top:14px;animation:up .25s ease-out}
+.fb.ok{background:color-mix(in srgb,var(--ok) 13%,var(--surf));border:1px solid var(--ok)}.fb.no{background:color-mix(in srgb,var(--bad) 11%,var(--surf));border:1px solid var(--bad)}
+.fb b{display:flex;gap:8px;align-items:center}
+.actionbar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);z-index:11}
+.actionbar>div{max-width:720px;margin:auto}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.view{animation:up .22s ease-out}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+table.t{width:100%;border-collapse:collapse}table.t td{padding:8px 4px;border-top:1px solid var(--line);font-size:.92rem}table.t tr:first-child td{border-top:0}
+.big{font-size:2.6rem;font-weight:800;letter-spacing:-.02em}
+details{margin:10px 0}summary{cursor:pointer;font-weight:600}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.swatch{width:40px;height:40px;border-radius:50%;border:3px solid transparent;cursor:pointer;padding:0}.swatch.on{border-color:var(--ink)}
+label.chk{display:flex;gap:10px;align-items:flex-start;margin:10px 0;cursor:pointer}label.chk input{width:20px;height:20px;margin-top:2px;accent-color:var(--pri)}
+.sheet{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.sheet label{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--mut);font-weight:600}
+.sheet input{padding:8px 8px;border-radius:10px;font-size:.95rem;text-align:center;min-width:0}
+.timer{font-variant-numeric:tabular-nums;font-size:1.4rem;font-weight:700}
 </style>
 </head>
 <body>
-<header><h1>Ascenso <span>· Inglés B1 → C2 · preparación de examen</span></h1></header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+<symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></symbol>
+<symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+<symbol id="i-phones" viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.5 15a9 9 0 1 1-2.1-9.4L23 10"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></symbol>
+<symbol id="i-vol" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+<symbol id="i-steps" viewBox="0 0 24 24"><path d="M3 21h5v-5h5v-5h5V6h3"/></symbol>
+<symbol id="i-ext" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></symbol>
+</defs></svg>
 <main>
-<nav id="nav"></nav>
-<div id="view"></div>
+<div class="top"><div class="logo"><svg class="i"><use href="#i-steps"/></svg></div><b>Ascenso</b><span class="sp"></span><span class="chip" id="lvchip"></span></div>
+<div id="view" class="view"></div>
 </main>
+<div class="nav" id="nav"></div>
+<script src="contenido.js"></script>
+<script src="contenido-temas.js"></script>
+<script src="contenido-a2.js"></script>
 <script>
-/* ================= CONTENIDO =================
- Cada unidad: explicación breve (teach) + ejercicios con explicación de cada respuesta.
- Tipos: mc, gap, wf (word formation), kw (transformación), ro (ordenar), lis (escucha), read (lectura). */
-const LV={B1:{n:'B1 · Preliminary',d:'Comunicación básica en situaciones cotidianas.'},
-B2:{n:'B2 · First',d:'Argumentar con fluidez y entender textos complejos.'},
-C1:{n:'C1 · Advanced',d:'Uso flexible y preciso en contextos académicos y profesionales.'},
-C2:{n:'C2 · Proficiency',d:'Dominio casi nativo: matiz, registro e implicaturas.'}};
-const U=[
-{id:'b1-gram',l:'B1',t:'Gramática clave',teach:`
-<p><b>Tres estructuras que más se confunden en B1:</b></p>
-<table><tr><td><b>Segundo condicional</b></td><td>If + pasado simple, would + infinitivo<br><span class="ex">If I had more time, I would learn Italian.</span></td></tr>
-<tr><td><b>since / for</b></td><td>since + momento de inicio; for + duración<br><span class="ex">since 2019 · for five years</span></td></tr>
-<tr><td><b>Estilo indirecto</b></td><td>El orden vuelve a ser afirmativo, sin do/did<br><span class="ex">He asked where I lived.</span></td></tr>
-<tr><td><b>be used to + -ing</b></td><td>estar acostumbrado a<br><span class="ex">I'm used to getting up early.</span></td></tr></table>`,
- q:[
- {k:'gap',p:'If I ___ more time, I would learn Italian.',a:['had'],e:'Segundo condicional: If + pasado simple, would + infinitivo.'},
- {k:'mc',p:'She has lived here ___ 2019.',o:['for','since','from','during'],a:1,e:'«since» + punto de inicio; «for» + duración.'},
- {k:'mc',p:"I'm not used to ___ up so early.",o:['get','getting','got','be get'],a:1,e:'«be used to» + gerundio (-ing).'},
- {k:'gap',p:'The report ___ (write) by the time you arrive.',a:['will have been written','will be written'],e:'Pasiva en futuro: will have been + participio.'},
- {k:'mc',p:'He asked me where ___.',o:['did I live','I lived','do I live','I do live'],a:1,e:'Estilo indirecto: orden de oración afirmativa.'},
- {k:'ro',p:'Ordena la frase',w:'have you ever been to London ?'.split(' '),a:'have you ever been to London ?',e:'Present perfect en pregunta: have + sujeto + participio.'}]},
-{id:'b1-voc',l:'B1',t:'Vocabulario y falsos amigos',teach:`
-<p>Un error típico de hispanohablantes es traducir palabra por palabra. Aprende <b>colocaciones</b> (palabras que van juntas) y vigila los <b>falsos amigos</b>:</p>
-<table><tr><td><b>actually</b></td><td>= en realidad (no «actualmente», que es <i>currently</i>)</td></tr>
-<tr><td><b>embarrassed</b></td><td>= avergonzado (no «embarazada», que es <i>pregnant</i>)</td></tr>
-<tr><td><b>make / do</b></td><td><span class="ex">make an appointment, make a mistake · do homework, do the shopping</span></td></tr>
-<tr><td><b>borrow / lend</b></td><td>borrow = tomar prestado · lend = prestar</td></tr>
-<tr><td><b>advice</b></td><td>incontable: <span class="ex">some advice</span>, nunca «an advice» ni «advices»</td></tr></table>`,
- q:[
- {k:'mc',p:'The opposite of "borrow" is…',o:['lend','steal','win','spend'],a:0,e:'Borrow = tomar prestado; lend = prestar.'},
- {k:'mc',p:'I need to ___ an appointment with the dentist.',o:['do','make','take','have to'],a:1,e:'Colocación: make an appointment.'},
- {k:'gap',p:'Could you give me some ___ (advice) about universities?',a:['advice'],e:'«advice» es incontable: sin «a/an» ni plural.'},
- {k:'mc',p:'"Fed up" means…',o:['hungry','tired of something','very full','angry at food'],a:1,e:'Fed up with = harto de.'},
- {k:'wf',p:'He is a very ___ person. (RELY)',a:['reliable'],e:'rely → reliable (adjetivo).'},
- {k:'mc',p:'"Actually" in English means…',o:['actualmente','en realidad','finalmente','exactamente'],a:1,e:'Falso amigo: actually = en realidad; actualmente = currently.'},
- {k:'mc',p:'"I was embarrassed" means…',o:['Estaba embarazada','Me dio vergüenza','Estaba enfadado','Estaba cansado'],a:1,e:'Falso amigo: embarrassed = avergonzado.'}]},
-{id:'b1-lis',l:'B1',t:'Estrategias de escucha',teach:`
-<p><b>Cómo escuchar en el examen:</b></p>
-<ul><li>Lee las preguntas <b>antes</b> de oír el audio y subraya qué te piden (hora, motivo, lugar…).</li>
-<li>La respuesta casi nunca usa las mismas palabras: se <b>parafrasea</b> (<span class="ex">half past nine = 9:30</span>).</li>
-<li>Cuidado con los <b>distractores</b>: suelen mencionarse varias opciones y el hablante se corrige.</li>
-<li>Al terminar, lee la transcripción y localiza lo que no entendiste: así se entrena el oído.</li></ul>`,
- q:[
- {k:'lis',s:'The train to Manchester leaves at half past nine from platform four.',p:'¿A qué hora sale el tren?',o:['9:00','9:30','10:30','4:00'],a:1,e:'Half past nine = 9:30.'},
- {k:'lis',s:"I'd rather stay at home tonight because I'm feeling a bit under the weather.",p:'¿Por qué se queda en casa?',o:['Hace mal tiempo','Está algo enfermo','Tiene trabajo','Está de vacaciones'],a:1,e:'Under the weather = encontrarse mal.'},
- {k:'lis',s:"Could you turn the music down? I'm trying to concentrate on my homework.",p:'¿Qué pide el hablante?',o:['Subir la música','Bajar la música','Apagar la luz','Ayuda con los deberes'],a:1,e:'Turn down = bajar el volumen.'}]},
-{id:'b2-gram',l:'B2',t:'Gramática avanzada',teach:`
-<table><tr><td><b>Tercer condicional invertido</b></td><td>Had + sujeto + participio, would have + participio<br><span class="ex">Had I known, I would have left earlier.</span></td></tr>
-<tr><td><b>Verbo + gerundio</b></td><td>suggest, enjoy, avoid, admit, regret + -ing<br><span class="ex">She suggested postponing the meeting.</span></td></tr>
-<tr><td><b>wish + past perfect</b></td><td>lamentar el pasado<br><span class="ex">I wish I had studied harder.</span></td></tr>
-<tr><td><b>Pasiva impersonal</b></td><td>It is said that… / He is said to be…<br><span class="ex">He is said to be a genius.</span></td></tr>
-<tr><td><b>Relativas no restrictivas</b></td><td>con comas, usa which/who (nunca that)</td></tr></table>`,
- q:[
- {k:'mc',p:'Had I known about the delay, I ___ earlier.',o:['would leave','would have left','had left','will leave'],a:1,e:'Inversión del tercer condicional.'},
- {k:'mc',p:'She suggested ___ the meeting.',o:['to postpone','postponing','postpone','to postponing'],a:1,e:'suggest + gerundio.'},
- {k:'kw',p:'"I regret not studying harder." → I wish I ___ harder. (STUDIED)',a:['had studied'],e:'wish + past perfect para lamentar el pasado.'},
- {k:'gap',p:'By next June, she ___ (work) here for ten years.',a:['will have been working','will have worked'],e:'Futuro perfecto continuo/simple.'},
- {k:'mc',p:'The film, ___ was directed by a newcomer, won three awards.',o:['that','which','what','who'],a:1,e:'Relativa no restrictiva: which (con comas).'},
- {k:'kw',p:'"People say he is a genius." → He ___ a genius. (SAID)',a:['is said to be'],e:'Pasiva impersonal: is said to be.'}]},
-{id:'b2-use',l:'B2',t:'Use of English',teach:`
-<p><b>Word formation:</b> identifica primero la categoría gramatical que falta (sustantivo, adjetivo, adverbio, verbo) y luego decide si necesita prefijo negativo.</p>
-<table><tr><td>implement → <b>implementation</b></td><td>-tion / -ment / -ness forman sustantivos</td></tr>
-<tr><td>popular → <b>unpopular</b></td><td>un-, in-, im-, dis-, ir-: sentido contrario</td></tr></table>
-<p><b>Phrasal verbs frecuentes:</b> put up with (soportar), set up (establecer), call off (cancelar), run out of (quedarse sin), carry out (llevar a cabo).</p>`,
- q:[
- {k:'wf',p:'The ___ of the new law was criticised. (IMPLEMENT)',a:['implementation'],e:'implement → implementation (sustantivo).'},
- {k:'wf',p:'It was an ___ decision. (POPULAR)',a:['unpopular'],e:'popular → unpopular.'},
- {k:'mc',p:"He couldn't ___ with the noise any longer.",o:['put up','keep up','give up','make up'],a:0,e:'Put up with = soportar.'},
- {k:'mc',p:'The company decided to ___ its operations abroad.',o:['carry out','set up','take off','call off'],a:1,e:'Set up = establecer; call off = cancelar.'},
- {k:'gap',p:'We ran ___ of milk, so I went to the shop.',a:['out'],e:'Run out of = quedarse sin.'}]},
-{id:'b2-read',l:'B2',t:'Comprensión lectora',teach:`
-<ul><li>Lee el texto una vez completo para la <b>idea general</b> antes de mirar las preguntas.</li>
-<li>La opción correcta <b>parafrasea</b> el texto; la incorrecta suele repetir palabras literales pero cambia el sentido.</li>
-<li>Localiza la frase exacta que justifica tu respuesta. Si no puedes señalarla, es una suposición.</li></ul>`,
- q:[
- {k:'read',x:'Remote working has changed how companies think about offices. Many firms now offer "hybrid" contracts, where staff spend two or three days at home. Supporters say it improves work–life balance; critics argue that it weakens team spirit and makes it harder for newcomers to learn from colleagues.',p:'¿Cuál es la postura de los críticos?',o:['Mejora el equilibrio personal','Debilita la cohesión y el aprendizaje de los recién llegados','Reduce los salarios','Elimina las oficinas'],a:1,e:'El texto: «weakens team spirit… harder for newcomers to learn».'},
- {k:'read',x:'The author argues that social media, despite its reputation for superficiality, has revived interest in long-form reading: book recommendations circulate faster than ever, and communities form around shared titles.',p:'La idea central del autor es que las redes sociales…',o:['destruyen la lectura','han impulsado el interés por leer','solo sirven para publicidad','sustituyen a las bibliotecas'],a:1,e:'«despite its reputation… has revived interest in long-form reading».'}]},
-{id:'c1-gram',l:'C1',t:'Estructuras de C1',teach:`
-<p><b>Inversión tras expresiones negativas o restrictivas</b> (verbo auxiliar antes del sujeto):</p>
-<table><tr><td>Not only / Never / Rarely</td><td><span class="ex">Not only did he arrive late, but…</span></td></tr>
-<tr><td>Hardly / Scarcely … when</td><td><span class="ex">Hardly had we entered when the alarm went off.</span></td></tr>
-<tr><td>Not until</td><td><span class="ex">Not until it was too late did he realise.</span></td></tr></table>
-<p><b>It's (high) time + pasado:</b> <span class="ex">It is high time we took action.</span> · <b>In spite of</b> + sustantivo o -ing.</p>`,
- q:[
- {k:'mc',p:'Not only ___ late, but he also forgot the documents.',o:['he arrived','did he arrive','he did arrive','arrived he'],a:1,e:'Inversión tras expresión negativa al inicio.'},
- {k:'mc',p:'It is high time we ___ the problem seriously.',o:['take','took','will take','have taken'],a:1,e:"It's (high) time + pasado."},
- {k:'kw',p:'"He only realised the danger when it was too late." → Not until it ___ too late did he realise the danger. (WAS)',a:['was'],e:'Not until + cláusula, luego inversión en la principal.'},
- {k:'kw',p:'"Despite her protests, they sold the house." → In spite of her ___ , the house was sold. (OBJECTED)',a:['objecting','having objected'],e:'In spite of + sustantivo/gerundio.'},
- {k:'mc',p:'Hardly ___ the building when the alarm went off.',o:['we had entered','had we entered','we entered','did we entered'],a:1,e:'Hardly… when + past perfect invertido.'}]},
-{id:'c1-voc',l:'C1',t:'Léxico y colocaciones',teach:`
-<p>En C1 se evalúa la <b>precisión léxica</b>: la palabra correcta suele venir impuesta por la colocación, no por el significado.</p>
-<table><tr><td>mounting <b>pressure</b></td><td>presión creciente (no «weight»)</td></tr>
-<tr><td>a <b>plethora</b> of</td><td>una abundancia de</td></tr>
-<tr><td><b>ambivalent</b> about</td><td>con sentimientos encontrados</td></tr>
-<tr><td>notorious <b>for</b></td><td>conocido (negativamente) por</td></tr></table>
-<p>Anota siempre la palabra <b>con su preposición y compañeros habituales</b>.</p>`,
- q:[
- {k:'mc',p:'The government faces mounting ___ to resign.',o:['pressure','weight','stress','load'],a:0,e:'Colocación: mounting pressure.'},
- {k:'mc',p:'A ___ of evidence supports the theory.',o:['plethora','plenty','large','crowd'],a:0,e:'A plethora of = abundancia de.'},
- {k:'wf',p:'The results were ___ with previous studies. (CONSISTENT)',a:['inconsistent'],e:'consistent → inconsistent.'},
- {k:'mc',p:'She was ___ about the offer, unsure whether to accept.',o:['ambivalent','indifferent','adamant','oblivious'],a:0,e:'Ambivalent = con sentimientos encontrados.'},
- {k:'mc',p:"He's notorious ___ never meeting deadlines.",o:['for','of','by','at'],a:0,e:'Notorious for.'}]},
-{id:'c1-lis',l:'C1',t:'Escucha avanzada',teach:`
-<p>En C1 el hablante suele <b>matizar o negar</b> lo que parece decir. Escucha la actitud, no solo la información.</p>
-<ul><li><span class="ex">I wouldn't go so far as to call it…</span> → no lo dice tan fuerte.</li>
-<li><span class="ex">Had X been…, it might have…</span> → hipótesis sobre el pasado: no ocurrió.</li></ul>`,
- q:[
- {k:'lis',s:"I wouldn't go so far as to call it a failure, but it certainly fell short of our expectations.",p:'¿Qué opina el hablante?',o:['Fue un éxito total','Fue un fracaso rotundo','No fue un fracaso, pero decepcionó','No tiene opinión'],a:2,e:'Fell short of expectations, pero sin llamarlo failure.'},
- {k:'lis',s:'Had the committee been better informed, it might well have reached a different conclusion.',p:'¿Qué implica?',o:['El comité decidió bien','El comité no estaba bien informado','El comité cambió de opinión','Nadie dijo nada'],a:1,e:'Tercer condicional invertido: no estaban bien informados.'}]},
-{id:'c2-gram',l:'C2',t:'Precisión y matiz',teach:`
-<table><tr><td><b>Were it not for…</b></td><td>= si no fuera por… <span class="ex">Were it not for your help, we would have failed.</span></td></tr>
-<tr><td><b>might / could have + participio</b></td><td>posibilidad pasada <span class="ex">She might have misread it.</span></td></tr>
-<tr><td><b>as though + pasado</b></td><td>irreal en presente <span class="ex">He spoke as though he knew everything.</span></td></tr>
-<tr><td><b>whose</b></td><td>posesivo relativo para personas y cosas</td></tr></table>`,
- q:[
- {k:'mc',p:'Scarcely ___ the speech when the audience erupted.',o:['he had finished','had he finished','he finished','did he finished'],a:1,e:'Scarcely… when con inversión.'},
- {k:'mc',p:'"Were it not for your help, we ___ failed." Elige la forma correcta.',o:['would have','will have','had','would'],a:0,e:'Were it not for + would have + participio.'},
- {k:'kw',p:'"It is possible that she misread the instructions." → She ___ the instructions. (MIGHT)',a:['might have misread'],e:'Deducción pasada: might have + participio.'},
- {k:'mc',p:'The proposal, ___ merits are debatable, was approved.',o:['whose','which','that','of which the'],a:0,e:'whose = posesivo relativo.'},
- {k:'mc',p:'He spoke as though he ___ the whole truth.',o:['knew','knows','had known','would know'],a:0,e:'As though + pasado (irreal en presente).'}]},
-{id:'c2-reg',l:'C2',t:'Registro y matices',teach:`
-<p>En C2 debes elegir el <b>registro</b> correcto (formal/informal) y entender <b>modismos</b> y tono irónico.</p>
-<table><tr><td>tongue-in-cheek</td><td>en broma, irónico</td></tr>
-<tr><td>not hold water</td><td>no sostenerse (un argumento)</td></tr>
-<tr><td>mealy-mouthed</td><td>evasivo, que no habla claro</td></tr></table>
-<p>Formal: <span class="ex">I would like to take this opportunity to express my gratitude.</span> · Informal: <span class="ex">Thanks a lot!</span></p>`,
- q:[
- {k:'mc',p:'Which is the most formal?',o:["I'd like to take this opportunity to express my gratitude.",'Thanks a lot, mate.','Cheers for that!','Ta very much.'],a:0,e:'Registro formal: take this opportunity to express…'},
- {k:'mc',p:'"His remarks were tongue-in-cheek" means…',o:['He was angry','He was being ironic/not serious','He was lying','He was shy'],a:1,e:'Tongue-in-cheek = en broma, irónico.'},
- {k:'mc',p:'"Her argument doesn\'t hold water" means…',o:["It's very clear","It's not logical or convincing","It's too long","It's emotional"],a:1,e:'Not hold water = no se sostiene.'},
- {k:'wf',p:'The ___ of the evidence cast doubt on the verdict. (RELIABLE)',a:['unreliability'],e:'reliable → unreliability.'},
- {k:'mc',p:'A "mealy-mouthed" answer is…',o:['honest and direct','evasive and unwilling to speak plainly','very loud','poetic'],a:1,e:'Mealy-mouthed = evasivo.'}]},
-{id:'b1-tenses',l:'B1',t:'Tiempos verbales',teach:`
-<table><tr><td><b>Pasado simple / continuo</b></td><td>La acción en curso se interrumpe con el pasado simple<br><span class="ex">I was watching TV when the phone rang.</span></td></tr>
-<tr><td><b>Present perfect</b></td><td>Experiencias y acciones que llegan al presente<br><span class="ex">She has been to Paris three times.</span></td></tr>
-<tr><td><b>will / going to</b></td><td>going to = plan o predicción con evidencia<br><span class="ex">Look at those clouds! It's going to rain.</span></td></tr>
-<tr><td><b>used to</b></td><td>hábito pasado que ya no existe<br><span class="ex">I used to play outside every day.</span></td></tr>
-<tr><td><b>Primer condicional</b></td><td>If + presente, will + infinitivo</td></tr></table>`,
- q:[
- {k:'mc',p:'I ___ TV when the phone rang.',o:['watched','was watching','have watched','watch'],a:1,e:'Pasado continuo para la acción en curso interrumpida.'},
- {k:'mc',p:'She ___ to Paris three times.',o:['went','has been','was','is going'],a:1,e:'Present perfect para experiencias: has been to.'},
- {k:'mc',p:'Look at those clouds! It ___ rain.',o:['will','is going to','is','rains'],a:1,e:'going to: predicción basada en evidencia presente.'},
- {k:'gap',p:'When I was a child, I ___ to play outside every day.',a:['used'],e:'used to + infinitivo: hábito pasado.'},
- {k:'mc',p:'I ___ him since Monday.',o:["haven't seen","didn't see","don't see","wasn't seeing"],a:0,e:'since + present perfect.'},
- {k:'gap',p:'Right now, they ___ (study) for the exam.',a:['are studying'],e:'Presente continuo: acción en este momento.'},
- {k:'mc',p:'If it rains tomorrow, we ___ at home.',o:['stay','will stay','would stay','stayed'],a:1,e:'Primer condicional: If + presente, will + infinitivo.'},
- {k:'ro',p:'Ordena la frase',w:'she has been working here since 2020 .'.split(' '),a:'she has been working here since 2020 .',e:'Present perfect continuo + since + año.'}]},
-{id:'b1-prep',l:'B1',t:'Preposiciones',teach:`
-<table><tr><td><b>Tiempo</b></td><td>at + hora (<span class="ex">at 6 o'clock</span>) · on + día (<span class="ex">on Monday</span>) · in + mes/año (<span class="ex">in 1998</span>)</td></tr>
-<tr><td><b>arrive</b></td><td>arrive at + lugar concreto · arrive in + ciudad/país</td></tr>
-<tr><td><b>Adjetivo + preposición</b></td><td>interested <b>in</b>, good <b>at</b>, afraid <b>of</b>, fond <b>of</b>, keen <b>on</b></td></tr>
-<tr><td><b>Verbo + preposición</b></td><td>wait <b>for</b>, depend <b>on</b>, listen <b>to</b>, look <b>at</b></td></tr></table>`,
- q:[
- {k:'mc',p:'The meeting is ___ Monday morning.',o:['at','on','in','by'],a:1,e:'on + días de la semana.'},
- {k:'mc',p:"I'll see you ___ 6 o'clock.",o:['at','on','in','for'],a:0,e:'at + hora.'},
- {k:'mc',p:'She was born ___ 1998.',o:['at','on','in','from'],a:2,e:'in + año.'},
- {k:'mc',p:"I'm interested ___ photography.",o:['in','on','at','for'],a:0,e:'interested in.'},
- {k:'mc',p:'He is very good ___ maths.',o:['at','in','on','with'],a:0,e:'good at.'},
- {k:'gap',p:'We arrived ___ the airport two hours early.',a:['at'],e:'arrive at + lugar concreto; arrive in + ciudad o país.'},
- {k:'mc',p:'She is afraid ___ spiders.',o:['of','from','about','with'],a:0,e:'afraid of.'},
- {k:'gap',p:"I'm waiting ___ the bus.",a:['for'],e:'wait for.'}]},
-{id:'b2-phrasal',l:'B2',t:'Phrasal verbs',teach:`
-<table><tr><td>look up</td><td>buscar información</td></tr><tr><td>take off</td><td>despegar / quitarse</td></tr>
-<tr><td>come up with</td><td>idear, proponer</td></tr><tr><td>take after</td><td>parecerse a (un familiar)</td></tr>
-<tr><td>call off</td><td>cancelar</td></tr><tr><td>give up</td><td>rendirse, dejar de</td></tr>
-<tr><td>get on with</td><td>llevarse bien con</td></tr></table>
-<p>Aprende cada phrasal verb <b>dentro de una frase</b>; el significado casi nunca se deduce de las partes.</p>`,
- q:[
- {k:'mc',p:'Can you ___ this word in the dictionary?',o:['look up','look after','look for it','look at up'],a:0,e:'Look up = buscar (una palabra).'},
- {k:'mc',p:'The plane ___ at 8 a.m.',o:['took off','took out','took over','took in'],a:0,e:'Take off = despegar.'},
- {k:'mc',p:'We need to ___ with a solution by Friday.',o:['come up','get along','break down','turn off'],a:0,e:'Come up with = idear.'},
- {k:'mc',p:'She ___ her grandmother; they have the same eyes.',o:['takes after','takes up','takes on','takes off'],a:0,e:'Take after = parecerse a un familiar.'},
- {k:'mc',p:'The match was ___ because of the storm.',o:['called off','called up','called in','called for'],a:0,e:'Call off = cancelar.'},
- {k:'gap',p:"I can't ___ up my mind between the two jobs.",a:['make'],e:'Make up your mind = decidirse.'},
- {k:'mc',p:'He finally ___ smoking last year.',o:['gave up','gave in','gave out','gave away'],a:0,e:'Give up + gerundio = dejar de.'},
- {k:'mc',p:'I get ___ well with my colleagues.',o:['on','up','off','in'],a:0,e:'Get on well with = llevarse bien con.'}]},
-{id:'b2-wf',l:'B2',t:'Formación de palabras',teach:`
-<p>Pregúntate primero <b>qué categoría falta</b> (sustantivo, adjetivo, adverbio, verbo) y después si el sentido pide un <b>prefijo negativo</b>.</p>
-<table><tr><td>Sustantivos</td><td>-tion, -ment, -ness, -ity, -ance/-ence</td></tr>
-<tr><td>Adjetivos</td><td>-able, -ful, -ive, -ous, -al, -ing/-ed</td></tr>
-<tr><td>Adverbios</td><td>-ly (enthusiastic → enthusiastically)</td></tr>
-<tr><td>Negativos</td><td>un-, in-, im-, il-, ir-, dis-</td></tr></table>`,
- q:[
- {k:'wf',p:'Her ___ to the project was outstanding. (CONTRIBUTE)',a:['contribution'],e:'Sustantivo: contribute → contribution.'},
- {k:'wf',p:'He spoke ___ about his experience. (ENTHUSIASM)',a:['enthusiastically'],e:'Adverbio: enthusiasm → enthusiastically.'},
- {k:'wf',p:'The film was surprisingly ___. (ENTERTAIN)',a:['entertaining'],e:'Adjetivo: entertain → entertaining.'},
- {k:'wf',p:'It is ___ to predict the weather here. (POSSIBLE)',a:['impossible'],e:'Prefijo negativo: im- delante de p.'},
- {k:'wf',p:'The ___ of the building took two years. (CONSTRUCT)',a:['construction'],e:'Sustantivo: construct → construction.'},
- {k:'wf',p:'It was ___ of him to leave the door open. (RESPONSIBLE)',a:['irresponsible'],e:'Prefijo negativo ir- delante de r.'},
- {k:'wf',p:'Their ___ with the service was obvious. (SATISFY)',a:['dissatisfaction'],e:'Sentido negativo + sustantivo: dissatisfaction.'},
- {k:'wf',p:'The company made a ___ profit this year. (CONSIDER)',a:['considerable'],e:'Adjetivo: consider → considerable.'}]},
-{id:'b2-lis',l:'B2',t:'Escucha: hipótesis y causa',teach:`
-<p>En B2 aparecen <b>causas</b> (owing to, because of), <b>condiciones</b> (unless, provided that) y <b>hipótesis irreales</b> (I'd have called, but…). Escucha qué <b>no</b> ocurrió y por qué.</p>`,
- q:[
- {k:'lis',s:"The conference has been moved from Tuesday to Thursday owing to the speaker's illness.",p:'¿Por qué se cambió la fecha?',o:['Mal tiempo','Enfermedad del ponente','Falta de público','Error de reserva'],a:1,e:"Owing to = debido a; the speaker's illness."},
- {k:'lis',s:"I'd have called you earlier, but my phone ran out of battery.",p:'¿Por qué no llamó antes?',o:['Se olvidó','No tenía batería','Estaba ocupado','No tenía el número'],a:1,e:'Ran out of battery = se quedó sin batería.'},
- {k:'lis',s:"Unless we leave now, we'll miss the last train.",p:'¿Qué pasará si no salen ya?',o:['Llegarán pronto','Perderán el último tren','Cogerán un taxi','Irán andando'],a:1,e:'Unless = a menos que (if not).'}]},
-{id:'c1-read',l:'C1',t:'Lectura: inferencia y actitud',teach:`
-<ul><li>En C1 muchas preguntas piden <b>inferir</b> la actitud del autor (escéptica, crítica, elogiosa), no localizar un dato.</li>
-<li>Palabras de actitud: <i>admittedly, arguably, regrettably, ostensibly, unduly</i>.</li>
-<li>Descarta opciones <b>demasiado extremas</b> (always, never, completely) salvo que el texto lo diga.</li></ul>`,
- q:[
- {k:'read',x:'Admittedly, the new policy has reduced waiting times in some hospitals. Yet critics point out that these gains were achieved largely by redirecting resources from preventive care, a trade-off that, arguably, will prove costly in the long run.',p:'¿Cuál es la actitud del autor hacia la política?',o:['Totalmente a favor','Reconoce un logro pero duda de su coste futuro','La rechaza por completo','Es indiferente'],a:1,e:'«Admittedly… Yet… arguably costly»: reconoce y matiza.'},
- {k:'read',x:'Far from being a mere technical upgrade, the platform ostensibly offers users greater control over their data. In practice, however, the settings are so deeply buried that few people ever change them.',p:'¿Qué sugiere «ostensibly»?',o:['Que es verdad y comprobado','Que lo aparente no coincide con la realidad','Que es muy costoso','Que es opcional'],a:1,e:'Ostensibly = aparentemente; «In practice, however» lo contradice.'},
- {k:'read',x:'The study found no evidence that homework improves attainment in primary schools, though it did note a modest benefit in secondary education. The authors caution against drawing sweeping conclusions from a single dataset.',p:'¿Qué concluye prudentemente el estudio?',o:['Los deberes son inútiles siempre','Los deberes ayudan algo en secundaria, no hay pruebas en primaria','Los deberes mejoran todo','Hay que prohibirlos'],a:1,e:'«no evidence» en primaria, «modest benefit» en secundaria; «caution» ante conclusiones generales.'}]},
-{id:'c1-idioms',l:'C1',t:'Modismos y expresiones',teach:`
-<table><tr><td>beat around the bush</td><td>andarse por las ramas</td></tr>
-<tr><td>a blessing in disguise</td><td>un mal que resulta bueno</td></tr>
-<tr><td>the tip of the iceberg</td><td>solo una pequeña parte visible de un problema mayor</td></tr>
-<tr><td>bite the bullet</td><td>afrontar algo desagradable con valentía</td></tr>
-<tr><td>once in a blue moon</td><td>muy rara vez</td></tr>
-<tr><td>cut corners</td><td>hacer algo a medias para ahorrar</td></tr></table>`,
- q:[
- {k:'mc',p:'"Stop beating around the bush" means…',o:['Stop running','Get to the point','Be quiet','Go outside'],a:1,e:'Beat around the bush = andarse por las ramas.'},
- {k:'mc',p:'Losing that job turned out to be a ___ in disguise.',o:['blessing','problem','lesson','risk'],a:0,e:'A blessing in disguise.'},
- {k:'mc',p:'The scandal is only the ___ of the iceberg.',o:['top','tip','edge','head'],a:1,e:'The tip of the iceberg.'},
- {k:'mc',p:'I hate going to the dentist, but I\'ll just have to ___ the bullet.',o:['bite','shoot','catch','take'],a:0,e:'Bite the bullet = afrontarlo.'},
- {k:'mc',p:'"We see each other once in a blue moon" means…',o:['every month','very rarely','every night','never'],a:1,e:'Once in a blue moon = muy rara vez.'},
- {k:'mc',p:'The builders ___ corners to save money, and the wall collapsed.',o:['cut','turned','took','rounded'],a:0,e:'Cut corners = hacer mal por ahorrar.'}]},
-{id:'c1-use',l:'C1',t:'Transformaciones (key word)',teach:`
-<p>Debes reescribir la frase con la palabra dada, <b>sin cambiarla</b>, usando de 2 a 5 palabras. Identifica la estructura que se pide: pasiva, condicional, inversión, estilo indirecto…</p>`,
- q:[
- {k:'kw',p:'"I haven\'t seen her for a week." → The last time ___ a week ago. (SAW)',a:['i saw her'],e:'The last time + pasado simple.'},
- {k:'kw',p:'"Please don\'t smoke here." → You ___ smoke here. (MUST)',a:['must not',"mustn't"],e:'Prohibición: must not.'},
- {k:'kw',p:'"They say the company is losing money." → The company ___ losing money. (SAID)',a:['is said to be'],e:'Pasiva impersonal: is said to be + -ing.'},
- {k:'kw',p:'"Although she was tired, she kept working." → ___ tired, she kept working. (SPITE)',a:['in spite of being'],e:'In spite of + gerundio.'},
- {k:'kw',p:'"I\'m sure he forgot." → He ___ forgotten. (MUST)',a:['must have'],e:'Deducción pasada: must have + participio.'},
- {k:'kw',p:'"Someone cleans the office every day." → The office ___ every day. (CLEANED)',a:['is cleaned'],e:'Pasiva en presente simple.'}]},
-{id:'c2-vocab',l:'C2',t:'Léxico avanzado',teach:`
-<table><tr><td>ubiquitous</td><td>omnipresente</td></tr><tr><td>ephemeral</td><td>efímero</td></tr>
-<tr><td>exacerbate</td><td>agravar</td></tr><tr><td>candid</td><td>sincero, franco</td></tr>
-<tr><td>mitigate</td><td>mitigar, atenuar</td></tr><tr><td>scrupulous</td><td>escrupuloso</td></tr>
-<tr><td>cogent</td><td>convincente (argumento)</td></tr></table>`,
- q:[
- {k:'mc',p:'Smartphones have become ___: you see them everywhere.',o:['ubiquitous','ephemeral','scrupulous','reluctant'],a:0,e:'Ubiquitous = omnipresente.'},
- {k:'mc',p:'Fame can be ___; it vanishes quickly.',o:['ephemeral','cogent','candid','tenacious'],a:0,e:'Ephemeral = efímero.'},
- {k:'mc',p:'The new tax will only ___ the housing crisis.',o:['exacerbate','alleviate','dismiss','foresee'],a:0,e:'Exacerbate = agravar.'},
- {k:'mc',p:'Her ___ remarks surprised the committee, who expected diplomacy.',o:['candid','ephemeral','ubiquitous','frugal'],a:0,e:'Candid = franco, sin rodeos.'},
- {k:'mc',p:'Measures were taken to ___ the environmental damage.',o:['mitigate','aggravate','provoke','ignore'],a:0,e:'Mitigate = atenuar.'},
- {k:'mc',p:'He is ___ about keeping accurate records.',o:['scrupulous','careless','indifferent','oblivious'],a:0,e:'Scrupulous = meticuloso y honesto.'},
- {k:'mc',p:'She presented a ___ argument that convinced everyone.',o:['cogent','vague','trivial','tentative'],a:0,e:'Cogent = convincente.'}]},
-{id:'c2-use',l:'C2',t:'Transformaciones avanzadas',teach:`
-<p>En C2 las transformaciones combinan <b>inversión, subjuntivo y estructuras impersonales</b>. Revisa: <i>Little did…, Not until…, It is believed to…, I'd prefer it if…</i></p>`,
- q:[
- {k:'kw',p:'"She had no idea that the plan would fail." → Little ___ that the plan would fail. (KNOW)',a:['did she know'],e:'Little + inversión: Little did she know.'},
- {k:'kw',p:'"People believe that the painting is a forgery." → The painting is ___ a forgery. (BELIEVED)',a:['believed to be'],e:'Pasiva impersonal: is believed to be.'},
- {k:'kw',p:'"I would rather you didn\'t tell anyone." → I\'d ___ you didn\'t tell anyone. (PREFER)',a:['prefer it if'],e:"I'd prefer it if + pasado."},
- {k:'kw',p:'"No matter how hard he tried, he couldn\'t open it." → However ___ , he couldn\'t open it. (HARD)',a:['hard he tried'],e:'However + adjetivo + sujeto + verbo.'},
- {k:'kw',p:'"It was only after the meeting that I understood." → Not ___ the meeting did I understand. (UNTIL)',a:['until after'],e:'Not until after + inversión en la principal.'}]},
-{id:'c2-read',l:'C2',t:'Lectura: matiz y tono',teach:`
-<p>En C2 se piden <b>tono, implicaturas e ironía</b>. Pregúntate: ¿qué quiere que sienta el lector aunque no lo diga?</p>`,
- q:[
- {k:'read',x:'The minister\'s statement was a masterclass in saying nothing at length. Each sentence, polished and sonorous, circled the question without ever landing on it.',p:'¿Cuál es el tono del autor?',o:['Admirativo sin reservas','Irónico y crítico','Neutro e informativo','Compasivo'],a:1,e:'«masterclass in saying nothing» es sarcasmo: la declaración no dijo nada.'},
- {k:'read',x:'It would be tempting to dismiss the findings as a statistical quirk. That the effect recurs across four independent samples, however, suggests something more stubborn than coincidence.',p:'¿Qué sugiere el autor?',o:['Es una casualidad','El efecto parece real y persistente','Los datos son erróneos','No se puede concluir nada'],a:1,e:'«however… more stubborn than coincidence»: apoya que el efecto es real.'}]},
-{id:'c2-lis',l:'C2',t:'Escucha: implicaturas',teach:`
-<p>En C2 lo importante suele ser lo <b>implícito</b>: eufemismos, ironía, rechazo cortés. Pregúntate qué quiere decir realmente el hablante.</p>`,
- q:[
- {k:'lis',s:"Well, it's certainly an ambitious proposal. I'm sure the board will give it all the attention it deserves.",p:'¿Qué insinúa el hablante?',o:['Que le encanta la propuesta','Que probablemente no la considera buena','Que la aprobará sin dudar','Que no la ha leído'],a:1,e:'«All the attention it deserves» es irónico: poca atención merece.'},
- {k:'lis',s:"I don't suppose you'd happen to know where I might find a decent plumber at this hour?",p:'¿Cuál es el registro?',o:['Muy formal y distante','Cortés e indirecto','Agresivo','Tajante'],a:1,e:'«I don\'t suppose you\'d happen to…» es una petición muy indirecta y cortés.'},
- {k:'lis',s:"With the benefit of hindsight, one might argue that the decision was, if not wrong, then at least premature.",p:'¿Cómo valora la decisión el hablante?',o:['Fue perfecta','Fue prematura, quizá errónea','Fue tardía','No opina'],a:1,e:'«if not wrong, then at least premature»: crítica atenuada.'}]}
-];
-const WRITING={
-B1:{tasks:['Escribe un correo informal a un amigo invitándole a tu cumpleaños (100–120 palabras).','Describe tu fin de semana ideal (100–120 palabras).'],min:100,max:120,
- phrases:['I\'m writing to invite you to…','It would be great if you could…','Let me know if you can come.','First of all… / Also… / Finally…'],
- model:'Hi Laura, I\'m writing to invite you to my birthday party on Saturday 14th at my house. We\'ll start at seven o\'clock and there will be food and music. It would be great if you could come early to help me with the decorations! Let me know if you can make it. Bye for now, Marta.'},
-B2:{tasks:['Ensayo: «¿Deberían prohibirse los móviles en las aulas?» (140–190 palabras).','Reseña de una película o serie reciente (140–190 palabras).'],min:140,max:190,
- phrases:['It is often argued that…','On the one hand… On the other hand…','Furthermore, / Moreover, / In addition,','Having considered both sides, I believe…'],
- model:'It is often argued that mobile phones should be banned in classrooms. On the one hand, they distract students and make it harder to concentrate. On the other hand, they can be useful tools for research and for learning languages. Having considered both sides, I believe schools should regulate their use rather than ban them completely.'},
-C1:{tasks:['Informe formal sobre el impacto del turismo masivo en una ciudad (220–260 palabras).','Ensayo a favor o en contra de la semana laboral de cuatro días (220–260 palabras).'],min:220,max:260,
- phrases:['The aim of this report is to…','It is widely acknowledged that…','This has given rise to…','In light of the above, it is recommended that…'],
- model:'The aim of this report is to assess the impact of mass tourism on the city. It is widely acknowledged that tourism brings substantial revenue; however, this has given rise to rising rents and overcrowding in the historic centre. In light of the above, it is recommended that the council introduce visitor limits.'},
-C2:{tasks:['Crítica razonada sobre el papel de la IA en la creatividad, con registro formal y matices (280–320 palabras).','Discurso persuasivo ante un público académico sobre el valor del multilingüismo (280–320 palabras).'],min:280,max:320,
- phrases:['One could be forgiven for assuming that…','Be that as it may,','This is by no means to suggest that…','Ultimately, the crux of the matter is…'],
- model:'One could be forgiven for assuming that artificial intelligence threatens human creativity. Be that as it may, history suggests that new tools rarely replace artists; they redefine what art can be. This is by no means to suggest that the concerns are unfounded. Ultimately, the crux of the matter is who retains authorship.'}};
-const SPEAK={B1:['Háblame de tu familia y de dónde vives.','Describe una foto de unas vacaciones: qué se ve y qué están haciendo.','¿Qué haces normalmente los fines de semana?'],
-B2:['Compara dos fotos de personas trabajando: una en oficina y otra desde casa. ¿Cuál preferirías?','Con un compañero, decidid qué actividad es mejor para un grupo de estudiantes extranjeros.','¿Crees que viajar es la mejor forma de aprender sobre otras culturas?'],
-C1:['Habla 2 minutos sobre: «¿Hasta qué punto la tecnología nos hace más aislados?»','Discute y llega a una decisión: ¿cómo debería una ciudad reducir el tráfico?','¿Qué responsabilidad tienen las empresas con el medio ambiente?'],
-C2:['Expón y defiende una postura matizada sobre la educación bilingüe obligatoria.','Responde a: «Algunos opinan que el éxito depende más de la suerte que del esfuerzo».','Analiza el papel de los medios en la formación de la opinión pública.']};
-const RUBRIC=['Contenido: respondí a todos los puntos de la tarea','Organización: párrafos claros y conectores variados','Léxico: variedad y precisión, sin repetir palabras','Gramática: estructuras variadas y corrección','Registro adecuado al tipo de texto'];
-const SRUBRIC=['Hablé sin pausas largas ni muletillas excesivas','Usé conectores y ideas ordenadas','Variedad de vocabulario y estructuras','Pronunciación y entonación comprensibles','Respondí a la tarea con ejemplos'];
-/* ================= ESTADO ================= */
+/* ================= ESTADO Y AJUSTES ================= */
 const KEY='ascenso-v2';
 let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
-S=S||{level:'B1',placed:false,done:{},cards:{},stats:{},hist:[],drafts:[]};
+S=S||{};
+Object.assign(S,{level:S.level||'B1',placed:!!S.placed,done:S.done||{},cards:S.cards||{},stats:S.stats||{},hist:S.hist||[],real:S.real||[]});
+S.set=Object.assign({theme:'auto',accent:'ocean',font:1,rate:.9},S.set||{});
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const norm=s=>s.toLowerCase().replace(/[’']/g,"'").replace(/\s+/g,' ').trim();
+const nd=s=>s.toLowerCase().replace(/[’']/g,'').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
 const today=()=>new Date().toISOString().slice(0,10);
-const ORD=['B1','B2','C1','C2'];
-/* ================= REPETICIÓN ESPACIADA ================= */
+const ORD=['A2','B1','B2','C1','C2'];
+const ic=n=>`<svg class="i"><use href="#i-${n}"/></svg>`;
+function applySet(){const r=document.documentElement;S.set.theme==='auto'?r.removeAttribute('data-theme'):r.dataset.theme=S.set.theme;r.dataset.accent=S.set.accent;r.style.setProperty('--fs',S.set.font)}
+applySet();
+/* ================= REPASO ESPACIADO ================= */
 const BOX=[0,1,3,7,14,30];
 const qid=(u,i)=>u.id+'#'+i;
 function review(id,ok){const c=S.cards[id]||{b:0};c.b=ok?Math.min(5,c.b+1):0;c.due=new Date(Date.now()+BOX[c.b]*864e5).toISOString().slice(0,10);S.cards[id]=c}
 function dueList(){const t=today(),o=[];U.forEach(u=>u.q.forEach((q,i)=>{const c=S.cards[qid(u,i)];if(c&&c.due<=t)o.push({u,q,i})}));return o}
+function errList(){const o=[];U.forEach(u=>u.q.forEach((q,i)=>{const c=S.cards[qid(u,i)];if(c&&c.b===0)o.push({u,q,i})}));return o}
 function stat(cat,ok){const s=S.stats[cat]||{ok:0,n:0};s.n++;if(ok)s.ok++;S.stats[cat]=s}
-function weak(){return Object.entries(S.stats).filter(([,s])=>s.n>=3&&s.ok/s.n<.7).sort((a,b)=>a[1].ok/a[1].n-b[1].ok/b[1].n).map(([c,s])=>({c,p:Math.round(100*s.ok/s.n),n:s.n}))}
-const unitPct=u=>{const d=S.done[u.id];return d?Math.round(100*d.best/u.q.length):0};
+function weak(){return Object.entries(S.stats).filter(([c,s])=>s.n>=3&&s.ok/s.n<.7&&U.some(u=>u.t===c)).sort((a,b)=>a[1].ok/a[1].n-b[1].ok/b[1].n).map(([c,s])=>({c,p:Math.round(100*s.ok/s.n)}))}
+const unitPct=u=>{const d=S.done[u.id];return d?Math.min(100,Math.round(100*d.best/u.q.length)):0};
+const unitsOf=L=>U.filter(u=>u.l===L);
+const mastery=L=>{const us=L?unitsOf(L):U;return us.length?Math.round(100*us.filter(u=>unitPct(u)>=70).length/us.length):0};
+function ring(p,size,sw,label){const r=(size-sw)/2,c=2*Math.PI*r;return `<svg class="ring" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" role="img" aria-label="${p}%"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="currentColor" stroke-opacity=".2" stroke-width="${sw}"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-dasharray="${c*p/100} ${c}" transform="rotate(-90 ${size/2} ${size/2})"/><text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" fill="currentColor" font-size="${size*.26}" font-weight="800">${label===undefined?p+'%':label}</text></svg>`}
+const unitIcon=u=>/-dic$|-lis$/.test(u.id)?'phones':/-read$/.test(u.id)?'book':'pen';
 /* ================= NAVEGACIÓN ================= */
-let tab='hoy';
-function nav(){const t=[['hoy','Hoy'],['aprender','Lecciones'],['repaso','Repaso ('+dueList().length+')'],['examen','Simulacro'],['write','Escritura'],['speak','Speaking'],['stats','Diagnóstico']];
- $('#nav').innerHTML=t.map(([k,l])=>`<button class="${tab===k?'on':''}" onclick="go('${k}')">${l}</button>`).join('')}
-function go(t){if(run&&run.iv)clearInterval(run.iv);run=null;tab=t;nav();({hoy:vHoy,aprender:vLearn,repaso:vReview,examen:vExam,write:vWrite,speak:vSpeak,stats:vStats})[t]()}
+let tab='hoy',run=null,sub=null;
+function renderNav(){const d=dueList().length,t=[['hoy','home','Hoy'],['aprender','book','Aprender'],['practicar','target','Practicar'],['progreso','chart','Progreso'],['ajustes','sliders','Ajustes']];
+ $('#nav').innerHTML='<div>'+t.map(([k,i,l])=>`<button class="${tab===k?'on':''}" onclick="go('${k}')" aria-label="${l}">${ic(i)}${l}${k==='practicar'&&d?`<span class="badge">${d>99?'99+':d}</span>`:''}</button>`).join('')+'</div>';
+ $('#lvchip').innerHTML=`<span class="lv ${S.level}">${S.level}</span> nivel`}
+function show(html){const v=$('#view');v.className='';v.innerHTML=html;void v.offsetWidth;v.className='view';window.scrollTo(0,0)}
+function go(t,s){if(run&&run.iv)clearInterval(run.iv);if(rIv){clearInterval(rIv);rIv=null}run=null;document.body.classList.remove('focus');tab=t;sub=s||null;renderNav();({hoy:vHoy,aprender:vLearn,practicar:vPractice,progreso:vStats,ajustes:vSettings})[t](s)}
 /* ================= HOY ================= */
-function nextUnit(){const w=weak();if(w.length){const u=U.find(x=>x.t===w[0].c);if(u)return {u,why:'Es tu punto más débil ('+w[0].p+'% de aciertos).'}}
- const start=ORD.indexOf(S.level);for(let i=start;i<4;i++){const u=U.filter(x=>x.l===ORD[i]).find(x=>unitPct(x)<70);if(u)return {u,why:'Siguiente unidad de tu nivel.'}}return null}
+function nextUnit(){const w=weak();if(w.length){const u=U.find(x=>x.t===w[0].c);if(u)return {u,why:'Es tu punto más débil ('+w[0].p+'% de aciertos)'}}
+ for(let i=ORD.indexOf(S.level);i<4;i++){const u=unitsOf(ORD[i]).find(x=>unitPct(x)<70);if(u)return {u,why:'Siguiente unidad de tu nivel'}}return null}
 function vHoy(){
- let h=UPD.avail||UPD.state!=='idle'?updCard():'';
- if(!S.placed)h+=`<div class="card"><h2>Empieza por un diagnóstico</h2><p>Un buen profesor evalúa antes de enseñar. Son 10 preguntas que abarcan B1–C2 y sirven para ajustar tu ruta.</p><button class="pri" onclick="placement()">Hacer el diagnóstico</button> <button onclick="S.placed=true;save();go('hoy')">Saltar (empezar en B1)</button></div>`;
- const d=dueList(),n=nextUnit();
- h+=`<div class="card"><h2>Plan de hoy</h2><p class="mut">Sesión recomendada de 20–30 minutos.</p><ol>
- <li><b>Repaso</b> (${d.length?d.length+' ejercicios pendientes':'nada pendiente'}) ${d.length?'<button class="pri" onclick="startRun(dueList().slice(0,15),\'Repaso\',{})">Repasar</button>':''}</li>
- <li><b>Lección nueva</b>${n?': '+esc(n.u.t)+' ('+n.u.l+') <span class="mut">'+n.why+'</span> <button class="pri" onclick="teach(\''+n.u.id+'\')">Abrir lección</button>':': completaste todas'}</li>
- <li><b>Producción</b>: una tarea corta de <a href="#" onclick="go('write');return false">escritura</a> o <a href="#" onclick="go('speak');return false">speaking</a> (2–3 veces por semana).</li></ol></div>`;
- h+=`<div class="card"><h3 style="margin-top:0">Tu método</h3><ul class="mut"><li>Primero entiendes la regla, luego practicas, y vuelves a ella en intervalos crecientes (1, 3, 7, 14, 30 días).</li><li>Cada fallo se explica y se repite al final de la sesión.</li><li>Un simulacro por semana con cronómetro, sin pistas.</li></ul></div>`;
- $('#view').innerHTML=h}
-/* ================= LECCIONES ================= */
-function vLearn(){
- $('#view').innerHTML=ORD.map(L=>`<div class="card"><h2>${LV[L].n}</h2><div class="mut">${LV[L].d}</div>${U.filter(u=>u.l===L).map(u=>{const p=unitPct(u);return `<div class="unit"><div class="t"><b>${esc(u.t)}</b><div class="bar"><i style="width:${p}%"></i></div></div><span class="mut">${p?p+'%':'—'}</span><button onclick="teach('${u.id}')">Abrir</button></div>`}).join('')}</div>`).join('')}
-function teach(id){const u=U.find(x=>x.id===id);tab='aprender';nav();
- $('#view').innerHTML=`<div class="card teach"><span class="tag">${u.l}</span> <h2>${esc(u.t)}</h2>${u.teach}<p class="mut">Lee con calma y fíjate en los ejemplos. Después practicarás ${u.q.length} ejercicios; los fallos se repiten al final.</p><div class="row"><button class="pri" onclick="lesson('${u.id}')">Empezar práctica</button><button onclick="go('aprender')">Volver</button></div></div>`}
+ const d=dueList(),n=nextUnit(),pr=mastery();
+ let h=`<div class="hero">${ring(pr,92,9)}<div><h2>Plan de hoy</h2><div class="mut">Unos 20–30 minutos · ${pr}% del temario dominado</div></div></div>`;
+ if(UPD.avail||UPD.state!=='idle')h+=updCard();
+ if(!S.placed)h+=`<div class="card"><h3>Empieza con un diagnóstico</h3><p class="mut">10 preguntas de B1 a C2 para ajustar tu ruta. Un buen profesor evalúa antes de enseñar.</p><div class="row"><button class="btn pri" onclick="placement()">Hacer el diagnóstico</button><button class="btn ghost" onclick="S.placed=true;save();go('hoy')">Saltar</button></div></div>`;
+ h+=`<div class="card"><button class="tile" onclick="${d.length?"startRun(dueList().slice(0,15),'Repaso',{})":"go('aprender')"}"><div class="ico">${ic('refresh')}</div><div class="t"><b>1 · Repaso</b><span class="mut">${d.length?d.length+' ejercicios pendientes de repasar':'Nada pendiente hoy'}</span></div>${ic('right')}</button>
+ ${n?`<button class="tile" onclick="teach('${n.u.id}')"><div class="ico" style="--c:var(--${n.u.l.toLowerCase()})">${ic(unitIcon(n.u))}</div><div class="t"><b>2 · ${esc(n.u.t)}</b><span class="mut">${n.u.l} · ${n.why}</span></div>${ic('right')}</button>`:''}
+ <button class="tile" onclick="go('practicar')"><div class="ico">${ic('pen')}</div><div class="t"><b>3 · Producción</b><span class="mut">Escritura o speaking, 2–3 veces por semana</span></div>${ic('right')}</button></div>`;
+ const w=weak();if(w.length)h+=`<div class="card"><h3>Puntos débiles</h3><p class="mut">Menos del 70 % de aciertos:</p><div class="row" style="margin-top:6px">${w.slice(0,5).map(x=>`<span class="chip">${esc(x.c)} · ${x.p}%</span>`).join('')}</div></div>`;
+ h+=`<div class="card"><button class="tile" onclick="vReal()"><div class="ico">${ic('file')}</div><div class="t"><b>Exámenes reales</b><span class="mut">Material oficial de Cambridge y corrección</span></div>${ic('right')}</button>
+ <button class="tile" onclick="vGuide()"><div class="ico">${ic('book')}</div><div class="t"><b>Conoce tu examen</b><span class="mut">Qué se evalúa en cada nivel</span></div>${ic('right')}</button></div>`;
+ show(h)}
+/* ================= APRENDER ================= */
+let lvSel=null;
+function vLearn(){const L=lvSel||S.level,us=unitsOf(L);
+ show(`<div class="seg">${ORD.map(x=>`<button class="${x===L?'on':''}" onclick="lvSel='${x}';vLearn()">${x}</button>`).join('')}</div>
+ <div class="card"><div class="row"><div class="t"><h2>${LV[L].n}</h2><div class="mut">${LV[L].d}</div></div><span class="sp"></span><div style="color:var(--${L.toLowerCase()})">${ring(mastery(L),56,6)}</div></div>
+ <div style="margin-top:8px">${us.map(u=>{const p=unitPct(u);return `<button class="tile" onclick="teach('${u.id}')" style="--c:var(--${L.toLowerCase()})"><div class="ico">${ic(unitIcon(u))}</div><div class="t"><b>${esc(u.t)}</b><div class="row" style="gap:8px"><div class="bar"><i style="width:${p}%"></i></div><span class="mut sm">${p?p+'%':u.q.length+' ejercicios'}</span></div></div>${ic('right')}</button>`}).join('')}</div></div>`)}
+function teach(id){const u=U.find(x=>x.id===id);tab='aprender';renderNav();document.body.classList.remove('focus');
+ show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('aprender')" aria-label="Volver">${ic('left')}</button><span class="lv ${u.l}">${u.l}</span></div>
+ <div class="card teach"><h2 style="margin-bottom:6px">${esc(u.t)}</h2>${u.teach}<p class="mut sm">${ic('vol')} Toca un ejemplo en cursiva para oírlo.</p></div>
+ <div class="actionbar"><div><button class="btn pri block" onclick="lesson('${u.id}')">Empezar práctica · ${u.q.length} ejercicios</button></div></div>`)}
+document.addEventListener('click',e=>{const x=e.target.closest&&e.target.closest('.ex');if(x)speak(x.textContent)});
 function lesson(id){const u=U.find(x=>x.id===id);startRun(u.q.map((q,i)=>({u,q,i})),u.t,{unit:u})}
+/* ================= PRACTICAR ================= */
+function vPractice(){const d=dueList().length,e=errList().length;
+ show(`<div class="card"><div class="grid2">
+ <button class="gt" onclick="${d?"startRun(dueList().slice(0,15),'Repaso',{})":""}" ${d?'':'style="opacity:.55"'}><div class="ico">${ic('refresh')}</div><b>Repaso</b><span class="mut sm">${d?d+' pendientes':'Al día'}</span></button>
+ <button class="gt" onclick="${e?"startRun(errList().slice(0,15),'Mis errores',{})":""}" ${e?'':'style="opacity:.55"'}><div class="ico" style="--c:var(--bad)">${ic('alert')}</div><b>Mis errores</b><span class="mut sm">${e?e+' por corregir':'Sin errores'}</span></button>
+ <button class="gt" onclick="dictMix()"><div class="ico">${ic('phones')}</div><b>Dictado</b><span class="mut sm">Oído y ortografía</span></button>
+ <button class="gt" onclick="vExam()"><div class="ico">${ic('clock')}</div><b>Simulacro</b><span class="mut sm">Con cronómetro</span></button>
+ <button class="gt" onclick="vWrite()"><div class="ico">${ic('pen')}</div><b>Escritura</b><span class="mut sm">Con rúbrica</span></button>
+ <button class="gt" onclick="vSpeak()"><div class="ico">${ic('mic')}</div><b>Speaking</b><span class="mut sm">Grábate</span></button>
+ <button class="gt" style="grid-column:1/-1" onclick="vReal()"><div class="row"><div class="ico">${ic('file')}</div><div><b>Exámenes reales</b><br><span class="mut sm">Pruebas oficiales de Cambridge con hoja de respuestas y corrección</span></div></div></button></div></div>`)}
+function dictMix(){const L=S.level;let items=U.filter(u=>u.l===L||u.l===ORD[Math.max(0,ORD.indexOf(L)-1)]).flatMap(u=>u.q.map((q,i)=>({u,q,i}))).filter(x=>x.q.k==='dic'||x.q.k==='lis');items=items.sort(()=>Math.random()-.5).slice(0,10);startRun(items,'Escucha y dictado',{})}
+function vExam(){tab='practicar';renderNav();
+ show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('practicar')" aria-label="Volver">${ic('left')}</button><h2>Simulacro</h2></div><div class="card"><p class="mut">15 ejercicios mezclados, 1 minuto por ejercicio, sin pistas ni explicaciones hasta el final.</p>
+ ${ORD.map(L=>`<button class="tile" style="--c:var(--${L.toLowerCase()})" onclick="mock('${L}')"><div class="ico">${ic('clock')}</div><div class="t"><b>${LV[L].n}</b><span class="mut">${LV[L].d}</span></div>${ic('right')}</button>`).join('')}</div>`)}
+function mock(L){const items=U.filter(u=>u.l===L).flatMap(u=>u.q.map((q,i)=>({u,q,i}))).sort(()=>Math.random()-.5).slice(0,15);startRun(items,'Simulacro '+L,{timer:items.length*60,exam:true})}
 /* ================= MOTOR DE EJERCICIOS ================= */
-let run=null;
-function startRun(items,title,opt){run={items:items.map(x=>({...x})),title,opt:opt||{},n:0,log:[],miss:[],done:false,ans:null,built:[]};
- if(run.opt.timer){run.t0=Date.now();run.iv=setInterval(tick,1000)}ex()}
 const fmt=s=>Math.max(0,Math.floor(s/60))+':'+String(Math.max(0,s%60)).padStart(2,'0');
-function tick(){if(!run||!run.opt.timer)return;const left=run.opt.timer-Math.floor((Date.now()-run.t0)/1000);const el=$('#clock');if(el)el.textContent=fmt(left);if(left<=0)finish()}
-function speak(t,rate){if(window.AndroidTTS){try{AndroidTTS.speak(t,rate||.9);return}catch(e){}}try{const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=rate||.9;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function speak(t,rate){rate=rate||S.set.rate;if(window.AndroidTTS){try{AndroidTTS.speak(t,rate);return}catch(e){}}try{const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=rate;const v=speechSynthesis.getVoices().find(x=>/en-GB/i.test(x.lang))||speechSynthesis.getVoices().find(x=>/^en/i.test(x.lang));if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+const TYPE={mc:'Elige la opción correcta',gap:'Completa la frase',wf:'Formación de palabras',kw:'Transformación',ro:'Ordena la frase',lis:'Comprensión oral',read:'Comprensión lectora',dic:'Dictado'};
+const HOW={mc:'Lee la pregunta y toca la opción correcta (también puedes pulsar 1–4).',gap:'Escribe en inglés la palabra o palabras que faltan en el hueco (___). Respeta lo que indica el paréntesis.',wf:'Transforma la palabra en MAYÚSCULAS (entre paréntesis) para que encaje en la frase y escribe solo la nueva palabra.',kw:'Reescribe la idea con la palabra clave indicada, sin cambiar el significado. Escribe solo las palabras que faltan.',ro:'Toca las palabras en el orden correcto para formar la frase. Toca una palabra de arriba para quitarla.',lis:'Pulsa «Escuchar», oye el audio (puedes repetirlo o ponerlo más lento) y elige la respuesta a la pregunta.',read:'Lee el texto y elige la opción que responde a la pregunta.',dic:'Pulsa «Escuchar» y escribe en inglés exactamente lo que oyes. No importan las mayúsculas ni la puntuación.'};
+function startRun(items,title,opt){if(!items.length)return;run={items:items.map(x=>({...x})),title,opt:opt||{},n:0,log:[],miss:[],done:false,ans:null,bi:[]};
+ if(run.opt.timer){run.t0=Date.now();run.iv=setInterval(tick,1000)}ex()}
+function tick(){if(!run||!run.opt.timer)return;const left=run.opt.timer-Math.floor((Date.now()-run.t0)/1000);const el=$('#clock');if(el)el.innerHTML=ic('clock')+' '+fmt(left);if(left<=0)finish()}
+function quitRun(){if(!run||confirm('¿Salir de la sesión? Se pierde el progreso de esta tanda.'))go(tab)}
 function ex(){
  if(run.n>=run.items.length)return finish();
- const it=run.items[run.n],{u,q}=it;run.ans=null;run.built=[];run.done=false;
- let h=`<div class="card"><div class="row"><span class="tag">${u.l}</span><b class="sp">${esc(run.title)}${it.retry?' · repetición del fallo':''}</b>${run.opt.timer?'<span class="chip" id="clock">'+fmt(run.opt.timer)+'</span>':''}<button onclick="go(tab)">Salir</button></div><div class="bar" style="margin:10px 0"><i style="width:${100*run.n/run.items.length}%"></i></div>`;
+ const it=run.items[run.n],{u,q}=it;run.ans=null;run.bi=[];run.done=false;document.body.classList.add('focus');
+ let h=`<div class="run"><button class="icon" onclick="quitRun()" aria-label="Salir">${ic('x')}</button><div class="bar"><i style="width:${100*run.n/run.items.length}%"></i></div>${run.opt.timer?`<span class="chip" id="clock">${ic('clock')} ${fmt(run.opt.timer)}</span>`:`<span class="chip">${run.n+1}/${run.items.length}</span>`}</div>
+ <div class="card"><div class="row"><span class="lv ${u.l}">${u.l}</span><span class="mut sm">${TYPE[q.k]||''}${it.retry?' · repetición del fallo':''}</span></div><div class="how">${ic('alert')}<span><b>Qué hacer:</b> ${HOW[q.k]||''}</span></div>`;
  if(q.k==='read')h+=`<div class="passage">${esc(q.x)}</div>`;
- if(q.k==='lis')h+=`<div class="row"><button class="pri" onclick="speak(run.items[run.n].q.s)">Escuchar</button><button onclick="speak(run.items[run.n].q.s,.6)">Más lento</button></div><p class="mut">Audio generado por la voz del navegador (inglés británico). Puedes escucharlo las veces que quieras; en el examen real solo se oye dos veces.</p>`;
- h+=`<h3 style="margin-top:6px">${esc(q.p)}</h3>`;
- if(q.o)h+=q.o.map((o,j)=>`<button class="opt" onclick="pick(${j})">${esc(o)}</button>`).join('');
- else if(q.k==='ro'){const sh=[...q.w].sort(()=>Math.random()-.5);h+=`<div class="words" id="built"></div><div class="words">${sh.map(w=>`<button onclick="addw(this,this.textContent)">${esc(w)}</button>`).join('')}</div>`}
- else h+=`<input type="text" id="inp" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Escribe tu respuesta" onkeydown="if(event.key==='Enter')check()">`;
- h+=`<div id="fb"></div><div class="row" style="margin-top:10px"><span class="sp"></span><button class="pri" id="chk" onclick="check()">${run.opt.exam?'Siguiente':'Comprobar'}</button></div></div>`;
- $('#view').innerHTML=h;const i=$('#inp');if(i)i.focus();
- if(q.k==='lis')setTimeout(()=>speak(q.s),300)}
+ if(q.k==='lis'||q.k==='dic')h+=`<div class="row" style="margin-top:10px"><button class="btn pri" onclick="speak(run.items[run.n].q.s)">${ic('vol')} Escuchar</button><button class="btn" onclick="speak(run.items[run.n].q.s,.6)">Más lento</button></div>`;
+ h+=`<div class="q">${esc(q.p)}</div>`;
+ if(q.o)h+=q.o.map((o,j)=>`<button class="opt" onclick="pick(${j})"><span class="k">${'ABCD'[j]}</span><span>${esc(o)}</span></button>`).join('');
+ else if(q.k==='ro'){run.bank=[...q.w].sort(()=>Math.random()-.5);h+=`<div class="words built" id="built"></div><div class="words" id="bank"></div>`}
+ else h+=`<input type="text" id="inp" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="${q.k==='dic'?'Escribe lo que oyes':'Escribe tu respuesta'}" onkeydown="if(event.key==='Enter'){event.preventDefault();check()}">`;
+ h+=`<div id="fb"></div></div><div class="actionbar"><div><button class="btn pri block" id="chk" onclick="check()">${run.opt.exam?'Siguiente':'Comprobar'}</button></div></div>`;
+ show(h);if(q.k==='ro')roDraw();const i=$('#inp');if(i&&q.k!=='dic')i.focus();
+ if(q.k==='lis'||q.k==='dic')setTimeout(()=>speak(q.s),350)}
+function roDraw(){$('#built').innerHTML=run.bi.map((j,k)=>`<button class="w" onclick="roUndo(${k})">${esc(run.bank[j])}</button>`).join('');$('#bank').innerHTML=run.bank.map((w,j)=>`<button class="w" ${run.bi.includes(j)?'disabled':''} onclick="roAdd(${j})">${esc(w)}</button>`).join('')}
+function roAdd(j){if(run.done)return;run.bi.push(j);roDraw()}
+function roUndo(k){if(run.done)return;run.bi.splice(k,1);roDraw()}
 function pick(j){if(run.done)return;run.ans=j;document.querySelectorAll('.opt').forEach((b,k)=>b.classList.toggle('sel',k===j))}
-function addw(b,w){if(run.done)return;run.built.push(w);b.disabled=true;$('#built').insertAdjacentHTML('beforeend',`<button>${esc(w)}</button>`)}
 function check(){
- if(run.done)return next();
- const it=run.items[run.n],{u,q,i}=it;let ok;
+ if(!run)return;if(run.done)return next();
+ const it=run.items[run.n],{u,q,i}=it;let ok,given='';
  if(q.o){if(run.ans===null)return;ok=run.ans===q.a}
- else if(q.k==='ro'){if(!run.built.length)return;ok=norm(run.built.join(' '))===norm(q.a)}
- else{const v=norm($('#inp').value);if(!v)return;ok=q.a.some(a=>norm(a)===v)}
+ else if(q.k==='ro'){if(!run.bi.length)return;given=run.bi.map(j=>run.bank[j]).join(' ');ok=norm(given)===norm(q.a)}
+ else{const v=$('#inp').value;if(!v.trim())return;given=v;ok=q.k==='dic'?q.a.some(a=>nd(a)===nd(v)):q.a.some(a=>norm(a)===norm(v))}
  const ans=q.o?q.o[q.a]:(q.k==='ro'?q.a:q.a[0]);
- if(!it.retry){run.log.push({u,ok});review(qid(u,i),ok);stat(u.t,ok);if(!ok){run.miss.push({p:q.p,ans,e:q.e,s:q.s});if(!run.opt.exam)run.items.push({...it,retry:true})}}
+ if(!it.retry){run.log.push({u,ok});review(qid(u,i),ok);stat(u.t,ok);if(!ok){run.miss.push({p:q.p,ans,e:q.e});if(!run.opt.exam)run.items.push({...it,retry:true})}}
  run.done=true;
  if(run.opt.exam){next();return}
  if(q.o)document.querySelectorAll('.opt').forEach((b,k)=>{b.disabled=true;if(k===q.a)b.classList.add('right');else if(k===run.ans)b.classList.add('wrong')});
- $('#fb').innerHTML=`<div class="fb ${ok?'ok':'no'}"><b>${ok?'Correcto.':'Respuesta correcta: '+esc(ans)}</b><div>${esc(q.e||'')}</div>${q.s?'<div class="mut">Transcripción: '+esc(q.s)+'</div>':''}${ok||run.items[run.n].retry?'':'<div class="mut">Volverá a aparecer al final de la sesión.</div>'}</div>`;
- $('#chk').textContent='Continuar';save()}
+ $('#fb').innerHTML=`<div class="fb ${ok?'ok':'no'}"><b>${ic(ok?'check':'x')} ${ok?'¡Correcto!':'Incorrecto. Respuesta correcta: '+esc(ans)}</b>${!ok&&(q.k!=='mc'&&q.k!=='lis'&&q.k!=='read')?`<div class="mut sm">Tú escribiste: ${esc(given)}</div>`:''}${!ok&&q.o?`<div class="mut sm">Tú elegiste: ${esc(q.o[run.ans])}</div>`:''}<div style="margin-top:6px"><b>Explicación:</b> ${esc(q.e||'')}</div>${q.s&&q.k!=='dic'?`<div class="mut sm" style="margin-top:6px">Transcripción del audio: ${esc(q.s)}</div>`:''}${ok||it.retry?'':'<div class="mut sm" style="margin-top:6px">Volverá a salir al final de la sesión.</div>'}</div>`;
+ $('#chk').textContent='Continuar';save();window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})}
 function next(){run.n++;ex()}
+document.addEventListener('keydown',e=>{if(!run)return;const t=e.target.tagName;if(t==='INPUT'||t==='TEXTAREA')return;
+ if(e.key==='Enter'){e.preventDefault();check()}else if(/^[1-4]$/.test(e.key)&&!run.done)pick(+e.key-1)});
 function finish(){
  if(!run)return;if(run.iv)clearInterval(run.iv);
  const r=run,n=r.log.length,ok=r.log.filter(x=>x.ok).length,pct=n?Math.round(100*ok/n):0;
+ document.body.classList.remove('focus');
  if(r.opt.placement)return placementEnd();
  if(r.opt.unit){const d=S.done[r.opt.unit.id]||{best:0};d.best=Math.max(d.best,ok);S.done[r.opt.unit.id]=d}
- S.hist.push({d:today(),t:r.title,pct,n});save();
+ S.hist.push({d:today(),t:r.title,pct,n});save();renderNav();
  const by={};r.log.forEach(x=>{by[x.u.t]=by[x.u.t]||[0,0];by[x.u.t][1]++;if(x.ok)by[x.u.t][0]++});
- $('#view').innerHTML=`<div class="card"><div class="big">${pct}%</div><h2>${ok} de ${n} correctas a la primera</h2>
- ${Object.keys(by).length>1?`<table>${Object.entries(by).map(([c,v])=>`<tr><td>${esc(c)}</td><td>${v[0]}/${v[1]}</td></tr>`).join('')}</table>`:''}
- ${r.miss.length?`<h3>Revisa estos errores</h3>${r.miss.map(m=>`<div class="fb no"><div>${esc(m.p)}</div><b>${esc(m.ans)}</b><div class="mut">${esc(m.e||'')}</div></div>`).join('')}`:'<p>Sin errores. Buen trabajo.</p>'}
- <div class="row" style="margin-top:12px"><button class="pri" onclick="go('hoy')">Volver a Hoy</button><button onclick="go('stats')">Ver diagnóstico</button></div></div>`;
+ show(`<div class="card" style="text-align:center"><div style="color:${pct>=70?'var(--ok)':'var(--pri)'};display:flex;justify-content:center">${ring(pct,120,11)}</div><h2 style="margin-top:10px">${pct>=70?'Muy bien':'Sigue practicando'}</h2><p class="mut">${ok} de ${n} correctas a la primera</p>
+ ${Object.keys(by).length>1?`<table class="t" style="text-align:left">${Object.entries(by).map(([c,v])=>`<tr><td>${esc(c)}</td><td style="text-align:right">${v[0]}/${v[1]}</td></tr>`).join('')}</table>`:''}</div>
+ ${r.miss.length?`<div class="card"><h3>Revisa estos errores</h3>${r.miss.map(m=>`<div class="fb no"><div>${esc(m.p)}</div><b>${esc(m.ans)}</b><div class="mut sm"><b>Explicación:</b> ${esc(m.e||'')}</div></div>`).join('')}</div>`:''}
+ <div class="row"><button class="btn pri" onclick="go('hoy')">Volver a Hoy</button><button class="btn" onclick="go('progreso')">Ver progreso</button></div>`);
  run=null}
-/* ================= DIAGNÓSTICO DE NIVEL ================= */
-function placement(){
- const items=[];ORD.forEach((L,k)=>{const pool=U.filter(u=>u.l===L).flatMap(u=>u.q.map((q,i)=>({u,q,i}))).filter(x=>x.q.k!=='lis'&&x.q.k!=='ro').sort(()=>Math.random()-.5);items.push(...pool.slice(0,k<2?3:2))});
+/* ================= DIAGNÓSTICO ================= */
+function placement(){const items=[];ORD.filter(L=>unitsOf(L).length).forEach((L,k)=>{const pool=unitsOf(L).flatMap(u=>u.q.map((q,i)=>({u,q,i}))).filter(x=>!['lis','ro','dic'].includes(x.q.k)).sort(()=>Math.random()-.5);items.push(...pool.slice(0,k<2?3:2))});
  startRun(items,'Diagnóstico de nivel',{placement:true,exam:true})}
 function placementEnd(){
- const sc={B1:[0,0],B2:[0,0],C1:[0,0],C2:[0,0]};run.log.forEach(x=>{sc[x.u.l][1]++;if(x.ok)sc[x.u.l][0]++});
- let lvl='B1';ORD.forEach(L=>{if(sc[L][1]&&sc[L][0]/sc[L][1]>=.6)lvl=L});
- S.level=lvl;S.placed=true;save();run=null;
- $('#view').innerHTML=`<div class="card"><div class="big">${lvl}</div><h2>Nivel estimado</h2><table>${ORD.map(L=>`<tr><td>${L}</td><td>${sc[L][0]}/${sc[L][1]}</td></tr>`).join('')}</table><p class="mut">Es una estimación orientativa con muy pocas preguntas, no un resultado oficial. Empezarás por ${lvl}; puedes trabajar cualquier nivel en Lecciones.</p><button class="pri" onclick="go('hoy')">Ver mi plan</button></div>`}
-/* ================= REPASO ================= */
-function vReview(){const d=dueList();
- $('#view').innerHTML=d.length?`<div class="card"><h2>Repaso espaciado</h2><p class="mut">${d.length} ejercicio(s) toca(n) hoy. Lo que fallas vuelve pronto; lo que dominas, cada vez más tarde.</p><button class="pri" onclick="startRun(dueList().slice(0,15),'Repaso',{})">Repasar ahora</button></div>`:`<div class="card"><h2>Todo al día</h2><p class="mut">No hay repasos pendientes. Haz una lección nueva.</p></div>`}
-/* ================= SIMULACRO ================= */
-function vExam(){
- $('#view').innerHTML=`<div class="card"><h2>Simulacro con cronómetro</h2><p class="mut">15 ejercicios mezclados de un nivel, 1 minuto por ejercicio, sin pistas ni explicaciones hasta el final. Así entrenas el ritmo del examen.</p>${ORD.map(L=>`<button class="opt" onclick="mock('${L}')"><b>${LV[L].n}</b><div class="mut">${LV[L].d}</div></button>`).join('')}</div>`}
-function mock(L){const items=U.filter(u=>u.l===L).flatMap(u=>u.q.map((q,i)=>({u,q,i}))).sort(()=>Math.random()-.5).slice(0,15);
- startRun(items,'Simulacro '+L,{timer:items.length*60,exam:true})}
+ const sc={A2:[0,0],B1:[0,0],B2:[0,0],C1:[0,0],C2:[0,0]};run.log.forEach(x=>{sc[x.u.l][1]++;if(x.ok)sc[x.u.l][0]++});
+ let lvl='A2';ORD.forEach(L=>{if(sc[L][1]&&sc[L][0]/sc[L][1]>=.6)lvl=L});
+ S.level=lvl;S.placed=true;save();run=null;renderNav();
+ show(`<div class="card" style="text-align:center"><div class="big" style="color:var(--${lvl.toLowerCase()})">${lvl}</div><h2>Nivel estimado</h2><table class="t" style="text-align:left;margin-top:8px">${ORD.map(L=>`<tr><td>${L}</td><td style="text-align:right">${sc[L][0]}/${sc[L][1]}</td></tr>`).join('')}</table><p class="mut">Orientativo: son muy pocas preguntas y no es un resultado oficial. Empezarás por ${lvl}; puedes trabajar cualquier nivel en Aprender.</p><button class="btn pri" onclick="go('hoy')">Ver mi plan</button></div>`)}
+/* ================= EXÁMENES REALES (material oficial de Cambridge) ================= */
+const CAM='https://www.cambridgeenglish.org/exams-and-tests/qualifications/';
+const OFI={A2:{x:'A2 Key',u:CAM+'key/preparation/'},B1:{x:'B1 Preliminary',u:CAM+'preliminary/preparation/'},B2:{x:'B2 First',u:CAM+'first/preparation/'},C1:{x:'C1 Advanced',u:CAM+'advanced/preparation/'},C2:{x:'C2 Proficiency',u:CAM+'proficiency/preparation/'}};
+let rIv=null,rS={L:null,paper:'Reading and Use of English',n:30,t0:null,ans:{}};
+function vReal(){tab='practicar';renderNav();if(rIv){clearInterval(rIv);rIv=null}
+ const past=S.real.slice(-5).reverse();
+ show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('practicar')" aria-label="Volver">${ic('left')}</button><h2>Exámenes reales</h2></div>
+ <div class="card"><p>Cambridge publica gratis <b>exámenes de muestra oficiales</b> de cada nivel, con claves de respuestas y transcripciones de los audios. No se pueden incluir dentro de la app por derechos de autor, pero aquí puedes <b>abrirlos, hacerlos con cronómetro y corregirlos</b> automáticamente.</p>
+ <ol class="mut"><li>Abre el material oficial de tu nivel y descarga una prueba (papel y audio).</li><li>Pulsa «Hoja de respuestas», inicia el cronómetro y haz la prueba.</li><li>Escribe tus respuestas en la hoja y pega la clave oficial: la app corrige y guarda el resultado.</li></ol></div>
+ <div class="card">${ORD.map(L=>`<div class="tile" style="--c:var(--${L.toLowerCase()})"><div class="ico">${ic('file')}</div><div class="t"><b>${OFI[L].x}</b><span class="mut">Exámenes de muestra, claves y audios</span></div><a class="btn sm" href="${OFI[L].u}" target="_blank" rel="noopener">${ic('ext')} Abrir</a><button class="btn sm pri" onclick="vSheet('${L}')">Hoja</button></div>`).join('')}</div>
+ ${past.length?`<div class="card"><h3>Tus últimos exámenes reales</h3><table class="t">${past.map(r=>`<tr><td class="mut">${r.d}</td><td>${esc(r.L)} · ${esc(r.paper)}</td><td style="text-align:right">${r.ok}/${r.n} (${Math.round(100*r.ok/r.n)}%)</td></tr>`).join('')}</table></div>`:''}
+ <p class="mut sm">Las puntuaciones de práctica no equivalen a una nota oficial. Cambridge ofrece una tabla para convertirlas en su página de preparación.</p>`)}
+function vSheet(L){rS={L,paper:rS.paper,n:rS.n||30,t0:null,ans:{}};drawSheet()}
+function drawSheet(){const s=rS;
+ show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="vReal()" aria-label="Volver">${ic('left')}</button><h2>Hoja de respuestas</h2></div>
+ <div class="card"><div class="row"><span class="lv ${s.L}">${s.L}</span><b>${OFI[s.L].x}</b></div>
+ <div class="seg" style="margin-top:10px">${['Reading and Use of English','Listening'].map(p=>`<button class="${s.paper===p?'on':''}" onclick="rS.paper='${p}';drawSheet()">${p==='Listening'?'Listening':'Reading & Use'}</button>`).join('')}</div>
+ <div class="row"><label class="mut sm" for="rn">Nº de preguntas</label><input id="rn" type="number" min="1" max="80" value="${s.n}" style="width:90px" onchange="rS.n=Math.max(1,Math.min(80,+this.value||30));drawSheet()"></div>
+ <div class="row" style="margin-top:12px"><span class="timer" id="rt">${s.t0?'':'0:00'}</span><button class="btn pri" id="rb" onclick="rStart()">${s.t0?'Parar cronómetro':'Iniciar cronómetro'}</button></div></div>
+ <div class="card"><h3 style="margin-bottom:10px">Tus respuestas</h3><div class="sheet">${Array.from({length:s.n},(_,i)=>`<label>${i+1}<input type="text" data-i="${i+1}" value="${esc(s.ans[i+1]||'')}" autocomplete="off" autocapitalize="off" spellcheck="false" oninput="rS.ans[${i+1}]=this.value"></label>`).join('')}</div></div>
+ <div class="card"><h3>Clave oficial</h3><p class="mut sm">Copia la clave de respuestas del PDF oficial y pégala aquí, por ejemplo: <i>1 B 2 C 3 A 4 D …</i> Las respuestas con varias opciones se separan con «/».</p><textarea id="rk" rows="5" placeholder="1 B 2 C 3 A …" spellcheck="false"></textarea><button class="btn pri block" style="margin-top:10px" onclick="rGrade()">Corregir</button><div id="rr"></div></div>`);
+ if(s.t0&&!rIv)rIv=setInterval(rTick,1000);rTick()}
+function rStart(){if(rS.t0){rS.el=Math.floor((Date.now()-rS.t0)/1000);rS.t0=null;clearInterval(rIv);rIv=null;$('#rb').textContent='Iniciar cronómetro';return}
+ rS.t0=Date.now();rS.el=0;rIv=setInterval(rTick,1000);$('#rb').textContent='Parar cronómetro';rTick()}
+function rTick(){const e=$('#rt');if(!e)return;if(rS.t0)e.textContent=fmt(Math.floor((Date.now()-rS.t0)/1000));else if(rS.el!=null)e.textContent=fmt(rS.el)}
+function parseKey(txt){const m={},t=txt.replace(/\s+/g,' ').trim(),re=/(\d{1,2})\s*[.:)\-]?\s+([^0-9]+?)(?=\s+\d{1,2}\s*[.:)\-]?\s|\s*$)/g;let x;while((x=re.exec(t)))m[+x[1]]=x[2].trim();return m}
+function rGrade(){const key=parseKey($('#rk').value),ids=Object.keys(key).map(Number).sort((a,b)=>a-b);
+ if(!ids.length){$('#rr').innerHTML='<p style="color:var(--bad)" class="sm">No encuentro respuestas en la clave. Formato: 1 B 2 C 3 A…</p>';return}
+ let ok=0;const bad=[];ids.forEach(i=>{const given=(rS.ans[i]||'').trim(),alts=key[i].split('/').map(a=>nd(a));const good=given&&alts.includes(nd(given));if(good)ok++;else bad.push({i,given:given||'—',key:key[i]})});
+ const n=ids.length,pct=Math.round(100*ok/n);
+ S.real.push({d:today(),L:rS.L,paper:rS.paper,ok,n,sec:rS.el||0});stat('Examen real '+rS.L,ok===n);S.hist.push({d:today(),t:'Examen real '+rS.L+' · '+(rS.paper==='Listening'?'Listening':'Reading & Use'),pct,n});save();
+ $('#rr').innerHTML=`<div style="text-align:center;margin-top:14px"><div style="color:${pct>=60?'var(--ok)':'var(--pri)'};display:flex;justify-content:center">${ring(pct,110,10)}</div><h3 style="margin-top:8px">${ok} de ${n} correctas</h3></div>
+ ${bad.length?`<h3 style="margin-top:14px">Para revisar</h3><table class="t">${bad.map(b=>`<tr><td><b>${b.i}</b></td><td>${esc(b.given)}</td><td class="mut">clave: <b>${esc(b.key)}</b></td></tr>`).join('')}</table><p class="mut sm">Repasa en el PDF oficial por qué es correcta la clave: ahí está el aprendizaje.</p>`:'<p>¡Sin fallos!</p>'}`}
 /* ================= ESCRITURA ================= */
 let wLvl=null;
-function vWrite(){const L=wLvl||S.level,W=WRITING[L],t=W.tasks[Math.floor(Math.random()*W.tasks.length)];
- $('#view').innerHTML=`<div class="card"><div class="row"><h2 class="sp">Escritura</h2>${ORD.map(x=>`<button class="${x===L?'on':''}" onclick="wLvl='${x}';vWrite()">${x}</button>`).join('')}</div>
- <p><b>Tarea:</b> ${esc(t)}</p><textarea id="wr" rows="10" placeholder="Write your answer here…" oninput="wc(${W.min},${W.max})"></textarea>
- <div class="row"><span class="chip" id="wc">0 palabras (objetivo ${W.min}–${W.max})</span><span class="sp"></span><button class="pri" onclick="evalW('${L}',${JSON.stringify(t).replace(/"/g,'&quot;')})">Terminé: revisar</button></div><div id="rub"></div></div>`}
-function wc(a,b){const n=($('#wr').value.trim().match(/\S+/g)||[]).length;$('#wc').textContent=n+' palabras (objetivo '+a+'–'+b+')'}
-function evalW(L,t){const W=WRITING[L],tx=$('#wr').value,n=(tx.trim().match(/\S+/g)||[]).length;
+function vWrite(){tab='practicar';renderNav();const L=wLvl||S.level,W=WRITING[L],t=W.tasks[Math.floor(Math.random()*W.tasks.length)];
+ show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('practicar')" aria-label="Volver">${ic('left')}</button><h2>Escritura</h2></div>
+ <div class="seg">${ORD.map(x=>`<button class="${x===L?'on':''}" onclick="wLvl='${x}';vWrite()">${x}</button>`).join('')}</div>
+ <div class="card"><b>Tarea</b><p>${esc(t)}</p><textarea id="wr" rows="10" placeholder="Write your answer here…" oninput="wc(${W.min},${W.max})"></textarea>
+ <div class="row" style="margin-top:10px"><span class="chip" id="wc">0 palabras · objetivo ${W.min}–${W.max}</span><span class="sp"></span><button class="btn pri" onclick="evalW('${L}')">Revisar</button></div><div id="rub"></div></div>`)}
+function wc(a,b){const n=($('#wr').value.trim().match(/\S+/g)||[]).length;$('#wc').textContent=n+' palabras · objetivo '+a+'–'+b}
+function evalW(L){const W=WRITING[L],tx=$('#wr').value,n=(tx.trim().match(/\S+/g)||[]).length;
  if(n<20){$('#rub').innerHTML='<p class="mut">Escribe al menos 20 palabras.</p>';return}
- const rep={};tx.toLowerCase().match(/[a-z']{5,}/g)?.forEach(w=>rep[w]=(rep[w]||0)+1);const reps=Object.entries(rep).filter(([,c])=>c>=3).map(([w,c])=>w+' ('+c+')');
- $('#rub').innerHTML=`<h3>Comprobaciones automáticas</h3><ul><li>Extensión: ${n} palabras ${n<W.min?'(corta: faltan '+(W.min-n)+')':n>W.max?'(te pasas por '+(n-W.max)+')':'(dentro del objetivo)'}</li><li>Palabras repetidas 3+ veces: ${reps.length?esc(reps.join(', ')):'ninguna'} ${reps.length?'<span class="mut">— busca sinónimos</span>':''}</li></ul>
- <details open><summary><b>Frases útiles de este nivel</b></summary><ul>${W.phrases.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></details>
- <details><summary><b>Ejemplo de apertura modelo</b></summary><p class="passage">${esc(W.model)}</p></details>
- <h3>Revisa tu texto con la rúbrica</h3>${RUBRIC.map(r=>`<label style="display:block;margin:6px 0"><input type="checkbox" class="rb"> ${esc(r)}</label>`).join('')}
- <button class="pri" onclick="doneW('${L}')">Guardar práctica</button><p class="mut">La app no corrige tu gramática. Para una corrección detallada, pega el texto en Claude.</p>`}
+ const rep={};(tx.toLowerCase().match(/[a-z']{5,}/g)||[]).forEach(w=>rep[w]=(rep[w]||0)+1);const reps=Object.entries(rep).filter(([,c])=>c>=3).map(([w,c])=>w+' ('+c+')');
+ $('#rub').innerHTML=`<h3 style="margin-top:16px">Comprobaciones automáticas</h3><ul><li>Extensión: ${n} palabras ${n<W.min?'(faltan '+(W.min-n)+')':n>W.max?'(te pasas por '+(n-W.max)+')':'(dentro del objetivo)'}</li><li>Palabras repetidas 3+ veces: ${reps.length?esc(reps.join(', '))+' — busca sinónimos':'ninguna'}</li></ul>
+ <details open><summary>Frases útiles de este nivel</summary><ul>${W.phrases.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></details>
+ <details><summary>Ejemplo de apertura modelo</summary><p class="passage">${esc(W.model)}</p></details>
+ <h3>Revisa con la rúbrica</h3>${RUBRIC.map(r=>`<label class="chk"><input type="checkbox" class="rb"><span>${esc(r)}</span></label>`).join('')}
+ <button class="btn pri" onclick="doneW('${L}')">Guardar práctica</button><p class="mut sm">La app no corrige tu gramática. Para una corrección detallada, pega el texto en Claude.</p>`}
 function doneW(L){const k=[...document.querySelectorAll('.rb')].filter(c=>c.checked).length;S.hist.push({d:today(),t:'Escritura '+L,pct:k*20,n:5});save();$('#rub').insertAdjacentHTML('beforeend',`<p><b>${k}/5 criterios.</b> ${k<4?'Reescribe la parte que no marcaste.':'Buen trabajo.'}</p>`)}
 /* ================= SPEAKING ================= */
 let sLvl=null,rec=null,sIv=null;
-function vSpeak(){const L=sLvl||S.level,ps=SPEAK[L],p=ps[Math.floor(Math.random()*ps.length)];
- $('#view').innerHTML=`<div class="card"><div class="row"><h2 class="sp">Speaking</h2>${ORD.map(x=>`<button class="${x===L?'on':''}" onclick="sLvl='${x}';vSpeak()">${x}</button>`).join('')}</div>
- <p><b>Tema:</b> ${esc(p)}</p><p class="mut">Prepara 30 segundos, luego habla 1–2 minutos. Grábate y escúchate después: es la forma más útil de detectar tus fallos.</p>
- <div class="row"><button class="pri" id="rbtn" onclick="recToggle()">Empezar a grabar</button><span class="chip" id="stimer">0:00</span></div><div id="player"></div>
- <h3>Autoevaluación</h3>${SRUBRIC.map(r=>`<label style="display:block;margin:6px 0"><input type="checkbox" class="rb"> ${esc(r)}</label>`).join('')}
- <button onclick="doneS('${L}')">Guardar práctica</button></div>`}
+function vSpeak(){tab='practicar';renderNav();const L=sLvl||S.level,ps=SPEAK[L],p=ps[Math.floor(Math.random()*ps.length)];
+ show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('practicar')" aria-label="Volver">${ic('left')}</button><h2>Speaking</h2></div>
+ <div class="seg">${ORD.map(x=>`<button class="${x===L?'on':''}" onclick="sLvl='${x}';vSpeak()">${x}</button>`).join('')}</div>
+ <div class="card"><b>Tema</b><p>${esc(p)}</p><p class="mut">Prepara 30 segundos, habla 1–2 minutos y escúchate después: es la forma más útil de detectar tus fallos.</p>
+ <div class="row"><button class="btn pri" id="rbtn" onclick="recToggle()">${ic('mic')} Grabar</button><span class="chip" id="stimer">0:00</span></div><div id="player"></div>
+ <h3 style="margin-top:16px">Autoevaluación</h3>${SRUBRIC.map(r=>`<label class="chk"><input type="checkbox" class="rb"><span>${esc(r)}</span></label>`).join('')}
+ <button class="btn" onclick="doneS('${L}')">Guardar práctica</button></div>`)}
 async function recToggle(){
  if(rec){rec.stop();return}
  try{const st=await navigator.mediaDevices.getUserMedia({audio:true});const ch=[];rec=new MediaRecorder(st);
   rec.ondataavailable=e=>ch.push(e.data);
-  rec.onstop=()=>{clearInterval(sIv);st.getTracks().forEach(t=>t.stop());const url=URL.createObjectURL(new Blob(ch,{type:rec.mimeType}));rec=null;$('#rbtn').textContent='Grabar de nuevo';$('#player').innerHTML=`<p class="mut">Escúchate y anota qué no suena natural:</p><audio controls src="${url}"></audio>`};
+  rec.onstop=()=>{clearInterval(sIv);st.getTracks().forEach(t=>t.stop());const url=URL.createObjectURL(new Blob(ch,{type:rec.mimeType}));rec=null;$('#rbtn').innerHTML=ic('mic')+' Grabar de nuevo';$('#player').innerHTML=`<p class="mut">Escúchate y anota qué no suena natural:</p><audio controls src="${url}" style="width:100%"></audio>`};
   const t0=Date.now();sIv=setInterval(()=>{const s=Math.floor((Date.now()-t0)/1000);$('#stimer').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0')},500);
-  rec.start();$('#rbtn').textContent='Parar'}catch(e){$('#player').innerHTML='<p class="mut">No se pudo acceder al micrófono. Puedes hablar igualmente y usar la rúbrica.</p>'}}
+  rec.start();$('#rbtn').innerHTML=ic('x')+' Parar'}catch(e){$('#player').innerHTML='<p class="mut">No se pudo acceder al micrófono. Puedes hablar igualmente y usar la rúbrica.</p>'}}
 function doneS(L){const k=[...document.querySelectorAll('.rb')].filter(c=>c.checked).length;S.hist.push({d:today(),t:'Speaking '+L,pct:k*20,n:5});save();$('#player').insertAdjacentHTML('beforeend',`<p><b>${k}/5 criterios.</b> Guardado.</p>`)}
-/* ================= DIAGNÓSTICO ================= */
+/* ================= PROGRESO ================= */
 function vStats(){
- const w=weak(),cats=Object.entries(S.stats).sort((a,b)=>a[1].ok/a[1].n-b[1].ok/b[1].n);
- $('#view').innerHTML=`<div class="card"><h2>Diagnóstico por categoría</h2>${cats.length?`<table>${cats.map(([c,s])=>{const p=Math.round(100*s.ok/s.n);return `<tr><td>${esc(c)}</td><td style="width:40%"><div class="bar"><i style="width:${p}%"></i></div></td><td>${p}% (${s.n})</td></tr>`}).join('')}</table>`:'<p class="mut">Aún no hay datos. Completa alguna lección.</p>'}
- ${w.length?`<p><b>Puntos débiles:</b> ${w.map(x=>esc(x.c)).join(', ')}. La pestaña Hoy te los recomienda primero.</p>`:''}</div>
- <div class="card"><h3 style="margin-top:0">Últimas sesiones</h3>${S.hist.length?`<table>${S.hist.slice(-10).reverse().map(h=>`<tr><td>${h.d}</td><td>${esc(h.t)}</td><td>${h.pct}%</td></tr>`).join('')}</table>`:'<p class="mut">Sin sesiones todavía.</p>'}</div>
+ const cats=Object.entries(S.stats).sort((a,b)=>a[1].ok/a[1].n-b[1].ok/b[1].n),tot=Object.values(S.stats).reduce((a,s)=>a+s.n,0),okk=Object.values(S.stats).reduce((a,s)=>a+s.ok,0);
+ show(`<div class="hero">${ring(mastery(),92,9)}<div><h2>Tu progreso</h2><div class="mut">${tot?Math.round(100*okk/tot)+'% de aciertos en '+tot+' respuestas':'Aún no hay datos'}</div></div></div>
+ <div class="card"><h3>Temario dominado por nivel</h3><table class="t">${ORD.map(L=>`<tr><td><span class="lv ${L}">${L}</span></td><td style="width:60%"><div class="bar"><i style="width:${mastery(L)}%"></i></div></td><td style="text-align:right">${mastery(L)}%</td></tr>`).join('')}</table><p class="mut sm">Una unidad cuenta como dominada con 70 % o más de aciertos.</p></div>
+ <div class="card"><h3>Aciertos por categoría</h3>${cats.length?`<table class="t">${cats.map(([c,s])=>{const p=Math.round(100*s.ok/s.n);return `<tr><td>${esc(c)}</td><td style="width:34%"><div class="bar"><i style="width:${p}%;background:${p<70?'var(--bad)':'var(--ok)'}"></i></div></td><td style="text-align:right">${p}%</td></tr>`}).join('')}</table>`:'<p class="mut">Completa alguna lección para ver tu diagnóstico.</p>'}</div>
+ <div class="card"><h3>Últimas sesiones</h3>${S.hist.length?`<table class="t">${S.hist.slice(-8).reverse().map(h=>`<tr><td class="mut">${h.d}</td><td>${esc(h.t)}</td><td style="text-align:right">${h.pct}%</td></tr>`).join('')}</table>`:'<p class="mut">Sin sesiones todavía.</p>'}</div>`)}
+/* ================= AJUSTES ================= */
+const ACC={ocean:'#2f6fed',forest:'#1f9d6b',sunset:'#e0662a',violet:'#7c4dff'};
+function setS(k,v){S.set[k]=v;save();applySet();vSettings()}
+function vSettings(){
+ show(`<h2 style="margin-bottom:12px">Ajustes</h2>
+ <div class="card"><h3>Apariencia</h3><div class="mut sm" style="margin:8px 0 4px">Tema</div><div class="seg">${[['auto','Automático'],['light','Claro'],['dark','Oscuro']].map(([k,l])=>`<button class="${S.set.theme===k?'on':''}" onclick="setS('theme','${k}')">${l}</button>`).join('')}</div>
+ <div class="mut sm" style="margin:8px 0 6px">Color</div><div class="row">${Object.entries(ACC).map(([k,c])=>`<button class="swatch ${S.set.accent===k?'on':''}" style="background:${c}" onclick="setS('accent','${k}')" aria-label="Color ${k}"></button>`).join('')}</div>
+ <div class="mut sm" style="margin:14px 0 4px">Tamaño del texto</div><div class="seg">${[[.9,'Pequeño'],[1,'Normal'],[1.15,'Grande']].map(([v,l])=>`<button class="${S.set.font===v?'on':''}" onclick="setS('font',${v})">${l}</button>`).join('')}</div>
+ <div class="mut sm" style="margin:8px 0 4px">Velocidad de la voz</div><div class="seg">${[[.7,'Lenta'],[.9,'Normal'],[1.05,'Rápida']].map(([v,l])=>`<button class="${S.set.rate===v?'on':''}" onclick="setS('rate',${v})">${l}</button>`).join('')}</div>
+ <button class="btn sm" onclick="speak('The quick brown fox jumps over the lazy dog.')">${ic('vol')} Probar voz</button></div>
  ${updCard()}
- <div class="card"><button onclick="if(confirm('¿Borrar todo el progreso?')){localStorage.removeItem(KEY);location.reload()}">Reiniciar progreso</button></div>`}
+ <div class="card"><h3>Nivel de partida</h3><div class="seg" style="margin-top:8px">${ORD.map(x=>`<button class="${S.level===x?'on':''}" onclick="S.level='${x}';save();vSettings();renderNav()">${x}</button>`).join('')}</div><button class="btn sm" onclick="placement()">Repetir el diagnóstico</button></div>
+ <div class="card"><h3>Copia de seguridad</h3><p class="mut sm">Tu progreso se guarda solo en este dispositivo. Si desinstalas la app, se pierde: copia el código y guárdalo (por ejemplo, en una nota).</p>
+ <div class="row"><button class="btn sm" onclick="bkExport()">${ic('down')} Exportar</button><button class="btn sm" onclick="bkImport()">Importar</button></div><textarea id="bk" rows="4" style="display:none;margin-top:10px;font-size:.8rem" spellcheck="false"></textarea><div id="bkb" style="margin-top:8px"></div></div>
+ <div class="card"><button class="tile" onclick="vReal()"><div class="ico">${ic('file')}</div><div class="t"><b>Exámenes reales</b><span class="mut">Material oficial de Cambridge</span></div>${ic('right')}</button>
+ <button class="tile" onclick="vGuide()"><div class="ico">${ic('book')}</div><div class="t"><b>Guía del examen</b><span class="mut">Qué se evalúa en cada nivel</span></div>${ic('right')}</button>
+ <button class="tile" onclick="if(confirm('¿Borrar TODO el progreso?')){localStorage.removeItem(KEY);location.reload()}"><div class="ico" style="--c:var(--bad)">${ic('alert')}</div><div class="t"><b>Borrar progreso</b><span class="mut">No se puede deshacer</span></div></button></div>
+ <p class="mut sm" style="text-align:center">Ascenso · ${U.length} unidades · ${U.reduce((a,u)=>a+u.q.length,0)} ejercicios</p>`)}
+function bkExport(){const t=$('#bk');t.style.display='block';t.value=JSON.stringify(S);t.select();$('#bkb').innerHTML='<button class="btn sm pri" onclick="bkCopy()">Copiar al portapapeles</button>'}
+function bkCopy(){const t=$('#bk');t.select();try{navigator.clipboard.writeText(t.value);$('#bkb').innerHTML='<span class="mut sm">Copiado. Guárdalo en un sitio seguro.</span>'}catch(e){document.execCommand('copy')}}
+function bkImport(){const t=$('#bk');t.style.display='block';t.value='';t.placeholder='Pega aquí el código de tu copia de seguridad';t.focus();$('#bkb').innerHTML='<button class="btn sm pri" onclick="bkApply()">Restaurar</button>'}
+function bkApply(){try{const o=JSON.parse($('#bk').value);if(!o||typeof o!=='object'||!o.cards||!o.stats)throw 0;if(!confirm('Esto reemplaza tu progreso actual. ¿Continuar?'))return;localStorage.setItem(KEY,JSON.stringify(o));location.reload()}catch(e){$('#bkb').innerHTML='<span style="color:var(--bad)" class="sm">El código no es válido.</span>'}}
+/* ================= GUÍA DEL EXAMEN ================= */
+const GUIDE={A2:{x:'A2 Key',t:'Entender y usar frases sencillas sobre rutina, familia y necesidades inmediatas.'},B1:{x:'B1 Preliminary',t:'Comprender y producir inglés en situaciones cotidianas: correos, anuncios, conversaciones.'},B2:{x:'B2 First',t:'Argumentar con fluidez, entender textos de actualidad y escribir ensayos, informes y reseñas.'},C1:{x:'C1 Advanced',t:'Uso flexible y preciso en contextos académicos y profesionales, con textos largos y matices.'},C2:{x:'C2 Proficiency',t:'Dominio casi nativo: tono, ironía, registro y estructuras complejas.'}};
+function vGuide(){tab='hoy';renderNav();
+ show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('hoy')" aria-label="Volver">${ic('left')}</button><h2>Conoce tu examen</h2></div>
+ <div class="card"><p>Los exámenes Cambridge evalúan cuatro destrezas: <b>Reading & Use of English</b>, <b>Writing</b>, <b>Listening</b> y <b>Speaking</b>. Consulta siempre el formato y los tiempos vigentes en <b>cambridgeenglish.org</b>, porque Cambridge los actualiza.</p></div>
+ ${ORD.map(L=>`<div class="card"><div class="row"><span class="lv ${L}">${L}</span><b>${GUIDE[L].x}</b></div><p class="mut" style="margin:6px 0 10px">${GUIDE[L].t}</p>
+ <table class="t"><tr><td><b>Reading y Use of English</b></td><td class="mut">Lecciones de gramática, léxico, formación de palabras, transformaciones y lectura</td></tr>
+ <tr><td><b>Writing</b></td><td class="mut">Practicar → Escritura, con frases útiles y rúbrica</td></tr>
+ <tr><td><b>Listening</b></td><td class="mut">Unidades de escucha y dictado</td></tr>
+ <tr><td><b>Speaking</b></td><td class="mut">Practicar → Speaking: grábate y escúchate</td></tr></table></div>`).join('')}`)}
 /* ================= ACTUALIZACIONES (solo en la app de Android) ================= */
 const APP=window.AscensoApp||null;
 const UPD={avail:null,state:'idle',pct:0,msg:''};
 function updInner(){
  if(!APP)return'';
- let h='<div class="mut">Versión instalada: '+esc(APP.versionName())+'</div>';
+ let h='<h3>Actualizaciones</h3><div class="mut sm" style="margin:4px 0 8px">Versión instalada: '+esc(APP.versionName())+'</div>';
  if(UPD.state==='checking')h+='<p>Buscando actualizaciones…</p>';
  else if(UPD.state==='downloading')h+='<p>Descargando… '+UPD.pct+'%</p><div class="bar"><i style="width:'+UPD.pct+'%"></i></div>';
- else if(UPD.state==='ready')h+='<p><b>Versión '+esc(UPD.avail.versionName)+' lista.</b></p><button class="pri" onclick="updInstall()">Instalar ahora</button>';
- else if(UPD.avail)h+='<p><b>Hay una versión nueva: '+esc(UPD.avail.versionName)+'</b></p>'+(UPD.avail.notes&&UPD.avail.notes.length?'<ul class="mut">'+UPD.avail.notes.map(n=>'<li>'+esc(n)+'</li>').join('')+'</ul>':'')+'<button class="pri" onclick="updDownload()">Descargar e instalar</button>';
- else h+='<button onclick="updCheck(true)">Buscar actualizaciones</button>';
- if(UPD.msg)h+='<p class="mut">'+esc(UPD.msg)+'</p>';
+ else if(UPD.state==='ready')h+='<p><b>Versión '+esc(UPD.avail.versionName)+' lista para instalar.</b></p><button class="btn pri" onclick="updInstall()">Instalar ahora</button>';
+ else if(UPD.avail)h+='<p><b>Hay una versión nueva: '+esc(UPD.avail.versionName)+'</b></p>'+(UPD.avail.notes&&UPD.avail.notes.length?'<ul class="mut sm">'+UPD.avail.notes.map(n=>'<li>'+esc(n)+'</li>').join('')+'</ul>':'')+'<button class="btn pri" onclick="updDownload()">Descargar e instalar</button>';
+ else h+='<button class="btn sm" onclick="updCheck(true)">Buscar actualizaciones</button>';
+ if(UPD.msg)h+='<p class="mut sm">'+esc(UPD.msg)+'</p>';
  return h}
 function updCard(){return APP?'<div class="card" id="updbox">'+updInner()+'</div>':''}
 function updRefresh(){const b=$('#updbox');if(b)b.innerHTML=updInner()}
@@ -502,7 +394,7 @@ window.__updCheck=r=>{UPD.state='idle';
  else if(r.info.versionCode>r.current){UPD.avail=r.info;UPD.msg=''}
  else{UPD.avail=null;UPD.msg='Tienes la última versión.'}
  try{localStorage.setItem('ascenso-lastcheck',String(Date.now()))}catch(e){}
- updRefresh()};
+ if(tab==='hoy'&&!run&&!sub&&UPD.avail)vHoy();else updRefresh()};
 function updDownload(){UPD.state='downloading';UPD.pct=0;UPD.msg='';updRefresh();APP.downloadUpdate(UPD.avail.apk,UPD.avail.sha256||'')}
 window.__updProgress=p=>{UPD.pct=p;updRefresh()};
 window.__updDone=r=>{if(r.ok){UPD.state='ready'}else{UPD.state='idle';UPD.msg=r.error||'Falló la descarga.'}updRefresh()};
