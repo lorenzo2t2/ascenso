@@ -192,13 +192,39 @@ function vLearn(){const L=lvSel||S.level,us=unitsOf(L);
 function teach(id){const u=U.find(x=>x.id===id);tab='aprender';renderNav();document.body.classList.remove('focus');
  show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('aprender')" aria-label="Volver">${ic('left')}</button><span class="lv ${u.l}">${u.l}</span></div>
  <div class="card teach"><h2 style="margin-bottom:6px">${esc(u.t)}</h2>${u.teach}<p class="mut sm">${ic('vol')} Toca un ejemplo en cursiva para oírlo.</p></div>
- <div class="actionbar"><div><button class="btn pri block" onclick="preWords('${u.id}')">Empezar práctica · ${u.q.length} ejercicios</button></div></div>`)}
+ <div class="actionbar"><div><button class="btn pri block" onclick="clase('${u.id}')">Empezar la clase · explicación y ${u.q.length} ejercicios</button></div></div>`)}
 document.addEventListener('click',e=>{const x=e.target.closest&&e.target.closest('.ex');if(x)speak(x.textContent)});
 function preWords(id){const u=U.find(x=>x.id===id),ws=PRE[id];if(!ws||!ws.length)return lesson(id);
  show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="teach('${id}')" aria-label="Volver">${ic('left')}</button><span class="lv ${u.l}">${u.l}</span></div>
  <div class="card"><h2>Palabras nuevas de esta lección</h2><p class="mut">Aprende estas palabras antes de empezar: aparecerán en los ejercicios. Toca el altavoz para oír la pronunciación.</p>
  ${ws.map((w,i)=>`<button class="tile" onclick="speak(PRE['${id}'][${i}][0])"><div class="ico">${ic('vol')}</div><div class="t"><b>${esc(w[0])}</b><span class="mut">${esc(w[1])}</span></div></button>`).join('')}</div>
- <div class="actionbar"><div><button class="btn pri block" onclick="lesson('${id}')">Entendido, empezar los ejercicios</button></div></div>`)}
+ <div class="actionbar"><div><button class="btn pri block" onclick="claseExp('${id}',0)">Entendido, seguimos con la explicación</button></div></div>`)}
+/* ================= CLASE GUIADA (como un profesor) ================= */
+function clase(id){const u=U.find(x=>x.id===id);tab='aprender';renderNav();document.body.classList.remove('focus');
+ const nPre=(PRE[id]||[]).length;
+ show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="teach('${id}')" aria-label="Volver">${ic('left')}</button><span class="lv ${u.l}">${u.l}</span></div>
+ <div class="card"><h2>${esc(u.t)}</h2><p class="mut">Hoy vamos a trabajar este tema paso a paso, como en clase:</p>
+ <ol><li>Primero, <b>vocabulario nuevo</b> (${nPre} palabras).</li><li>Luego, la <b>explicación</b>, poco a poco y con ejemplos.</li><li>Después, <b>un ejercicio resuelto</b> por mí, para que veas el método.</li><li>Por último, <b>tus ejercicios</b>. Si fallas, te explico el porqué.</li></ol></div>
+ <div class="actionbar"><div><button class="btn pri block" onclick="${nPre?"preWords('"+id+"')":"claseExp('"+id+"',0)"}">Empezar</button></div></div>`)}
+function teachSteps(u){const d=document.createElement('div');d.innerHTML=u.teach;const out=[];
+ [...d.children].forEach(el=>{if(el.tagName==='TABLE'){el.querySelectorAll('tr').forEach(tr=>out.push('<table>'+tr.outerHTML+'</table>'))}else if(el.tagName==='UL'||el.tagName==='OL'){el.querySelectorAll('li').forEach(li=>out.push('<p>'+li.innerHTML+'</p>'))}else out.push(el.outerHTML)});
+ return out.filter(x=>x.replace(/<[^>]*>/g,'').trim())}
+const PROF=['Fíjate bien en esto:','Vamos con el siguiente punto:','Ahora mira este caso:','Esto es muy importante:','Y no olvides esto:'];
+function claseExp(id,k){const u=U.find(x=>x.id===id),st=teachSteps(u);if(k>=st.length)return claseEj(id);
+ const shown=st.slice(0,k+1).map((h,i)=>`<div class="card teach ${i===k?'':'past'}" style="${i===k?'':'opacity:.55'}">${i===k?`<div class="mut sm" style="margin-bottom:4px"><b>${PROF[i%PROF.length]}</b></div>`:''}${h}</div>`).join('');
+ show(`<div class="row" style="margin-bottom:10px"><span class="lv ${u.l}">${u.l}</span><b>${esc(u.t)}</b><span class="sp"></span><span class="chip">${k+1}/${st.length}</span></div>${shown}
+ <p class="mut sm">${ic('vol')} Toca un ejemplo en cursiva para oírlo.</p>
+ <div class="actionbar"><div class="row" style="flex-wrap:nowrap">${k?`<button class="btn" onclick="claseExp('${id}',${k-1})">Atrás</button>`:''}<button class="btn pri" style="flex:1" onclick="claseExp('${id}',${k+1})">${k+1<st.length?'Entendido, siguiente':'Entendido, veamos un ejemplo'}</button></div></div>`);
+ window.scrollTo(0,document.body.scrollHeight)}
+function claseEj(id){const u=U.find(x=>x.id===id),q=u.q.find(x=>x.k==='mc'||x.k==='gap'||x.k==='wf')||u.q[0];
+ const ans=q.o?q.o[q.a]:(q.k==='ro'?q.a:q.a[0]);
+ show(`<div class="row" style="margin-bottom:10px"><span class="lv ${u.l}">${u.l}</span><b>${esc(u.t)}</b></div>
+ <div class="card"><div class="mut sm"><b>Ejemplo resuelto por el profesor</b></div>
+ ${q.k==='read'?`<div class="passage">${esc(q.x)}</div>`:''}<div class="q">${esc(q.p)}</div>
+ ${q.o?q.o.map((o,j)=>`<div class="opt ${j===q.a?'right':''}" style="cursor:default"><span class="k">${'ABCD'[j]}</span><span>${esc(o)}</span></div>`).join(''):''}
+ <div class="fb ok"><b>${ic('check')} Respuesta: ${esc(ans)}</b><div style="margin-top:6px"><b>Por qué:</b> ${esc(q.e||'')}</div></div></div>
+ <p class="mut">Ahora te toca a ti. Si dudas, vuelve a leer la explicación: después de cada fallo te explicaré el motivo.</p>
+ <div class="actionbar"><div class="row" style="flex-wrap:nowrap"><button class="btn" onclick="claseExp('${id}',0)">Repasar explicación</button><button class="btn pri" style="flex:1" onclick="lesson('${id}')">Empezar mis ejercicios</button></div></div>`)}
 function lesson(id){const u=U.find(x=>x.id===id);startRun(u.q.map((q,i)=>({u,q,i})),u.t,{unit:u})}
 
 /* ================= EXAMEN FINAL DE NIVEL ================= */
@@ -295,6 +321,7 @@ function finish(){
  show(`<div class="card" style="text-align:center"><div style="color:${pct>=70?'var(--ok)':'var(--pri)'};display:flex;justify-content:center">${ring(pct,120,11)}</div><h2 style="margin-top:10px">${pct>=70?'Muy bien':'Sigue practicando'}</h2><p class="mut">${ok} de ${n} correctas a la primera</p>
  ${Object.keys(by).length>1?`<table class="t" style="text-align:left">${Object.entries(by).map(([c,v])=>`<tr><td>${esc(c)}</td><td style="text-align:right">${v[0]}/${v[1]}</td></tr>`).join('')}</table>`:''}</div>
  ${r.miss.length?`<div class="card"><h3>Revisa estos errores</h3>${r.miss.map(m=>`<div class="fb no"><div>${esc(m.p)}</div><b>${esc(m.ans)}</b><div class="mut sm"><b>Explicación:</b> ${esc(m.e||'')}</div></div>`).join('')}</div>`:''}
+ ${r.opt.unit?`<div class="card"><h3>Resumen del profesor</h3><p>${pct>=90?'Excelente: dominas este tema. Puedes pasar al siguiente.':pct>=70?'Bien: lo has entendido. Repasa los fallos de arriba y en unos días lo revisaremos de nuevo.':'Este tema aún no está sólido. Vuelve a leer la explicación y repite la práctica; es normal necesitar dos o tres vueltas.'}</p><button class="btn sm" onclick="clase('${r.opt.unit.id}')">Repetir la clase</button></div>`:''}
  <div class="row"><button class="btn pri" onclick="go('hoy')">Volver a Hoy</button><button class="btn" onclick="go('progreso')">Ver progreso</button></div>`);
  run=null}
 /* ================= DIAGNÓSTICO ================= */

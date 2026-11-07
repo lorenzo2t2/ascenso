@@ -1,10 +1,10 @@
 {
- "versionCode": 8,
- "versionName": "1.7.0",
+ "versionCode": 9,
+ "versionName": "1.8.0",
  "apk": "Ascenso.apk",
- "size": 1005747,
- "sha256": "06c29da41c30362e0292f0be5997414d5e6f3edf729659ba303842bc89aba46c",
+ "size": 1006956,
+ "sha256": "73e6ddb6caff078471223069cd1212689fba9e2882b750e5baa3bfeaa3f28545",
  "notes": [
-  "Antes de cada lección se enseñan las palabras nuevas con su significado y audio"
+  "Clases guiadas como en el instituto: palabras nuevas, explicación paso a paso, ejemplo resuelto por el profesor y luego tus ejercicios"
  ]
 }
