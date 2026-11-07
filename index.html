@@ -131,6 +131,7 @@ const KEY='ascenso-v2';
 let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
 S=S||{};
 Object.assign(S,{level:S.level||'B1',placed:!!S.placed,done:S.done||{},cards:S.cards||{},stats:S.stats||{},hist:S.hist||[],real:S.real||[]});
+S.passed=S.passed||{};
 S.set=Object.assign({theme:'auto',accent:'ocean',font:1,rate:.9},S.set||{});
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const $=s=>document.querySelector(s);
@@ -173,6 +174,7 @@ function vHoy(){
  h+=`<div class="card"><button class="tile" onclick="${d.length?"startRun(dueList().slice(0,15),'Repaso',{})":"go('aprender')"}"><div class="ico">${ic('refresh')}</div><div class="t"><b>1 · Repaso</b><span class="mut">${d.length?d.length+' ejercicios pendientes de repasar':'Nada pendiente hoy'}</span></div>${ic('right')}</button>
  ${n?`<button class="tile" onclick="teach('${n.u.id}')"><div class="ico" style="--c:var(--${n.u.l.toLowerCase()})">${ic(unitIcon(n.u))}</div><div class="t"><b>2 · ${esc(n.u.t)}</b><span class="mut">${n.u.l} · ${n.why}</span></div>${ic('right')}</button>`:''}
  <button class="tile" onclick="go('practicar')"><div class="ico">${ic('pen')}</div><div class="t"><b>3 · Producción</b><span class="mut">Escritura o speaking, 2–3 veces por semana</span></div>${ic('right')}</button></div>`;
+ if(finalReady(S.level)&&!S.passed[S.level])h+=`<div class="card"><button class="tile" onclick="lvSel='${S.level}';go('aprender')"><div class="ico">${ic('target')}</div><div class="t"><b>Examen final ${S.level} desbloqueado</b><span class="mut">Apruébalo para pasar al siguiente nivel</span></div>${ic('right')}</button></div>`;
  const w=weak();if(w.length)h+=`<div class="card"><h3>Puntos débiles</h3><p class="mut">Menos del 70 % de aciertos:</p><div class="row" style="margin-top:6px">${w.slice(0,5).map(x=>`<span class="chip">${esc(x.c)} · ${x.p}%</span>`).join('')}</div></div>`;
  h+=`<div class="card"><button class="tile" onclick="vReal()"><div class="ico">${ic('file')}</div><div class="t"><b>Exámenes reales</b><span class="mut">Material oficial de Cambridge y corrección</span></div>${ic('right')}</button>
  <button class="tile" onclick="vGuide()"><div class="ico">${ic('book')}</div><div class="t"><b>Conoce tu examen</b><span class="mut">Qué se evalúa en cada nivel</span></div>${ic('right')}</button></div>`;
@@ -182,13 +184,37 @@ let lvSel=null;
 function vLearn(){const L=lvSel||S.level,us=unitsOf(L);
  show(`<div class="seg">${ORD.map(x=>`<button class="${x===L?'on':''}" onclick="lvSel='${x}';vLearn()">${x}</button>`).join('')}</div>
  <div class="card"><div class="row"><div class="t"><h2>${LV[L].n}</h2><div class="mut">${LV[L].d}</div></div><span class="sp"></span><div style="color:var(--${L.toLowerCase()})">${ring(mastery(L),56,6)}</div></div>
- <div style="margin-top:8px">${us.map(u=>{const p=unitPct(u);return `<button class="tile" onclick="teach('${u.id}')" style="--c:var(--${L.toLowerCase()})"><div class="ico">${ic(unitIcon(u))}</div><div class="t"><b>${esc(u.t)}</b><div class="row" style="gap:8px"><div class="bar"><i style="width:${p}%"></i></div><span class="mut sm">${p?p+'%':u.q.length+' ejercicios'}</span></div></div>${ic('right')}</button>`}).join('')}</div></div>`)}
+ ${finalCard(L,us)}<div style="margin-top:8px">${us.map(u=>{const p=unitPct(u);return `<button class="tile" onclick="teach('${u.id}')" style="--c:var(--${L.toLowerCase()})"><div class="ico">${ic(unitIcon(u))}</div><div class="t"><b>${esc(u.t)}</b><div class="row" style="gap:8px"><div class="bar"><i style="width:${p}%"></i></div><span class="mut sm">${p?p+'%':u.q.length+' ejercicios'}</span></div></div>${ic('right')}</button>`}).join('')}</div></div>`)}
 function teach(id){const u=U.find(x=>x.id===id);tab='aprender';renderNav();document.body.classList.remove('focus');
  show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('aprender')" aria-label="Volver">${ic('left')}</button><span class="lv ${u.l}">${u.l}</span></div>
  <div class="card teach"><h2 style="margin-bottom:6px">${esc(u.t)}</h2>${u.teach}<p class="mut sm">${ic('vol')} Toca un ejemplo en cursiva para oírlo.</p></div>
  <div class="actionbar"><div><button class="btn pri block" onclick="lesson('${u.id}')">Empezar práctica · ${u.q.length} ejercicios</button></div></div>`)}
 document.addEventListener('click',e=>{const x=e.target.closest&&e.target.closest('.ex');if(x)speak(x.textContent)});
 function lesson(id){const u=U.find(x=>x.id===id);startRun(u.q.map((q,i)=>({u,q,i})),u.t,{unit:u})}
+
+/* ================= EXAMEN FINAL DE NIVEL ================= */
+const PASS=70;
+function finalReady(L){return unitsOf(L).every(u=>S.done[u.id])}
+function finalCard(L,us){const p=S.passed[L],ready=finalReady(L),left=us.filter(u=>!S.done[u.id]).length,nx=ORD[ORD.indexOf(L)+1];
+ return `<div class="card" style="background:var(--surf2);margin:12px 0 0;box-shadow:none"><div class="row"><div class="ico" style="--c:var(--${L.toLowerCase()})">${ic('target')}</div><div class="t" style="flex:1"><b>Examen final ${L}</b><div class="mut sm">${p?'Aprobado el '+p.d+' ('+p.pct+'%)':ready?'20 ejercicios, sin ayudas. Con '+PASS+'% o más '+(nx?'pasas a '+nx+'.':'completas el programa.'):'Completa las '+left+' unidades que te faltan para desbloquearlo.'}</div></div></div>
+ <button class="btn ${p?'':'pri'} block" style="margin-top:10px" ${ready?'':'disabled'} onclick="finalExam('${L}')">${p?'Repetir examen':'Hacer el examen final'}</button></div>`}
+function finalExam(L){const items=unitsOf(L).flatMap(u=>u.q.map((q,i)=>({u,q,i}))).sort(()=>Math.random()-.5).slice(0,20);
+ if(!confirm('Examen final '+L+': '+items.length+' ejercicios, '+items.length+' minutos y sin explicaciones hasta el final. ¿Empezar?'))return;
+ startRun(items,'Examen final '+L,{timer:items.length*60,exam:true,final:L})}
+function finalEnd(r,ok,n,pct){const L=r.opt.final,nx=ORD[ORD.indexOf(L)+1],pass=pct>=PASS;
+ S.hist.push({d:today(),t:'Examen final '+L,pct,n});
+ if(pass){S.passed[L]={d:today(),pct};if(nx&&ORD.indexOf(nx)>ORD.indexOf(S.level))S.level=nx;}
+ save();renderNav();
+ const by={};r.log.forEach(x=>{by[x.u.t]=by[x.u.t]||[0,0];by[x.u.t][1]++;if(x.ok)by[x.u.t][0]++});
+ const weakT=Object.entries(by).filter(([,v])=>v[0]/v[1]<.7).map(([k])=>k);
+ show(`<div class="card" style="text-align:center"><div style="color:${pass?'var(--ok)':'var(--bad)'};display:flex;justify-content:center">${ring(pct,120,11)}</div>
+ <h2 style="margin-top:10px">${pass?(nx?'¡Aprobado! Pasas a '+nx:'¡Programa completado!'):'Aún no llegas al '+PASS+'%'}</h2>
+ <p class="mut">${ok} de ${n} correctas.${pass?'':' Repasa los temas débiles y vuelve a intentarlo cuando quieras.'}</p>
+ <table class="t" style="text-align:left">${Object.entries(by).map(([k,v])=>`<tr><td>${esc(k)}</td><td style="text-align:right;color:${v[0]/v[1]<.7?'var(--bad)':'var(--ok)'}">${v[0]}/${v[1]}</td></tr>`).join('')}</table></div>
+ ${r.miss.length?`<div class="card"><h3>Revisa tus fallos</h3>${r.miss.map(m=>`<div class="fb no"><div>${esc(m.p)}</div><b>${esc(m.ans)}</b><div class="mut sm"><b>Explicación:</b> ${esc(m.e||'')}</div></div>`).join('')}</div>`:''}
+ ${!pass&&weakT.length?`<p class="mut">Temas a reforzar: ${weakT.map(esc).join(', ')}.</p>`:''}
+ <div class="row"><button class="btn pri" onclick="${pass&&nx?"lvSel='"+nx+"';go('aprender')":"go('aprender')"}">${pass&&nx?'Empezar '+nx:'Volver a Aprender'}</button><button class="btn" onclick="go('hoy')">Hoy</button></div>`);
+ run=null}
 /* ================= PRACTICAR ================= */
 function vPractice(){const d=dueList().length,e=errList().length;
  show(`<div class="card"><div class="grid2">
@@ -253,6 +279,7 @@ function finish(){
  const r=run,n=r.log.length,ok=r.log.filter(x=>x.ok).length,pct=n?Math.round(100*ok/n):0;
  document.body.classList.remove('focus');
  if(r.opt.placement)return placementEnd();
+ if(r.opt.final)return finalEnd(r,ok,n,pct);
  if(r.opt.unit){const d=S.done[r.opt.unit.id]||{best:0};d.best=Math.max(d.best,ok);S.done[r.opt.unit.id]=d}
  S.hist.push({d:today(),t:r.title,pct,n});save();renderNav();
  const by={};r.log.forEach(x=>{by[x.u.t]=by[x.u.t]||[0,0];by[x.u.t][1]++;if(x.ok)by[x.u.t][0]++});

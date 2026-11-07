@@ -1,12 +1,10 @@
 {
- "versionCode": 3,
- "versionName": "1.2.0",
+ "versionCode": 4,
+ "versionName": "1.3.0",
  "apk": "Ascenso.apk",
- "size": 992961,
- "sha256": "2435a90c85569c2749bb09b34f0de8eda62a0d14973244294e3e79f73842640d",
+ "size": 993869,
+ "sha256": "8f8c9cc52f36e66098ba7435d4f7a8733bcd7e6f2ad4a02fea2346ef168bf5fa",
  "notes": [
-  "3 unidades nuevas de A2 (modales, preposiciones, there is/are)",
-  "tarjetas de vocabulario con voz",
-  "errores agrupados por tema"
+  "Examen final al terminar cada nivel: con 70% o más pasas al siguiente"
  ]
 }
