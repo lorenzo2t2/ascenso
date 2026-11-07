@@ -133,7 +133,7 @@ let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
 S=S||{};
 Object.assign(S,{level:S.level||'B1',placed:!!S.placed,done:S.done||{},cards:S.cards||{},stats:S.stats||{},hist:S.hist||[],real:S.real||[]});
 S.passed=S.passed||{};
-S.set=Object.assign({theme:'auto',accent:'ocean',font:1,rate:.9},S.set||{});
+S.set=Object.assign({theme:'auto',accent:'ocean',font:1,rate:.9,voice:''},S.set||{});
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -235,7 +235,7 @@ function vExam(){tab='practicar';renderNav();
 function mock(L){const items=U.filter(u=>u.l===L).flatMap(u=>u.q.map((q,i)=>({u,q,i}))).sort(()=>Math.random()-.5).slice(0,15);startRun(items,'Simulacro '+L,{timer:items.length*60,exam:true})}
 /* ================= MOTOR DE EJERCICIOS ================= */
 const fmt=s=>Math.max(0,Math.floor(s/60))+':'+String(Math.max(0,s%60)).padStart(2,'0');
-function speak(t,rate){rate=rate||S.set.rate;if(window.AndroidTTS){try{AndroidTTS.speak(t,rate);return}catch(e){}}try{const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=rate;const v=speechSynthesis.getVoices().find(x=>/en-GB/i.test(x.lang))||speechSynthesis.getVoices().find(x=>/^en/i.test(x.lang));if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function speak(t,rate){rate=rate||S.set.rate;if(window.AndroidTTS){try{AndroidTTS.setVoice(S.set.voice||'');AndroidTTS.speak(t,rate);return}catch(e){}}try{const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=rate;const v=speechSynthesis.getVoices().find(x=>x.name===S.set.voice)||speechSynthesis.getVoices().find(x=>/en-GB/i.test(x.lang))||speechSynthesis.getVoices().find(x=>/^en/i.test(x.lang));if(v)u.voice=v;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
 const TYPE={mc:'Elige la opción correcta',gap:'Completa la frase',wf:'Formación de palabras',kw:'Transformación',ro:'Ordena la frase',lis:'Comprensión oral',read:'Comprensión lectora',dic:'Dictado'};
 const HOW={mc:'Lee la pregunta y toca la opción correcta (también puedes pulsar 1–4).',gap:'Escribe en inglés la palabra o palabras que faltan en el hueco (___). Respeta lo que indica el paréntesis.',wf:'Transforma la palabra en MAYÚSCULAS (entre paréntesis) para que encaje en la frase y escribe solo la nueva palabra.',kw:'Reescribe la idea con la palabra clave indicada, sin cambiar el significado. Escribe solo las palabras que faltan.',ro:'Toca las palabras en el orden correcto para formar la frase. Toca una palabra de arriba para quitarla.',lis:'Pulsa «Escuchar», oye el audio (puedes repetirlo o ponerlo más lento) y elige la respuesta a la pregunta.',read:'Lee el texto y elige la opción que responde a la pregunta.',dic:'Pulsa «Escuchar» y escribe en inglés exactamente lo que oyes. No importan las mayúsculas ni la puntuación.'};
 function startRun(items,title,opt){if(!items.length)return;run={items:items.map(x=>({...x})),title,opt:opt||{},n:0,log:[],miss:[],done:false,ans:null,bi:[]};
@@ -414,7 +414,10 @@ function vSettings(){
  <div class="card"><h3>Apariencia</h3><div class="mut sm" style="margin:8px 0 4px">Tema</div><div class="seg">${[['auto','Automático'],['light','Claro'],['dark','Oscuro']].map(([k,l])=>`<button class="${S.set.theme===k?'on':''}" onclick="setS('theme','${k}')">${l}</button>`).join('')}</div>
  <div class="mut sm" style="margin:8px 0 6px">Color</div><div class="row">${Object.entries(ACC).map(([k,c])=>`<button class="swatch ${S.set.accent===k?'on':''}" style="background:${c}" onclick="setS('accent','${k}')" aria-label="Color ${k}"></button>`).join('')}</div>
  <div class="mut sm" style="margin:14px 0 4px">Tamaño del texto</div><div class="seg">${[[.9,'Pequeño'],[1,'Normal'],[1.15,'Grande']].map(([v,l])=>`<button class="${S.set.font===v?'on':''}" onclick="setS('font',${v})">${l}</button>`).join('')}</div>
- <div class="mut sm" style="margin:8px 0 4px">Velocidad de la voz</div><div class="seg">${[[.7,'Lenta'],[.9,'Normal'],[1.05,'Rápida']].map(([v,l])=>`<button class="${S.set.rate===v?'on':''}" onclick="setS('rate',${v})">${l}</button>`).join('')}</div>
+ <div class="mut sm" style="margin:8px 0 4px">Velocidad de la voz: <b id="rv">${S.set.rate.toFixed(2)}×</b></div>
+ <input type="range" min="0.5" max="1.4" step="0.05" value="${S.set.rate}" style="width:100%;accent-color:var(--pri)" oninput="S.set.rate=+this.value;$('#rv').textContent=S.set.rate.toFixed(2)+'×';save()" aria-label="Velocidad de la voz">
+ <div class="mut sm" style="margin:12px 0 4px">Voz</div>
+ <select id="vsel" onchange="S.set.voice=this.value;save()" style="width:100%;font:inherit;padding:12px;border-radius:12px;border:2px solid var(--line);background:var(--surf);color:var(--ink);margin-bottom:10px"><option value="">Voz por defecto del móvil</option></select>
  <button class="btn sm" onclick="speak('The quick brown fox jumps over the lazy dog.')">${ic('vol')} Probar voz</button></div>
  ${updCard()}
  <div class="card"><h3>Nivel de partida</h3><div class="seg" style="margin-top:8px">${ORD.map(x=>`<button class="${S.level===x?'on':''}" onclick="S.level='${x}';save();vSettings();renderNav()">${x}</button>`).join('')}</div><button class="btn sm" onclick="placement()">Repetir el diagnóstico</button></div>
@@ -423,7 +426,15 @@ function vSettings(){
  <div class="card"><button class="tile" onclick="vReal()"><div class="ico">${ic('file')}</div><div class="t"><b>Exámenes reales</b><span class="mut">Material oficial de Cambridge</span></div>${ic('right')}</button>
  <button class="tile" onclick="vGuide()"><div class="ico">${ic('book')}</div><div class="t"><b>Guía del examen</b><span class="mut">Qué se evalúa en cada nivel</span></div>${ic('right')}</button>
  <button class="tile" onclick="if(confirm('¿Borrar TODO el progreso?')){localStorage.removeItem(KEY);location.reload()}"><div class="ico" style="--c:var(--bad)">${ic('alert')}</div><div class="t"><b>Borrar progreso</b><span class="mut">No se puede deshacer</span></div></button></div>
- <p class="mut sm" style="text-align:center">Ascenso · ${U.length} unidades · ${U.reduce((a,u)=>a+u.q.length,0)} ejercicios</p>`)}
+ <p class="mut sm" style="text-align:center" id="cnt">Ascenso · ${U.length} unidades · ${U.reduce((a,u)=>a+u.q.length,0)} ejercicios</p>`);fillVoices()}
+function voiceList(){let l=[];
+ if(window.AndroidTTS){try{l=JSON.parse(AndroidTTS.voices()).map(v=>({n:v.n,t:v.l.replace('_','-')+(v.o?'':' (requiere conexión)')+(v.q>=400?' · alta calidad':'')}))}catch(e){}}
+ else{try{l=speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang)).map(v=>({n:v.name,t:v.name+' · '+v.lang}))}catch(e){}}
+ return l}
+function fillVoices(){const sel=$('#vsel');if(!sel)return;const l=voiceList();l.sort((a,b)=>a.t.localeCompare(b.t));
+ sel.innerHTML='<option value="">Voz por defecto del móvil</option>'+l.map((v,i)=>`<option value="${esc(v.n)}" ${S.set.voice===v.n?'selected':''}>${esc(v.t)}</option>`).join('');
+ if(!l.length)sel.insertAdjacentHTML('afterend','<p class="mut sm">No se encontraron más voces en inglés. Instálalas en Ajustes de Android → Salida de texto a voz.</p>')}
+try{speechSynthesis.onvoiceschanged=fillVoices}catch(e){}
 function bkExport(){const t=$('#bk');t.style.display='block';t.value=JSON.stringify(S);t.select();$('#bkb').innerHTML='<button class="btn sm pri" onclick="bkCopy()">Copiar al portapapeles</button>'}
 function bkCopy(){const t=$('#bk');t.select();try{navigator.clipboard.writeText(t.value);$('#bkb').innerHTML='<span class="mut sm">Copiado. Guárdalo en un sitio seguro.</span>'}catch(e){document.execCommand('copy')}}
 function bkImport(){const t=$('#bk');t.style.display='block';t.value='';t.placeholder='Pega aquí el código de tu copia de seguridad';t.focus();$('#bkb').innerHTML='<button class="btn sm pri" onclick="bkApply()">Restaurar</button>'}

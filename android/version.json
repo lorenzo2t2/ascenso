@@ -1,11 +1,10 @@
 {
- "versionCode": 5,
- "versionName": "1.4.0",
+ "versionCode": 6,
+ "versionName": "1.5.0",
  "apk": "Ascenso.apk",
- "size": 996604,
- "sha256": "2d31d301613c9af6d5d4c6d0149a16ac29c86826ce940c5b3ecb837ca5dcabc3",
+ "size": 997550,
+ "sha256": "435a23ce88830025ceca27f81f44d6120af7ebd5e4698533b388417e84cae335",
  "notes": [
-  "Vocabulario con repaso espaciado (avisos en Hoy)",
-  "lecturas y escuchas largas en B1 y B2"
+  "Elegir la voz en inglés y la velocidad con un deslizador (Ajustes)"
  ]
 }
