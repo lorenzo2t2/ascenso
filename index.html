@@ -42,7 +42,7 @@
 :root[data-skin="biblioteca"] body{background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0,rgba(255,255,255,.03) 2px,transparent 2px,transparent 22px)}
 :root[data-skin="montana"] body{background:linear-gradient(180deg,#1b2a49 0%,#473a6e 55%,#e07a5f 100%) fixed;background-repeat:no-repeat}
 :root[data-skin="montana"] body::after{content:"";position:fixed;left:0;right:0;bottom:0;height:34vh;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120' preserveAspectRatio='none'%3E%3Cpolygon fill='%23121c36' points='0,120 0,70 60,30 110,75 170,20 240,80 300,40 360,85 400,55 400,120'/%3E%3Cpolygon fill='%230b1226' points='0,120 0,95 80,60 140,100 210,55 280,105 350,70 400,100 400,120'/%3E%3C/svg%3E") bottom/100% 100% no-repeat;pointer-events:none;z-index:0}
-:root[data-skin="montana"] main,:root[data-skin="montana"] .nav{position:relative;z-index:1}
+:root[data-skin="montana"] .nav{z-index:10}
 :root[data-skin="montana"] .nav{position:fixed}
 /* tarjetas */
 :root[data-card="ticket"] .card{border-radius:10px;background-image:radial-gradient(circle at 0 50%,var(--bg) 9px,transparent 10px),radial-gradient(circle at 100% 50%,var(--bg) 9px,transparent 10px);background-color:var(--surf);border-left:6px solid var(--pri)}
@@ -167,7 +167,7 @@
 :root[data-skin="aurora"] body{background:radial-gradient(circle at 12% 4%,rgba(61,255,170,.5),transparent 42%),radial-gradient(circle at 98% 22%,rgba(140,80,255,.6),transparent 40%),radial-gradient(circle at 40% 75%,rgba(0,170,255,.3),transparent 45%),radial-gradient(1.2px 1.2px at 20% 30%,#fff,transparent),radial-gradient(1.2px 1.2px at 70% 12%,#fff,transparent),radial-gradient(1px 1px at 85% 60%,#fff,transparent),radial-gradient(1px 1px at 35% 85%,#fff,transparent),radial-gradient(1.2px 1.2px at 55% 45%,#fff,transparent),linear-gradient(#050b1a,#0a1430) fixed}
 :root[data-skin="aurora"] body::before{content:"";position:fixed;left:-30vw;top:14vh;width:160vw;height:11vh;transform:rotate(-16deg);background:linear-gradient(90deg,transparent,rgba(61,255,176,.8),rgba(123,92,255,.8),transparent);filter:blur(34px);pointer-events:none;z-index:0}
 :root[data-skin="liquido"] body{background:radial-gradient(circle at 0 0,#ff7eb3 0,transparent 46%),radial-gradient(circle at 100% 5%,#6ef3ff 0,transparent 42%),radial-gradient(circle at 100% 95%,#fff59a 0,transparent 46%),radial-gradient(circle at 0 100%,#a78bfa 0,transparent 50%),radial-gradient(circle at 15% 45%,rgba(255,95,162,.5) 0,transparent 26%),linear-gradient(#f3e8ff,#ffe9f3) fixed}
-:root[data-skin="tokio"] main,:root[data-skin="tokio"] .nav,:root[data-skin="aurora"] main,:root[data-skin="aurora"] .nav{position:relative;z-index:1}
+:root[data-skin="tokio"] #view,:root[data-skin="aurora"] #view{position:relative}
 :root[data-skin="tokio"] .nav,:root[data-skin="aurora"] .nav,:root[data-skin="liquido"] .nav{position:fixed}
 /* tarjetas */
 :root[data-card="neonedge"] .card,:root[data-card="neonedge"] .gt{background:rgba(12,10,34,.76);border:1px solid rgba(255,70,180,.5);box-shadow:0 0 14px rgba(255,70,180,.16);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
@@ -274,7 +274,7 @@ input[type=text]:focus,input[type=number]:focus,textarea:focus{border-color:var(
 .fb{border-radius:14px;padding:14px;margin-top:14px;animation:up .25s ease-out}
 .fb.ok{background:color-mix(in srgb,var(--ok) 13%,var(--surf));border:1px solid var(--ok)}.fb.no{background:color-mix(in srgb,var(--bad) 11%,var(--surf));border:1px solid var(--bad)}
 .fb b{display:flex;gap:8px;align-items:center}
-.actionbar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);z-index:11}
+.actionbar{z-index:80 !important;position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);z-index:11}
 .actionbar>div{max-width:720px;margin:auto}
 @keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .view{animation:up .22s ease-out}
