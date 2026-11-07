@@ -1,10 +1,10 @@
 {
- "versionCode": 6,
- "versionName": "1.5.0",
+ "versionCode": 7,
+ "versionName": "1.6.0",
  "apk": "Ascenso.apk",
- "size": 997550,
- "sha256": "435a23ce88830025ceca27f81f44d6120af7ebd5e4698533b388417e84cae335",
+ "size": 1001828,
+ "sha256": "c800d016822d66b84979eaaa5b842774d93c35c940e525b79aeb721d9b530eb1",
  "notes": [
-  "Elegir la voz en inglés y la velocidad con un deslizador (Ajustes)"
+  "Más lecturas y escuchas largas en B1, B2, C1 y C2"
  ]
 }
