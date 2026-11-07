@@ -92,4 +92,49 @@ U.push(
 {k:'read',x:'Hi Anna! I\'m writing from Edinburgh. The weather is cold but the city is beautiful. Yesterday we visited the castle and today we are going shopping. Tomorrow we are taking the train to Glasgow. See you on Sunday! Love, Mia',p:'¿Cuándo verá Mia a Anna?',o:['Mañana','El sábado','El domingo','Hoy'],a:2,e:'«See you on Sunday» = nos vemos el domingo.'},
 {k:'read',x:'NOTICE: The library is open Monday to Friday from 9 am to 6 pm and on Saturday from 10 am to 2 pm. It is closed on Sundays. Students can borrow up to five books for two weeks.',p:'¿Cuántos libros puede llevarse un estudiante?',o:['Dos','Cinco','Diez','Catorce'],a:1,e:'«up to five books» = hasta cinco libros. Two weeks es la duración del préstamo.'},
 {k:'read',x:'NOTICE: The library is open Monday to Friday from 9 am to 6 pm and on Saturday from 10 am to 2 pm. It is closed on Sundays. Students can borrow up to five books for two weeks.',p:'¿Abre la biblioteca el domingo?',o:['Sí, de 9 a 6','Sí, de 10 a 2','No','Solo para estudiantes'],a:2,e:'«closed on Sundays» = cerrada los domingos.'}]}
+,
+
+{id:'a2-modal',l:'A2',t:'Can, must, should y have to',teach:`
+<p><b>Verbos modales:</b> van seguidos del verbo base, sin <b>to</b> ni <b>-s</b>.</p>
+<table><tr><td><b>can / can't</b></td><td>habilidad o permiso<br><span class="ex">She can swim. · Can I open the window?</span></td></tr>
+<tr><td><b>must</b></td><td>obligación fuerte<br><span class="ex">You must wear a seatbelt.</span></td></tr>
+<tr><td><b>should</b></td><td>consejo<br><span class="ex">You should drink more water.</span></td></tr>
+<tr><td><b>have to</b></td><td>obligación externa; sí lleva -s con he/she<br><span class="ex">He has to work on Saturday.</span></td></tr></table>`,q:[
+{k:'mc',p:'She ___ speak three languages.',o:['can','cans','can to','is can'],a:0,e:'Can no cambia con she y va con el verbo base.'},
+{k:'mc',p:'You ___ smoke in the hospital. It is forbidden.',o:['should','mustn\'t','can','have'],a:1,e:'Mustn\'t expresa prohibición.'},
+{k:'mc',p:'I have a headache. — You ___ see a doctor.',o:['should','must to','can','are'],a:0,e:'Para dar un consejo se usa should.'},
+{k:'mc',p:'He ___ get up early on weekdays.',o:['have to','has to','must to','haves to'],a:1,e:'Have to con he/she cambia a has to.'},
+{k:'gap',p:'___ I borrow your pen? (pedir permiso)',a:['Can','Could','May'],e:'Para pedir permiso se usa Can / Could / May + sujeto.'},
+{k:'gap',p:'We ___ (not/have) to wear a uniform.',a:["don't have","do not have"],e:'La negativa de have to usa don\'t have to (no es necesario).'},
+{k:'ro',p:'Ordena las palabras para formar una frase.',w:['You','should','go','to','bed','early'],a:'You should go to bed early',e:'Should + verbo base, sin to.'},
+{k:'dic',s:'You must show your passport.',p:'Escucha y escribe la frase.',a:['You must show your passport'],e:'Must + verbo base.'}]},
+
+{id:'a2-prep',l:'A2',t:'Preposiciones de tiempo y lugar',teach:`
+<p><b>Tiempo:</b> <b>at</b> + hora · <b>on</b> + día · <b>in</b> + mes, año, estación o parte del día.</p>
+<table><tr><td><b>at</b></td><td><span class="ex">at seven o'clock · at night · at the weekend</span></td></tr>
+<tr><td><b>on</b></td><td><span class="ex">on Monday · on 5th May · on my birthday</span></td></tr>
+<tr><td><b>in</b></td><td><span class="ex">in June · in 2020 · in the morning · in winter</span></td></tr>
+<tr><td><b>Lugar</b></td><td>in (dentro), on (sobre), at (punto concreto), next to (al lado de), between (entre)</td></tr></table>`,q:[
+{k:'mc',p:'My class starts ___ nine o\'clock.',o:['in','on','at','to'],a:2,e:'Con horas se usa at.'},
+{k:'mc',p:'I was born ___ 1998.',o:['on','at','in','of'],a:2,e:'Con años se usa in.'},
+{k:'mc',p:'We have a party ___ Saturday.',o:['in','on','at','by'],a:1,e:'Con días de la semana se usa on.'},
+{k:'mc',p:'The cat is ___ the table. (debajo)',o:['under','over','between','next'],a:0,e:'Under = debajo de.'},
+{k:'gap',p:'I usually study ___ the morning.',a:['in'],e:'Con partes del día (morning, afternoon, evening) se usa in; ojo: at night.'},
+{k:'gap',p:'The bank is ___ to the post office. (al lado)',a:['next'],e:'Next to = al lado de.'},
+{k:'gap',p:'See you ___ the weekend!',a:['at'],e:'En inglés británico: at the weekend (en EE. UU.: on the weekend).'},
+{k:'dic',s:'The meeting is on Monday at ten.',p:'Escucha y escribe la frase.',a:['The meeting is on Monday at ten'],e:'On + día, at + hora.'}]},
+
+{id:'a2-there',l:'A2',t:'There is / are y cantidades',teach:`
+<p><b>There is</b> + singular o incontable · <b>There are</b> + plural.</p>
+<table><tr><td><b>Afirmativa</b></td><td><span class="ex">There is a park near my house. · There are two bedrooms.</span></td></tr>
+<tr><td><b>Negativa / pregunta</b></td><td><span class="ex">There isn't any milk. · Are there any shops?</span></td></tr>
+<tr><td><b>Contables</b></td><td>many, a few → <span class="ex">There aren't many chairs.</span></td></tr>
+<tr><td><b>Incontables</b></td><td>much, a little → <span class="ex">There isn't much time.</span></td></tr></table>`,q:[
+{k:'mc',p:'___ a supermarket near here?',o:['Is there','Are there','There is','Have'],a:0,e:'Pregunta en singular: Is there…?'},
+{k:'mc',p:'There ___ three books on the shelf.',o:['is','are','be','has'],a:1,e:'Books es plural: there are.'},
+{k:'mc',p:'We haven\'t got ___ money.',o:['many','much','a few','these'],a:1,e:'Money es incontable: much (en negativas).'},
+{k:'mc',p:'How ___ people are there in your family?',o:['much','many','few','lot'],a:1,e:'People es contable: how many.'},
+{k:'gap',p:'There ___ (not/be) any eggs in the fridge.',a:["aren't","are not","isn't","is not"],e:'Con any se usa la negativa; eggs es plural: there aren\'t.'},
+{k:'ro',p:'Ordena las palabras para formar una pregunta.',w:['Are','there','any','shops','here'],a:'Are there any shops here',e:'Are there + any + sustantivo plural.'},
+{k:'dic',s:'There are many people in the park.',p:'Escucha y escribe la frase.',a:['There are many people in the park'],e:'People es plural: there are.'}]}
 );

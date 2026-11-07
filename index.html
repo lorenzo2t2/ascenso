@@ -124,6 +124,7 @@ label.chk{display:flex;gap:10px;align-items:flex-start;margin:10px 0;cursor:poin
 <script src="contenido.js"></script>
 <script src="contenido-temas.js"></script>
 <script src="contenido-a2.js"></script>
+<script src="contenido-voc.js"></script>
 <script>
 /* ================= ESTADO Y AJUSTES ================= */
 const KEY='ascenso-v2';
@@ -192,7 +193,8 @@ function lesson(id){const u=U.find(x=>x.id===id);startRun(u.q.map((q,i)=>({u,q,i
 function vPractice(){const d=dueList().length,e=errList().length;
  show(`<div class="card"><div class="grid2">
  <button class="gt" onclick="${d?"startRun(dueList().slice(0,15),'Repaso',{})":""}" ${d?'':'style="opacity:.55"'}><div class="ico">${ic('refresh')}</div><b>Repaso</b><span class="mut sm">${d?d+' pendientes':'Al día'}</span></button>
- <button class="gt" onclick="${e?"startRun(errList().slice(0,15),'Mis errores',{})":""}" ${e?'':'style="opacity:.55"'}><div class="ico" style="--c:var(--bad)">${ic('alert')}</div><b>Mis errores</b><span class="mut sm">${e?e+' por corregir':'Sin errores'}</span></button>
+ <button class="gt" onclick="${e?"vErrors()":""}" ${e?'':'style="opacity:.55"'}><div class="ico" style="--c:var(--bad)">${ic('alert')}</div><b>Mis errores</b><span class="mut sm">${e?e+' por corregir':'Sin errores'}</span></button>
+ <button class="gt" onclick="vVoc()"><div class="ico">${ic('book')}</div><b>Vocabulario</b><span class="mut sm">Tarjetas con voz</span></button>
  <button class="gt" onclick="dictMix()"><div class="ico">${ic('phones')}</div><b>Dictado</b><span class="mut sm">Oído y ortografía</span></button>
  <button class="gt" onclick="vExam()"><div class="ico">${ic('clock')}</div><b>Simulacro</b><span class="mut sm">Con cronómetro</span></button>
  <button class="gt" onclick="vWrite()"><div class="ico">${ic('pen')}</div><b>Escritura</b><span class="mut sm">Con rúbrica</span></button>
@@ -267,6 +269,27 @@ function placementEnd(){
  let lvl='A2';ORD.forEach(L=>{if(sc[L][1]&&sc[L][0]/sc[L][1]>=.6)lvl=L});
  S.level=lvl;S.placed=true;save();run=null;renderNav();
  show(`<div class="card" style="text-align:center"><div class="big" style="color:var(--${lvl.toLowerCase()})">${lvl}</div><h2>Nivel estimado</h2><table class="t" style="text-align:left;margin-top:8px">${ORD.map(L=>`<tr><td>${L}</td><td style="text-align:right">${sc[L][0]}/${sc[L][1]}</td></tr>`).join('')}</table><p class="mut">Orientativo: son muy pocas preguntas y no es un resultado oficial. Empezarás por ${lvl}; puedes trabajar cualquier nivel en Aprender.</p><button class="btn pri" onclick="go('hoy')">Ver mi plan</button></div>`)}
+
+/* ================= ERRORES POR TEMA ================= */
+function vErrors(){tab='practicar';renderNav();const by={};errList().forEach(x=>{(by[x.u.t]=by[x.u.t]||[]).push(x)});
+ const ks=Object.keys(by).sort((a,b)=>by[b].length-by[a].length);
+ show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('practicar')" aria-label="Volver">${ic('left')}</button><h2>Mis errores</h2></div>
+ <div class="card"><p class="mut">Ejercicios que fallaste la última vez, agrupados por tema. Trabaja primero el tema con más errores.</p>
+ <button class="btn pri block" onclick="startRun(errList().slice(0,15),'Mis errores',{})">Repasar todos (${errList().length})</button>
+ <div style="margin-top:8px">${ks.map(k=>`<button class="tile" style="--c:var(--bad)" onclick="errTopic(${JSON.stringify(k).replace(/"/g,'&quot;')})"><div class="ico">${ic('alert')}</div><div class="t"><b>${esc(k)}</b><span class="mut">${by[k][0].u.l} · ${by[k].length} por corregir</span></div>${ic('right')}</button>`).join('')}</div></div>`)}
+function errTopic(k){startRun(errList().filter(x=>x.u.t===k).slice(0,15),'Errores: '+k,{})}
+/* ================= VOCABULARIO ================= */
+let vl=null,vi=0,vflip=false;
+function vLv(){return vl||(VOC[S.level]?S.level:'A2')}
+function vVoc(){tab='practicar';renderNav();const L=vLv(),ws=VOC[L],w=ws[vi%ws.length];S.voc=S.voc||{};
+ show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('practicar')" aria-label="Volver">${ic('left')}</button><h2>Vocabulario</h2></div>
+ <div class="seg">${Object.keys(VOC).map(x=>`<button class="${x===L?'on':''}" onclick="vl='${x}';vi=0;vflip=false;vVoc()">${x}</button>`).join('')}</div>
+ <div class="card" style="text-align:center;padding:28px 16px"><div class="mut sm">${vi%ws.length+1} / ${ws.length} · ${Object.keys(S.voc).filter(k=>k.startsWith(L)).length} conocidas</div>
+ <div class="big" style="font-size:2.2rem;margin:14px 0 4px">${esc(w[0])}</div>
+ <button class="btn sm" onclick="speak(VOC[vLv()][vi%VOC[vLv()].length][0])">${ic('vol')} Escuchar</button>
+ ${vflip?`<div style="margin-top:16px;font-size:1.3rem;font-weight:700;color:var(--pri)">${esc(w[1])}</div><p class="ex" style="margin:8px 0 0">${esc(w[2])}</p>`:`<div style="margin-top:16px"><button class="btn pri" onclick="vflip=true;vVoc()">Ver significado</button></div><p class="mut sm">Piensa primero qué significa y luego comprueba.</p>`}</div>
+ ${vflip?`<div class="grid2"><button class="btn" onclick="vMark(false)">${ic('x')} A repasar</button><button class="btn pri" onclick="vMark(true)">${ic('check')} La sabía</button></div>`:''}`)}
+function vMark(ok){const L=vLv(),w=VOC[L][vi%VOC[L].length];S.voc=S.voc||{};if(ok)S.voc[L+w[0]]=1;else delete S.voc[L+w[0]];save();vi++;vflip=false;vVoc()}
 /* ================= EXÁMENES REALES (material oficial de Cambridge) ================= */
 const CAM='https://www.cambridgeenglish.org/exams-and-tests/qualifications/';
 const OFI={A2:{x:'A2 Key',u:CAM+'key/preparation/'},B1:{x:'B1 Preliminary',u:CAM+'preliminary/preparation/'},B2:{x:'B2 First',u:CAM+'first/preparation/'},C1:{x:'C1 Advanced',u:CAM+'advanced/preparation/'},C2:{x:'C2 Proficiency',u:CAM+'proficiency/preparation/'}};

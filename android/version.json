@@ -1,15 +1,12 @@
 {
- "versionCode": 2,
- "versionName": "1.1.0",
+ "versionCode": 3,
+ "versionName": "1.2.0",
  "apk": "Ascenso.apk",
- "size": 988804,
- "sha256": "f1f2eae28ab50b460032ed74b8ab1f0dac73f4e4efe80b14ba5b2025599512c9",
+ "size": 992961,
+ "sha256": "2435a90c85569c2749bb09b34f0de8eda62a0d14973244294e3e79f73842640d",
  "notes": [
-  "Nuevo nivel A2 (7 unidades)",
-  "rediseño moderno con tema claro/oscuro",
-  "sección Exámenes reales de Cambridge",
-  "explicaciones y consignas en español",
-  "nuevo icono",
-  "15 temas nuevos"
+  "3 unidades nuevas de A2 (modales, preposiciones, there is/are)",
+  "tarjetas de vocabulario con voz",
+  "errores agrupados por tema"
  ]
 }
