@@ -1,10 +1,10 @@
 {
- "versionCode": 20,
- "versionName": "2.1.1",
+ "versionCode": 21,
+ "versionName": "2.2.0",
  "apk": "Ascenso.apk",
- "size": 30167250,
- "sha256": "eab5a69fed81bd612b4d43466b37e2aa7be9035980dc65acba603c183098176a",
+ "size": 40437751,
+ "sha256": "faf12b1a3ca8c70e6d9740979aab2f771ca1c6ca2faa565716f976b805e36f62",
  "notes": [
-  "Arreglada la lista de exámenes reales (texto aplastado) y el icono suelto en el menú"
+  "Explicaciones nuevas en las 71 lecciones: paso a paso, en español sencillo, con ejemplos traducidos y con voz, errores típicos y resumen final"
  ]
 }
