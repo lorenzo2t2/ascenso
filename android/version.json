@@ -1,10 +1,10 @@
 {
- "versionCode": 13,
- "versionName": "2.0.2",
+ "versionCode": 14,
+ "versionName": "2.0.3",
  "apk": "Ascenso.apk",
- "size": 30166497,
- "sha256": "80cd8e14f4792ba094a6fe2f72e067e01aa04ca0e4e335580b2737d70698c4c1",
+ "size": 30166538,
+ "sha256": "f5b843dd61bd2d2868145906b8ca046629dffa61625e456e828cd52ad0f282f7",
  "notes": [
-  "Corrige el gesto de atrás de Android: ahora vuelve a Hoy antes de salir"
+  "Repaso, errores y recomendaciones solo de tu nivel y los anteriores (ya no salen preguntas de B1 en A2)"
  ]
 }

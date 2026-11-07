@@ -351,10 +351,11 @@ function applySet(){if(typeof SKINS!=='undefined'&&S.set.skin&&!SKINS[S.set.skin
 const BOX=[0,1,3,7,14,30];
 const qid=(u,i)=>u.id+'#'+i;
 function review(id,ok){const c=S.cards[id]||{b:0};c.b=ok?Math.min(5,c.b+1):0;c.due=new Date(Date.now()+BOX[c.b]*864e5).toISOString().slice(0,10);S.cards[id]=c}
-function dueList(){const t=today(),o=[];U.forEach(u=>u.q.forEach((q,i)=>{const c=S.cards[qid(u,i)];if(c&&c.due<=t)o.push({u,q,i})}));return o}
-function errList(){const o=[];U.forEach(u=>u.q.forEach((q,i)=>{const c=S.cards[qid(u,i)];if(c&&c.b===0)o.push({u,q,i})}));return o}
+const inLvl=u=>ORD.indexOf(u.l)<=ORD.indexOf(S.level);
+function dueList(){const t=today(),o=[];U.filter(inLvl).forEach(u=>u.q.forEach((q,i)=>{const c=S.cards[qid(u,i)];if(c&&c.due<=t)o.push({u,q,i})}));return o}
+function errList(){const o=[];U.filter(inLvl).forEach(u=>u.q.forEach((q,i)=>{const c=S.cards[qid(u,i)];if(c&&c.b===0)o.push({u,q,i})}));return o}
 function stat(cat,ok){const s=S.stats[cat]||{ok:0,n:0};s.n++;if(ok)s.ok++;S.stats[cat]=s}
-function weak(){return Object.entries(S.stats).filter(([c,s])=>s.n>=3&&s.ok/s.n<.7&&U.some(u=>u.t===c)).sort((a,b)=>a[1].ok/a[1].n-b[1].ok/b[1].n).map(([c,s])=>({c,p:Math.round(100*s.ok/s.n)}))}
+function weak(){return Object.entries(S.stats).filter(([c,s])=>s.n>=3&&s.ok/s.n<.7&&U.some(u=>u.t===c&&inLvl(u))).sort((a,b)=>a[1].ok/a[1].n-b[1].ok/b[1].n).map(([c,s])=>({c,p:Math.round(100*s.ok/s.n)}))}
 const unitPct=u=>{const d=S.done[u.id];return d?Math.min(100,Math.round(100*d.best/u.q.length)):0};
 const unitsOf=L=>U.filter(u=>u.l===L);
 const mastery=L=>{const us=L?unitsOf(L):U;return us.length?Math.round(100*us.filter(u=>unitPct(u)>=70).length/us.length):0};
@@ -372,7 +373,7 @@ function show(html){curHome=false;const v=$('#view');v.className='';v.innerHTML=
 function go(t,s){if(run&&run.iv)clearInterval(run.iv);if(rIv){clearInterval(rIv);rIv=null}run=null;document.body.classList.remove('focus');tab=t;sub=s||null;renderNav();({hoy:vHoy,aprender:vLearn,practicar:vPractice,progreso:vStats,ajustes:vSettings})[t](s)}
 /* ================= HOY ================= */
 function nextUnit(){const w=weak();if(w.length){const u=U.find(x=>x.t===w[0].c);if(u)return {u,why:'Es tu punto más débil ('+w[0].p+'% de aciertos)'}}
- for(let i=ORD.indexOf(S.level);i<4;i++){const u=unitsOf(ORD[i]).find(x=>unitPct(x)<70);if(u)return {u,why:'Siguiente unidad de tu nivel'}}return null}
+ for(let i=ORD.indexOf(S.level);i<ORD.length;i++){const u=unitsOf(ORD[i]).find(x=>unitPct(x)<70);if(u)return {u,why:'Siguiente unidad de tu nivel'}}return null}
 function vHoy(){
  const d=dueList(),n=nextUnit(),pr=mastery();const THM=hoyThemed({d,n,pr});
  let h=THM?THM.hero:`<div class="hero">${ring(pr,92,9)}<div><h2>Plan de hoy</h2><div class="mut">Unos 20–30 minutos · ${pr}% del temario dominado</div></div></div>`;
