@@ -1,11 +1,10 @@
 {
- "versionCode": 19,
- "versionName": "2.1.0",
+ "versionCode": 20,
+ "versionName": "2.1.1",
  "apk": "Ascenso.apk",
- "size": 30167185,
- "sha256": "6d94ec0221ba0dc0cadf881b879ce10b59a3d2d67678fe164cfa18eb96cdc0bd",
+ "size": 30167250,
+ "sha256": "eab5a69fed81bd612b4d43466b37e2aa7be9035980dc65acba603c183098176a",
  "notes": [
-  "Clases más intuitivas: barra de fases (palabras, explicación, ejemplo, pruébalo, práctica), progreso por paso y mini ejercicio guiado antes de la práctica",
-  "explicación de does/do más clara"
+  "Arreglada la lista de exámenes reales (texto aplastado) y el icono suelto en el menú"
  ]
 }

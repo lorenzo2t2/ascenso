@@ -181,6 +181,8 @@
 :root[data-skin="aurora"] .hero{background:rgba(255,255,255,.16);color:#f1f6ff;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(14px)}
 :root[data-skin="liquido"] .hero{background:rgba(255,255,255,.6);color:#1b1530;border:1.5px solid #fff}
 /* menús */
+.nav .fabbtn{display:none!important}
+.rtile{flex-wrap:wrap}.rtile .t{flex:1 1 150px;min-width:0}.rtile .acts{display:flex;gap:8px;width:100%;justify-content:flex-end}.rtile .acts .btn{flex:1;justify-content:center}
 .fabbtn,:root[data-skin="aurora"] .fabbtn,:root[data-nav="dockr"] .fabbtn,:root[data-nav="dock"] .fabbtn{display:none}
 :root[data-nav="dockr"] body{padding-right:72px;padding-bottom:calc(96px + env(safe-area-inset-bottom))}
 :root[data-nav="dockr"] .nav{left:auto;right:10px;top:50%;bottom:auto;transform:translateY(-50%);width:54px;padding:8px 4px;border-radius:24px;border:1px solid rgba(255,70,180,.55);box-shadow:0 0 20px rgba(255,70,180,.3);background:rgba(8,6,24,.85)}
@@ -645,7 +647,7 @@ function vReal(){tab='practicar';renderNav();if(rIv){clearInterval(rIv);rIv=null
  show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('practicar')" aria-label="Volver">${ic('left')}</button><h2>Exámenes reales</h2></div>
  <div class="card"><p>Cambridge publica gratis <b>exámenes de muestra oficiales</b> de cada nivel, con claves de respuestas y transcripciones de los audios. No se pueden incluir dentro de la app por derechos de autor, pero aquí puedes <b>abrirlos, hacerlos con cronómetro y corregirlos</b> automáticamente.</p>
  <ol class="mut"><li>Abre el material oficial de tu nivel y descarga una prueba (papel y audio).</li><li>Pulsa «Hoja de respuestas», inicia el cronómetro y haz la prueba.</li><li>Escribe tus respuestas en la hoja y pega la clave oficial: la app corrige y guarda el resultado.</li></ol></div>
- <div class="card">${ORD.map(L=>`<div class="tile" style="--c:var(--${L.toLowerCase()})"><div class="ico">${ic('file')}</div><div class="t"><b>${OFI[L].x}</b><span class="mut">Exámenes de muestra, claves y audios</span></div><a class="btn sm" href="${OFI[L].u}" target="_blank" rel="noopener">${ic('ext')} Abrir</a><button class="btn sm pri" onclick="vSheet('${L}')">Hoja</button></div>`).join('')}</div>
+ <div class="card">${ORD.map(L=>`<div class="tile rtile" style="--c:var(--${L.toLowerCase()})"><div class="ico">${ic('file')}</div><div class="t"><b>${OFI[L].x}</b><span class="mut">Exámenes de muestra, claves y audios</span></div><div class="acts"><a class="btn sm" href="${OFI[L].u}" target="_blank" rel="noopener">${ic('ext')} Abrir</a><button class="btn sm pri" onclick="vSheet('${L}')">Hoja de respuestas</button></div></div>`).join('')}</div>
  ${past.length?`<div class="card"><h3>Tus últimos exámenes reales</h3><table class="t">${past.map(r=>`<tr><td class="mut">${r.d}</td><td>${esc(r.L)} · ${esc(r.paper)}</td><td style="text-align:right">${r.ok}/${r.n} (${Math.round(100*r.ok/r.n)}%)</td></tr>`).join('')}</table></div>`:''}
  <p class="mut sm">Las puntuaciones de práctica no equivalen a una nota oficial. Cambridge ofrece una tabla para convertirlas en su página de preparación.</p>`)}
 function vSheet(L){rS={L,paper:rS.paper,n:rS.n||30,t0:null,ans:{}};drawSheet()}
