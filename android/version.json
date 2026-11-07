@@ -1,9 +1,9 @@
 {
- "versionCode": 17,
+ "versionCode": 18,
  "versionName": "2.0.5",
  "apk": "Ascenso.apk",
- "size": 30166544,
- "sha256": "4466a15d60545a942b48e785c68597fc1a016be01903c80d9de693cd4ff2472f",
+ "size": 30166511,
+ "sha256": "a5403273c15eb28cb36fe73ed9ce2776b29be9e071fa8010700b8cce4805570c",
  "notes": [
   "Explicación más clara de does/do en negativas"
  ]
