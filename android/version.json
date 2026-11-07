@@ -1,10 +1,10 @@
 {
- "versionCode": 7,
- "versionName": "1.6.0",
+ "versionCode": 8,
+ "versionName": "1.7.0",
  "apk": "Ascenso.apk",
- "size": 1001828,
- "sha256": "c800d016822d66b84979eaaa5b842774d93c35c940e525b79aeb721d9b530eb1",
+ "size": 1005747,
+ "sha256": "06c29da41c30362e0292f0be5997414d5e6f3edf729659ba303842bc89aba46c",
  "notes": [
-  "Más lecturas y escuchas largas en B1, B2, C1 y C2"
+  "Antes de cada lección se enseñan las palabras nuevas con su significado y audio"
  ]
 }

@@ -127,6 +127,7 @@ label.chk{display:flex;gap:10px;align-items:flex-start;margin:10px 0;cursor:poin
 <script src="contenido-voc.js"></script>
 <script src="contenido-lect.js"></script>
 <script src="contenido-lect2.js"></script>
+<script src="contenido-pre.js"></script>
 <script>
 /* ================= ESTADO Y AJUSTES ================= */
 const KEY='ascenso-v2';
@@ -191,8 +192,13 @@ function vLearn(){const L=lvSel||S.level,us=unitsOf(L);
 function teach(id){const u=U.find(x=>x.id===id);tab='aprender';renderNav();document.body.classList.remove('focus');
  show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('aprender')" aria-label="Volver">${ic('left')}</button><span class="lv ${u.l}">${u.l}</span></div>
  <div class="card teach"><h2 style="margin-bottom:6px">${esc(u.t)}</h2>${u.teach}<p class="mut sm">${ic('vol')} Toca un ejemplo en cursiva para oírlo.</p></div>
- <div class="actionbar"><div><button class="btn pri block" onclick="lesson('${u.id}')">Empezar práctica · ${u.q.length} ejercicios</button></div></div>`)}
+ <div class="actionbar"><div><button class="btn pri block" onclick="preWords('${u.id}')">Empezar práctica · ${u.q.length} ejercicios</button></div></div>`)}
 document.addEventListener('click',e=>{const x=e.target.closest&&e.target.closest('.ex');if(x)speak(x.textContent)});
+function preWords(id){const u=U.find(x=>x.id===id),ws=PRE[id];if(!ws||!ws.length)return lesson(id);
+ show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="teach('${id}')" aria-label="Volver">${ic('left')}</button><span class="lv ${u.l}">${u.l}</span></div>
+ <div class="card"><h2>Palabras nuevas de esta lección</h2><p class="mut">Aprende estas palabras antes de empezar: aparecerán en los ejercicios. Toca el altavoz para oír la pronunciación.</p>
+ ${ws.map((w,i)=>`<button class="tile" onclick="speak(PRE['${id}'][${i}][0])"><div class="ico">${ic('vol')}</div><div class="t"><b>${esc(w[0])}</b><span class="mut">${esc(w[1])}</span></div></button>`).join('')}</div>
+ <div class="actionbar"><div><button class="btn pri block" onclick="lesson('${id}')">Entendido, empezar los ejercicios</button></div></div>`)}
 function lesson(id){const u=U.find(x=>x.id===id);startRun(u.q.map((q,i)=>({u,q,i})),u.t,{unit:u})}
 
 /* ================= EXAMEN FINAL DE NIVEL ================= */
