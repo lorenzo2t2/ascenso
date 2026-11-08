@@ -159,6 +159,22 @@
 
 .steps{display:flex;gap:4px;margin-bottom:12px}.steps span{flex:1;text-align:center;font-size:.68rem;padding:6px 2px;border-radius:99px;background:var(--surf2);color:var(--mut);white-space:nowrap}.steps .on{background:var(--pri);color:var(--pri-ink);font-weight:800}.steps .ok{color:var(--ok);font-weight:700}
 .exl{display:flex;flex-direction:column;gap:8px;margin:10px 0}.exi{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:var(--rb);background:var(--surf2);border-left:3px solid var(--pri)}.exi .ex{font-size:1.05rem}
+.parts{display:flex;flex-direction:column;gap:0;margin:12px 0 4px;position:relative}
+.pt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;color:inherit;padding:8px 0;font:inherit;cursor:pointer;position:relative}
+.pt .pd{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--surf2);color:var(--mut);border:2px solid var(--line,rgba(127,127,127,.25));position:relative;z-index:1}
+.pt:not(:last-child)::after{content:"";position:absolute;left:19px;top:44px;bottom:-8px;width:2px;background:var(--line,rgba(127,127,127,.25))}
+.pt.ok .pd{background:var(--ok);color:#fff;border-color:var(--ok)}.pt.ok:not(:last-child)::after{background:var(--ok)}
+.pt.now .pd{background:var(--pri);color:var(--pri-ink);border-color:var(--pri);box-shadow:0 0 0 5px color-mix(in srgb,var(--pri) 25%,transparent)}
+.pt .t{flex:1;min-width:0}.pt .t b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pt .t span{font-size:.8rem;color:var(--mut)}
+.pt.now .t b{color:var(--pri)}
+.dots{display:flex;gap:5px;justify-content:center;margin:2px 0 12px}.dots i{width:8px;height:8px;border-radius:50%;background:var(--surf2);border:1px solid var(--line,rgba(127,127,127,.3))}.dots i.on{background:var(--pri);border-color:var(--pri);width:22px;border-radius:99px}.dots i.ok{background:var(--ok);border-color:var(--ok)}
+.chuleta summary{cursor:pointer;font-weight:700;padding:2px 0}.chuleta[open] summary{margin-bottom:8px}
+.cele{text-align:center}.cele .big{font-size:3.2rem;line-height:1;margin:4px 0 6px;animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+.stars{font-size:1.9rem;letter-spacing:4px;margin:4px 0}.stars .off{opacity:.2;filter:grayscale(1)}
+@keyframes pop{0%{transform:scale(.2);opacity:0}100%{transform:scale(1);opacity:1}}
+.confeti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:200}.confeti i{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;animation:caer 1.9s ease-in forwards}
+@keyframes caer{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(105vh) rotate(720deg);opacity:.6}}
+.racha{display:inline-block;margin-top:6px;padding:3px 10px;border-radius:99px;background:color-mix(in srgb,var(--ok) 18%,transparent);font-weight:800;animation:pop .4s}
 .try .opt{width:100%;text-align:left}.hintbox{margin:10px 0;padding:10px 12px;border-radius:var(--rb);background:var(--surf2);border:1px dashed var(--pri)}
 /* ===== Tokio de noche, Aurora boreal y Cristal líquido ===== */
 :root[data-skin="tokio"]{--bg:#05061a;--surf:#0c0a22;--surf2:#1a1238;--ink:#f4f2ff;--mut:#b4b6dc;--line:rgba(255,70,180,.5);--sh:0 0 16px rgba(255,70,180,.18);--pri:#3cf0ff;--pri-ink:#03141c;--ok:#4ae89a;--bad:#ff7a9a;--b1:#4ae89a;--b2:#3cf0ff;--c1:#c9a4ff;--c2:#ff9ad0;--r:18px;--rb:12px;--rb2:12px;--rh:20px;--ff:"Yu Gothic UI","Meiryo","Segoe UI",sans-serif;color-scheme:dark}
@@ -344,7 +360,7 @@ label.chk{display:flex;gap:10px;align-items:flex-start;margin:10px 0;cursor:poin
 const KEY='ascenso-v2';
 let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
 S=S||{};
-Object.assign(S,{level:S.level||'B1',placed:!!S.placed,done:S.done||{},cards:S.cards||{},stats:S.stats||{},hist:S.hist||[],real:S.real||[]});
+Object.assign(S,{level:S.level||'B1',placed:!!S.placed,done:S.done||{},part:S.part||{},cards:S.cards||{},stats:S.stats||{},hist:S.hist||[],real:S.real||[]});
 S.passed=S.passed||{};
 S.set=Object.assign({theme:'auto',accent:'ocean',font:1,rate:.9,voice:'',skin:'clasico'},S.set||{});
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
@@ -365,7 +381,8 @@ function dueList(){const t=today(),o=[];U.filter(inLvl).forEach(u=>u.q.forEach((
 function errList(){const o=[];U.filter(inLvl).forEach(u=>u.q.forEach((q,i)=>{const c=S.cards[qid(u,i)];if(c&&c.b===0)o.push({u,q,i})}));return o}
 function stat(cat,ok){const s=S.stats[cat]||{ok:0,n:0};s.n++;if(ok)s.ok++;S.stats[cat]=s}
 function weak(){return Object.entries(S.stats).filter(([c,s])=>s.n>=3&&s.ok/s.n<.7&&U.some(u=>u.t===c&&inLvl(u))).sort((a,b)=>a[1].ok/a[1].n-b[1].ok/b[1].n).map(([c,s])=>({c,p:Math.round(100*s.ok/s.n)}))}
-const unitPct=u=>{const d=S.done[u.id];return d?Math.min(100,Math.round(100*d.best/u.q.length)):0};
+const partOk=u=>{const p=S.part&&S.part[u.id];return p&&p.q?Object.values(p.q).reduce((a,b)=>a+b,0):0};
+const unitPct=u=>{const d=S.done[u.id],b=Math.max(d?d.best:0,partOk(u));return b?Math.min(100,Math.round(100*b/u.q.length)):0};
 const unitsOf=L=>U.filter(u=>u.l===L);
 const mastery=L=>{const us=L?unitsOf(L):U;return us.length?Math.round(100*us.filter(u=>unitPct(u)>=70).length/us.length):0};
 function ring(p,size,sw,label){const r=(size-sw)/2,c=2*Math.PI*r;return `<svg class="ring" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" role="img" aria-label="${p}%"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="currentColor" stroke-opacity=".2" stroke-width="${sw}"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-dasharray="${c*p/100} ${c}" transform="rotate(-90 ${size/2} ${size/2})"/><text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" fill="currentColor" font-size="${size*.26}" font-weight="800">${label===undefined?p+'%':label}</text></svg>`}
@@ -377,8 +394,9 @@ function renderNav(){setTimeout(updBar,0);{const tb=document.querySelector('.top
  $('#nav').classList.remove('open');$('#nav').innerHTML='<button class="fabbtn" onclick="$(\'#nav\').classList.toggle(\'open\')" aria-label="Menú">'+ic('steps')+'</button><div>'+t.map(([k,i,l])=>`<button class="${tab===k?'on':''}" onclick="go('${k}')" aria-label="${l}">${ic(i)}${l}${k==='practicar'&&d?`<span class="badge">${d>99?'99+':d}</span>`:''}</button>`).join('')+'</div>';
  $('#lvchip').innerHTML=`<span class="lv ${S.level}">${S.level}</span> nivel`}
 let curHome=false;
-window.__back=function(){if(run){quitRun();return true}if(!curHome){go('hoy');return true}return false};
-function show(html){curHome=false;const v=$('#view');v.className='';v.innerHTML=html;void v.offsetWidth;v.className='view';window.scrollTo(0,0)}
+let backFn=null;
+window.__back=function(){if(run){quitRun();return true}if(backFn){const f=backFn;backFn=null;f();return true}if(!curHome){go('hoy');return true}return false};
+function show(html){curHome=false;backFn=null;const v=$('#view');v.className='';v.innerHTML=html;void v.offsetWidth;v.className='view';window.scrollTo(0,0)}
 function go(t,s){if(run&&run.iv)clearInterval(run.iv);if(rIv){clearInterval(rIv);rIv=null}run=null;document.body.classList.remove('focus');tab=t;sub=s||null;renderNav();({hoy:vHoy,aprender:vLearn,practicar:vPractice,progreso:vStats,ajustes:vSettings})[t](s)}
 /* ================= HOY ================= */
 function nextUnit(){const w=weak();if(w.length){const u=U.find(x=>x.t===w[0].c);if(u)return {u,why:'Es tu punto más débil ('+w[0].p+'% de aciertos)'}}
@@ -444,57 +462,86 @@ function vLearn(){const L=lvSel||S.level,us=unitsOf(L);
  show(`<div class="seg">${ORD.map(x=>`<button class="${x===L?'on':''}" onclick="lvSel='${x}';vLearn()">${x}</button>`).join('')}</div>
  <div class="card"><div class="row"><div class="t"><h2>${LV[L].n}</h2><div class="mut">${LV[L].d}</div></div><span class="sp"></span><div style="color:var(--${L.toLowerCase()})">${ring(mastery(L),56,6)}</div></div>
  ${finalCard(L,us)}<div style="margin-top:8px">${unitList(us,L)||us.map(u=>{const p=unitPct(u);return `<button class="tile" onclick="teach('${u.id}')" style="--c:var(--${L.toLowerCase()})"><div class="ico">${ic(unitIcon(u))}</div><div class="t"><b>${esc(u.t)}</b><div class="row" style="gap:8px"><div class="bar"><i style="width:${p}%"></i></div><span class="mut sm">${p?p+'%':u.q.length+' ejercicios'}</span></div></div>${ic('right')}</button>`}).join('')}</div></div>`)}
-function teach(id){const u=U.find(x=>x.id===id);tab='aprender';renderNav();document.body.classList.remove('focus');
- show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('aprender')" aria-label="Volver">${ic('left')}</button><span class="lv ${u.l}">${u.l}</span></div>
- <div class="card teach"><h2 style="margin-bottom:6px">${esc(u.t)}</h2>${u.teach}<p class="mut sm">${ic('vol')} Toca un ejemplo en cursiva para oírlo.</p></div>
- <div class="actionbar"><div><button class="btn pri block" onclick="clase('${u.id}')">Empezar la clase · explicación y ${u.q.length} ejercicios</button></div></div>`)}
-document.addEventListener('click',e=>{const x=e.target.closest&&e.target.closest('.ex');if(x)speak(x.textContent)});
-const STEPS=['Palabras','Explicación','Ejemplo','Pruébalo','Práctica'];
-function stepper(n,id){const skip=!(PRE[id]||[]).length;return `<div class="steps" aria-label="Fases de la clase">${STEPS.map((t,i)=>skip&&i===0?'':`<span class="${i===n?'on':i<n?'ok':''}">${i<n?'✓ ':''}${t}</span>`).join('')}</div>`}
-function preWords(id){const u=U.find(x=>x.id===id),ws=PRE[id];if(!ws||!ws.length)return lesson(id);
- show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="teach('${id}')" aria-label="Volver">${ic('left')}</button><span class="lv ${u.l}">${u.l}</span></div>${stepper(0,id)}
- <div class="card"><h2>Palabras nuevas de esta lección</h2><p class="mut">Aprende estas palabras antes de empezar: aparecerán en los ejercicios. Toca el altavoz para oír la pronunciación.</p>
- ${ws.map((w,i)=>`<button class="tile" onclick="speak(PRE['${id}'][${i}][0])"><div class="ico">${ic('vol')}</div><div class="t"><b>${esc(w[0])}</b><span class="mut">${esc(w[1])}</span></div></button>`).join('')}</div>
- <div class="actionbar"><div><button class="btn pri block" onclick="claseExp('${id}',0)">Entendido, seguimos con la explicación</button></div></div>`)}
-/* ================= CLASE GUIADA (como un profesor) ================= */
-function clase(id){const u=U.find(x=>x.id===id);tab='aprender';renderNav();document.body.classList.remove('focus');
- const nPre=(PRE[id]||[]).length;
- show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="teach('${id}')" aria-label="Volver">${ic('left')}</button><span class="lv ${u.l}">${u.l}</span></div>
- <div class="card"><h2>${esc(u.t)}</h2><p class="mut">Hoy vamos a trabajar este tema paso a paso, como en clase:</p>
- <ol><li>Primero, <b>vocabulario nuevo</b> (${nPre} palabras).</li><li>Luego, la <b>explicación</b>, poco a poco y con ejemplos.</li><li>Después, <b>un ejercicio resuelto</b> por mí, para que veas el método.</li><li>Por último, <b>tus ejercicios</b>. Si fallas, te explico el porqué.</li></ol></div>
- <div class="actionbar"><div><button class="btn pri block" onclick="${nPre?"preWords('"+id+"')":"claseExp('"+id+"',0)"}">Empezar</button></div></div>`)}
+/* ================= LECCIÓN POR PARTES ================= */
 function teachSteps(u){const d=document.createElement('div');d.innerHTML=u.teach;const out=[];
  [...d.children].forEach(el=>{if(el.tagName==='TABLE'){el.querySelectorAll('tr').forEach(tr=>out.push('<table>'+tr.outerHTML+'</table>'))}else if(el.tagName==='UL'||el.tagName==='OL'){el.querySelectorAll('li').forEach(li=>out.push('<p>'+li.innerHTML+'</p>'))}else out.push(el.outerHTML)});
  return out.filter(x=>x.replace(/<[^>]*>/g,'').trim())}
-const PROF=['Fíjate bien en esto:','Vamos con el siguiente punto:','Ahora mira este caso:','Esto es muy importante:','Y no olvides esto:'];
 function expStep(x){const [h,p,ex,oj]=x;return `<h3 style="margin-bottom:6px">${h}</h3><p>${p}</p>${ex&&ex.length?`<div class="exl">${ex.map(([e,t])=>`<div class="exi"><span class="ex">${esc(e)}</span><span class="mut sm">${esc(t)}</span></div>`).join('')}</div>`:''}${oj?`<div class="hintbox"><b>Ojo:</b> ${oj}</div>`:''}`}
-function claseSteps(u){const E=(typeof EXP!=="undefined"&&EXP||{})[u.id];if(!E)return teachSteps(u);return [...E.map(expStep),`<h3 style="margin-bottom:6px">En resumen</h3><ul>${E.map(x=>`<li>${x[0]}</li>`).join('')}</ul><p class="mut sm">Si algo no te ha quedado claro, pulsa «Atrás» para volver a ese paso.</p>`]}
-function claseExp(id,k){const u=U.find(x=>x.id===id),st=claseSteps(u);if(k>=st.length)return claseEj(id);
- const shown=st.slice(0,k+1).map((h,i)=>`<div class="card teach ${i===k?'':'past'}" style="${i===k?'':'opacity:.55'}">${i===k?`<div class="mut sm" style="margin-bottom:4px"><b>${PROF[i%PROF.length]}</b></div>`:''}${h}</div>`).join('');
- show(`<div class="row" style="margin-bottom:10px"><span class="lv ${u.l}">${u.l}</span><b>${esc(u.t)}</b><span class="sp"></span><span class="chip">${k+1}/${st.length}</span></div>${stepper(1,id)}<div class="bar" style="margin-bottom:10px;flex:none"><i style="width:${Math.round(100*(k+1)/st.length)}%"></i></div>${shown}
- <p class="mut sm">${ic('vol')} Toca un ejemplo en cursiva para oírlo.</p>
- <div class="actionbar"><div class="row" style="flex-wrap:nowrap">${k?`<button class="btn" onclick="claseExp('${id}',${k-1})">Atrás</button>`:''}<button class="btn pri" style="flex:1" onclick="claseExp('${id}',${k+1})">${k+1<st.length?'Entendido, siguiente':'Entendido, veamos un ejemplo'}</button></div></div>`);
- window.scrollTo(0,document.body.scrollHeight)}
-function claseEj(id){const u=U.find(x=>x.id===id),q=u.q.find(x=>x.k==='mc'||x.k==='gap'||x.k==='wf')||u.q[0];
- const ans=q.o?q.o[q.a]:(q.k==='ro'?q.a:q.a[0]);
- show(`<div class="row" style="margin-bottom:10px"><span class="lv ${u.l}">${u.l}</span><b>${esc(u.t)}</b></div>${stepper(2,id)}
- <div class="card"><div class="mut sm"><b>Ejemplo resuelto por el profesor</b></div>
- ${q.k==='read'?`<div class="passage">${esc(q.x)}</div>`:''}<div class="q">${esc(q.p)}</div>
- ${q.o?q.o.map((o,j)=>`<div class="opt ${j===q.a?'right':''}" style="cursor:default"><span class="k">${'ABCD'[j]}</span><span>${esc(o)}</span></div>`).join(''):''}
- <div class="fb ok"><b>${ic('check')} Respuesta: ${esc(ans)}</b><div style="margin-top:6px"><b>Por qué:</b> ${esc(q.e||'')}</div></div></div>
- <p class="mut">Fíjate en cómo se razona: primero la regla, luego la respuesta. Ahora harás tú uno parecido, con ayuda.</p>
- <div class="actionbar"><div class="row" style="flex-wrap:nowrap"><button class="btn" onclick="claseExp('${id}',0)">Repasar explicación</button><button class="btn pri" style="flex:1" onclick="claseTry('${id}')">Ahora pruébalo tú</button></div></div>`)}
-function claseTry(id,n){const u=U.find(x=>x.id===id),first=u.q.find(x=>x.k==='mc'||x.k==='gap'||x.k==='wf')||u.q[0];
- const cand=u.q.filter(x=>x.k==='mc'&&x!==first);n=n||0;const q=cand[0];if(!q)return lesson(id);
- const opts=q.o.map((o,j)=>({o,j})).sort(()=>Math.random()-.5);
- window.__try=function(j,el){const ok=j===q.a;document.querySelectorAll('.try .opt').forEach(b=>{b.disabled=true;if(+b.dataset.j===q.a)b.classList.add('right')});if(!ok)el.classList.add('wrong');
-  $('#tryfb').innerHTML=`<div class="fb ${ok?'ok':'no'}"><b>${ok?'¡Muy bien!':'Casi. La respuesta es: '+esc(q.o[q.a])}</b><div style="margin-top:6px">${esc(q.e||'')}</div></div>`;$('#trygo').style.display='';$('#hint').style.display='none'};
- show(`<div class="row" style="margin-bottom:10px"><span class="lv ${u.l}">${u.l}</span><b>${esc(u.t)}</b></div>${stepper(3,id)}
- <div class="card try"><div class="mut sm"><b>Ahora tú, con ayuda</b></div><div class="q">${esc(q.p)}</div>
- ${opts.map(x=>`<button class="opt" data-j="${x.j}" onclick="__try(${x.j},this)"><span>${esc(x.o)}</span></button>`).join('')}
- <div id="hint" class="hintbox"><b>Pista:</b> piensa en la regla que acabamos de ver. <button class="btn sm" onclick="claseExp('${id}',0)">Releer la explicación</button></div><div id="tryfb"></div></div>
- <div class="actionbar"><div><button id="trygo" style="display:none" class="btn pri block" onclick="lesson('${id}')">Muy bien, a mis ejercicios</button></div></div>`)}
-function lesson(id){const u=U.find(x=>x.id===id);startRun(u.q.map((q,i)=>({u,q,i})),u.t,{unit:u})}
+function partsOf(u){const X=(typeof EXP!=="undefined"&&EXP||{})[u.id],st=X&&X.length?X.map(expStep):teachSteps(u),tt=X&&X.length?X.map(x=>x[0].replace(/<[^>]*>/g,'')):null;
+ const nq=u.q.length,ns=Math.max(1,st.length),n=Math.max(1,Math.min(ns,nq,Math.max(2,Math.ceil(nq/3)))),P=[];
+ if((PRE[u.id]||[]).length)P.push({k:'w',t:'Palabras nuevas',sub:PRE[u.id].length+' palabras · minijuego',min:2});
+ for(let i=0;i<n;i++){const s0=Math.floor(i*ns/n),s1=Math.floor((i+1)*ns/n),q0=Math.floor(i*nq/n),q1=Math.floor((i+1)*nq/n),nqi=q1-q0;
+  const sh=X&&X.length?X.slice(s0,s1).flatMap(x=>x[2]||[]).filter(e=>e[0].split(' ').length<=12).sort((a,b)=>a[0].length-b[0].length).slice(0,2):[];
+  P.push({k:'e',t:tt?tt[s0]:'Parte '+(i+1),st:st.slice(s0,s1),sh,qi:[...Array(nqi)].map((_,j)=>q0+j),sub:`${s1-s0===1?'1 idea':(s1-s0)+' ideas'} · ${nqi} ${nqi===1?'ejercicio':'ejercicios'}`,min:Math.max(1,Math.round((s1-s0)*.8+nqi*.6))})}
+ return P}
+function partSt(id){const p=S.part[id]=S.part[id]||{};p.d=p.d||{};p.q=p.q||{};return p}
+function nextPart(id,P){const p=partSt(id);for(let i=0;i<P.length;i++)if(!p.d[i])return i;return -1}
+function teach(id){const u=U.find(x=>x.id===id);tab='aprender';renderNav();document.body.classList.remove('focus');
+ const P=partsOf(u),p=partSt(id),nx=nextPart(id,P),all=nx<0,mins=P.reduce((a,x)=>a+x.min,0),hecho=P.filter((_,i)=>p.d[i]).length;
+ show(`<div class="row" style="margin-bottom:10px"><button class="icon" onclick="go('aprender')" aria-label="Volver">${ic('left')}</button><span class="lv ${u.l}">${u.l}</span><span class="sp"></span><span class="chip">${hecho}/${P.length} partes</span></div>
+ <div class="card"><h2 style="margin-bottom:4px">${esc(u.t)}</h2><p class="mut sm">${P.length} partes cortas · unos ${mins} minutos en total. Puedes parar al terminar cualquier parte: tu avance se guarda.</p>
+ <div class="parts">${P.map((x,i)=>`<button class="pt ${p.d[i]?'ok':i===nx?'now':''}" onclick="parte('${id}',${i},0)"><span class="pd">${p.d[i]?ic('check'):i+1}</span><span class="t"><b>${esc(x.t)}</b><span>${x.sub} · ≈${x.min} min</span></span>${i===nx?ic('right'):''}</button>`).join('')}</div></div>
+ <details class="card chuleta"><summary>Chuleta: el tema en un vistazo</summary>${u.teach}<p class="mut sm">${ic('vol')} Toca un ejemplo en cursiva para oírlo.</p></details>
+ <div class="actionbar"><div><button class="btn pri block" onclick="${all?`delete S.part['${id}'];save();parte('${id}',0,0)`:`parte('${id}',${nx},0)`}">${all?'Repetir la lección desde el principio':nx===0?'Empezar · Parte 1 de '+P.length:'Continuar · Parte '+(nx+1)+' de '+P.length}</button></div></div>`)}
+document.addEventListener('click',e=>{const x=e.target.closest&&e.target.closest('.ex');if(x)speak(x.textContent)});
+const clase=teach;
+const PROF=['Fíjate bien en esto:','Vamos con esto:','Mira este caso:','Esto es importante:','Y ahora esto:'];
+function parteHead(u,k,P){return `<div class="row" style="margin-bottom:6px"><button class="icon" onclick="teach('${u.id}')" aria-label="Volver al mapa de la lección">${ic('left')}</button><span class="lv ${u.l}">${u.l}</span><b style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1">${esc(u.t)}</b><span class="chip">Parte ${k+1}/${P.length}</span></div>`}
+function parte(id,k,s){const u=U.find(x=>x.id===id),P=partsOf(u),x=P[k];if(!x)return teach(id);tab='aprender';renderNav();document.body.classList.remove('focus');
+ if(x.k==='w'){const ws=PRE[id];
+  show(`${parteHead(u,k,P)}<div class="card"><h2>Palabras nuevas</h2><p class="mut">Saldrán en la lección. Tócalas para oírlas y, cuando las tengas, juega a emparejarlas.</p>
+  ${ws.map((w,i)=>`<button class="tile" onclick="speak(PRE['${id}'][${i}][0])"><div class="ico">${ic('vol')}</div><div class="t"><b>${esc(w[0])}</b><span class="mut">${esc(w[1])}</span></div></button>`).join('')}</div>
+  <div class="actionbar"><div><button class="btn pri block" onclick="wordGame('${id}',${k})">¡Ya me las sé, a jugar!</button></div></div>`);backFn=()=>teach(id);return}
+ if(s===x.st.length&&x.sh.length){
+  show(`${parteHead(u,k,P)}<div class="mut sm" style="text-align:center;margin-bottom:4px">${esc(x.t)}</div><div class="dots">${x.st.map(()=>`<i class="ok"></i>`).join('')}<i class="on"></i></div>
+  <div class="card"><h3>Ahora dilo tú en voz alta</h3><p class="mut">Escucha cada frase y repítela imitando el ritmo y la entonación, como un eco. Hazlo dos veces: decirlo en voz alta ayuda a recordarlo y a pronunciar mejor.</p>
+  ${x.sh.map((e,i)=>`<div class="exi" style="margin-top:8px"><span class="ex">${esc(e[0])}</span><span class="mut sm">${esc(e[1])}</span><div class="row" style="margin-top:6px"><button class="btn sm" onclick="speak(partsOf(U.find(z=>z.id==='${id}'))[${k}].sh[${i}][0])">${ic('vol')} Escuchar</button><button class="btn sm" onclick="speak(partsOf(U.find(z=>z.id==='${id}'))[${k}].sh[${i}][0],.6)">Más lento</button></div></div>`).join('')}</div>
+  <div class="actionbar"><div class="row" style="flex-wrap:nowrap"><button class="btn" onclick="parte('${id}',${k},${s-1})">Atrás</button><button class="btn pri" style="flex:1" onclick="parte('${id}',${k},${s+1})">Lo he dicho · A practicar (${x.qi.length})</button></div></div>`);
+  setTimeout(()=>speak(x.sh[0][0]),400);backFn=()=>parte(id,k,s-1);return}
+ if(s>=x.st.length)return partRun(id,k);
+ show(`${parteHead(u,k,P)}<div class="mut sm" style="text-align:center;margin-bottom:4px">${esc(x.t)}</div><div class="dots">${x.st.map((_,i)=>`<i class="${i===s?'on':i<s?'ok':''}"></i>`).join('')}${x.sh.length?'<i></i>':''}${x.qi.length?`<i title="Ejercicios"></i>`:''}</div>
+ <div class="card teach"><div class="mut sm" style="margin-bottom:4px"><b>${PROF[(k+s)%PROF.length]}</b></div>${x.st[s]}<p class="mut sm" style="margin-top:8px">${ic('vol')} Toca un ejemplo en cursiva para oírlo.</p></div>
+ <div class="actionbar"><div class="row" style="flex-wrap:nowrap">${s?`<button class="btn" onclick="parte('${id}',${k},${s-1})">Atrás</button>`:''}<button class="btn pri" style="flex:1" onclick="parte('${id}',${k},${s+1})">${s+1<x.st.length?'Entendido, sigue':x.sh.length?'Entendido, ahora a decirlo':'¡Entendido! A practicar ('+x.qi.length+')'}</button></div></div>`);
+ backFn=s?()=>parte(id,k,s-1):()=>teach(id)}
+function partRun(id,k){const u=U.find(x=>x.id===id),P=partsOf(u),x=P[k];if(!x.qi.length)return partEnd({opt:{unit:u,part:k},log:[],miss:[]},0,0,100);
+ const warm=[],fe=P.findIndex(z=>z.k==='e');
+ if(k===fe){const t=today(),otros=U.filter(z=>z.id!==id&&inLvl(z)&&(S.done[z.id]||partOk(z))).flatMap(z=>z.q.map((q,i)=>({u:z,q,i}))).filter(o=>o.q.k!=='lis'&&o.q.k!=='dic');
+  const due=otros.filter(o=>{const c=S.cards[qid(o.u,o.i)];return c&&c.due<=t}).sort(()=>Math.random()-.5),resto=otros.sort(()=>Math.random()-.5);
+  [...due,...resto].forEach(o=>{if(warm.length<2&&!warm.some(w=>w.u===o.u&&w.i===o.i))warm.push({...o,rep:'Repaso de otra lección'})})}
+ else if(k>fe&&P[k-1].k==='e'&&P[k-1].qi.length){const i=P[k-1].qi[Math.floor(Math.random()*P[k-1].qi.length)];warm.push({u,q:u.q[i],i,rep:'Recuerda la parte anterior'})}
+ startRun([...warm,...x.qi.map(i=>({u,q:u.q[i],i}))],u.t+' · parte '+(k+1),{unit:u,part:k})}
+function wordGame(id,k){const u=U.find(x=>x.id===id),ws=PRE[id];
+ const items=ws.map((w,i)=>{const otros=ws.filter((_,j)=>j!==i).sort(()=>Math.random()-.5).slice(0,2).map(o=>o[1]),o=[w[1],...otros];
+  return {u,i,syn:true,q:{k:'mc',p:'¿Qué significa «'+w[0]+'»?',o,a:0,e:w[0]+' = '+w[1]}}}).sort(()=>Math.random()-.5);
+ startRun(items,'Palabras · '+u.t,{unit:u,part:k,words:true})}
+function lesson(id){teach(id)}
+const ANIMO=['¡Genial!','¡Así se hace!','¡Bien hecho!','¡Vas como un cohete!','¡Muy bien!','¡Imparable!'];
+function confeti(){try{if(matchMedia('(prefers-reduced-motion: reduce)').matches)return}catch(e){}
+ const c=document.createElement('div');c.className='confeti';const col=['#f6c445','#4cc9f0','#f72585','#80ed99','#ff8c42','#b388ff'];
+ for(let i=0;i<36;i++){const e=document.createElement('i');e.style.left=Math.random()*100+'%';e.style.background=col[i%col.length];e.style.animationDelay=(Math.random()*.5)+'s';e.style.animationDuration=(1.4+Math.random())+'s';c.appendChild(e)}
+ document.body.appendChild(c);setTimeout(()=>c.remove(),3200)}
+function partEnd(r,ok,n,pct){if(r.log.length){ok=r.log.filter(x=>x.ok&&!x.rep).length;n=r.log.filter(x=>!x.rep).length;pct=n?Math.round(100*ok/n):100}const u=r.opt.unit,id=u.id,k=r.opt.part,P=partsOf(u),p=partSt(id);
+ p.d[k]=1;if(!r.opt.words)p.q[k]=Math.max(p.q[k]||0,ok);
+ if(n&&!r.opt.words)S.hist.push({d:today(),t:r.title,pct,n});
+ const nx=nextPart(id,P),fin=nx<0;let tot=0;
+ if(fin){tot=P.reduce((a,_,i)=>a+(p.q[i]||0),0);const d=S.done[id]||{best:0};d.best=Math.max(d.best,tot);S.done[id]=d}
+ save();renderNav();run=null;
+ const est=pct>=90?3:pct>=60?2:1,X=(typeof EXP!=="undefined"&&EXP||{})[id];
+ const fallos=r.miss.length?`<div class="card"><h3>Repasa esto</h3>${r.miss.map(m=>`<div class="fb no"><div>${esc(m.p)}</div><b>${esc(m.ans)}</b><div class="mut sm">${esc(m.e||'')}</div></div>`).join('')}</div>`:'';
+ if(fin){const tp=Math.round(100*tot/u.q.length),nu=nextUnit();
+  show(`<div class="card cele"><div class="big">🏆</div><h2>¡Lección completada!</h2><p class="mut">${esc(u.t)} · ${tot} de ${u.q.length} ejercicios bien a la primera (${tp}%)</p>
+  ${X?`<div style="text-align:left;margin-top:10px"><b>Lo que has aprendido:</b><ul>${X.map(x=>`<li>${x[0]}</li>`).join('')}</ul></div>`:''}
+  <p class="mut sm">${tp>=90?'Lo dominas. ¡A por la siguiente!':tp>=70?'Bien aprendido. Repasaremos los fallos dentro de unos días.':'Buen primer intento. Vuelve a hacer las partes que más te costaron: es normal necesitar dos vueltas.'}</p></div>${fallos}
+  <div class="actionbar"><div class="row" style="flex-wrap:nowrap"><button class="btn" onclick="teach('${id}')">Ver la lección</button>${nu&&nu.u.id!==id?`<button class="btn pri" style="flex:1" onclick="teach('${nu.u.id}')">Siguiente: ${esc(nu.u.t)}</button>`:`<button class="btn pri" style="flex:1" onclick="go('hoy')">Volver a Hoy</button>`}</div></div>`);
+  confeti();backFn=()=>go('aprender');return}
+ const q=P[nx];
+ show(`<div class="card cele"><div class="big">${r.opt.words?'🧠':est===3?'🎉':est===2?'👏':'💪'}</div><h2>${r.opt.words?'¡Palabras aprendidas!':ANIMO[Math.floor(Math.random()*ANIMO.length)]}</h2>
+ ${n?`<div class="stars" aria-label="${est} de 3 estrellas">${[1,2,3].map(i=>`<span class="${i<=est?'':'off'}">⭐</span>`).join('')}</div><p class="mut">${ok} de ${n} a la primera</p>`:''}
+ <p><b>Parte ${k+1} de ${P.length} terminada.</b></p>
+ <div class="parts" style="text-align:left">${P.map((x,i)=>`<div class="pt ${p.d[i]?'ok':i===nx?'now':''}" style="cursor:default"><span class="pd">${p.d[i]?ic('check'):i+1}</span><span class="t"><b>${esc(x.t)}</b><span>${x.sub}</span></span></div>`).join('')}</div></div>${fallos}
+ <p class="mut sm" style="text-align:center">Si quieres, para aquí: lo tienes guardado y luego sigues por la parte ${nx+1}.</p>
+ <div class="actionbar"><div class="row" style="flex-wrap:nowrap"><button class="btn" onclick="go('aprender')">Lo dejo aquí</button><button class="btn pri" style="flex:1" onclick="parte('${id}',${nx},0)">Seguir · Parte ${nx+1}</button></div></div>`);
+ if(est===3||r.opt.words)confeti();backFn=()=>teach(id)}
 
 /* ================= EXAMEN FINAL DE NIVEL ================= */
 const PASS=70;
@@ -553,12 +600,12 @@ function shufQ(q){if(!q.o)return q;const idx=q.o.map((_,i)=>i).sort(()=>Math.ran
 function startRun(items,title,opt){if(!items.length)return;run={items:items.map(x=>({...x,q:shufQ(x.q)})),title,opt:opt||{},n:0,log:[],miss:[],done:false,ans:null,bi:[]};
  if(run.opt.timer){run.t0=Date.now();run.iv=setInterval(tick,1000)}ex()}
 function tick(){if(!run||!run.opt.timer)return;const left=run.opt.timer-Math.floor((Date.now()-run.t0)/1000);const el=$('#clock');if(el)el.innerHTML=ic('clock')+' '+fmt(left);if(left<=0)finish()}
-function quitRun(){if(!run||confirm('¿Salir de la sesión? Se pierde el progreso de esta tanda.'))go(tab)}
+function quitRun(){if(!run)return go(tab);const pu=run.opt.part!==undefined&&run.opt.unit;if(confirm(pu?'¿Salir de esta parte? Las partes que ya terminaste siguen guardadas.':'¿Salir de la sesión? Se pierde el progreso de esta tanda.')){if(run.iv)clearInterval(run.iv);run=null;document.body.classList.remove('focus');pu?teach(pu.id):go(tab)}}
 function ex(){
  if(run.n>=run.items.length)return finish();
  const it=run.items[run.n],{u,q}=it;run.ans=null;run.bi=[];run.done=false;document.body.classList.add('focus');
  let h=`<div class="run"><button class="icon" onclick="quitRun()" aria-label="Salir">${ic('x')}</button><div class="bar"><i style="width:${100*run.n/run.items.length}%"></i></div>${run.opt.timer?`<span class="chip" id="clock">${ic('clock')} ${fmt(run.opt.timer)}</span>`:`<span class="chip">${run.n+1}/${run.items.length}</span>`}</div>
- <div class="card"><div class="row"><span class="lv ${u.l}">${u.l}</span><span class="mut sm">${TYPE[q.k]||''}${it.retry?' · repetición del fallo':''}</span></div><div class="how">${ic('alert')}<span><b>Qué hacer:</b> ${HOW[q.k]||''}</span></div>`;
+ <div class="card"><div class="row"><span class="lv ${u.l}">${u.l}</span><span class="mut sm">${it.rep?`<b>${it.rep}</b> · `:''}${TYPE[q.k]||''}${it.retry?' · repetición del fallo':''}</span></div><div class="how">${ic('alert')}<span><b>Qué hacer:</b> ${HOW[q.k]||''}</span></div>`;
  if(q.k==='read')h+=`<div class="passage">${esc(q.x)}</div>`;
  if(q.k==='lis'||q.k==='dic')h+=`<div class="row" style="margin-top:10px"><button class="btn pri" onclick="speak(run.items[run.n].q.s)">${ic('vol')} Escuchar</button><button class="btn" onclick="speak(run.items[run.n].q.s,.6)">Más lento</button></div>`;
  h+=`<div class="q">${esc(q.p)}</div>`;
@@ -579,11 +626,12 @@ function check(){
  else if(q.k==='ro'){if(!run.bi.length)return;given=run.bi.map(j=>run.bank[j]).join(' ');ok=norm(given)===norm(q.a)}
  else{const v=$('#inp').value;if(!v.trim())return;given=v;ok=q.k==='dic'?q.a.some(a=>nd(a)===nd(v)):q.a.some(a=>norm(a)===norm(v))}
  const ans=q.o?q.o[q.a]:(q.k==='ro'?q.a:q.a[0]);
- if(!it.retry){run.log.push({u,ok});review(qid(u,i),ok);stat(u.t,ok);if(!ok){run.miss.push({p:q.p,ans,e:q.e});if(!run.opt.exam)run.items.push({...it,retry:true})}}
+ if(!it.retry)run.streak=ok?(run.streak||0)+1:0;
+ if(!it.retry){run.log.push({u,ok,rep:!!it.rep});if(!it.syn){review(qid(u,i),ok);stat(u.t,ok)}if(!ok){run.miss.push({p:q.p,ans,e:q.e});if(!run.opt.exam)run.items.push({...it,retry:true})}}
  run.done=true;
  if(run.opt.exam){next();return}
  if(q.o)document.querySelectorAll('.opt').forEach((b,k)=>{b.disabled=true;if(k===q.a)b.classList.add('right');else if(k===run.ans)b.classList.add('wrong')});
- $('#fb').innerHTML=`<div class="fb ${ok?'ok':'no'}"><b>${ic(ok?'check':'x')} ${ok?'¡Correcto!':'Incorrecto. Respuesta correcta: '+esc(ans)}</b>${!ok&&(q.k!=='mc'&&q.k!=='lis'&&q.k!=='read')?`<div class="mut sm">Tú escribiste: ${esc(given)}</div>`:''}${!ok&&q.o?`<div class="mut sm">Tú elegiste: ${esc(q.o[run.ans])}</div>`:''}<div style="margin-top:6px"><b>Explicación:</b> ${esc(q.e||'')}</div>${q.s&&q.k!=='dic'?`<div class="mut sm" style="margin-top:6px">Transcripción del audio: ${esc(q.s)}</div>`:''}${ok||it.retry?'':'<div class="mut sm" style="margin-top:6px">Volverá a salir al final de la sesión.</div>'}</div>`;
+ $('#fb').innerHTML=`<div class="fb ${ok?'ok':'no'}"><b>${ic(ok?'check':'x')} ${ok?'¡Correcto!':'Incorrecto. Respuesta correcta: '+esc(ans)}</b>${ok&&run.streak>=3&&!it.retry?`<div><span class="racha">🔥 ¡${run.streak} seguidas!</span></div>`:''}${!ok&&(q.k!=='mc'&&q.k!=='lis'&&q.k!=='read')?`<div class="mut sm">Tú escribiste: ${esc(given)}</div>`:''}${!ok&&q.o?`<div class="mut sm">Tú elegiste: ${esc(q.o[run.ans])}</div>`:''}<div style="margin-top:6px"><b>Explicación:</b> ${esc(q.e||'')}</div>${q.s&&q.k!=='dic'?`<div class="mut sm" style="margin-top:6px">Transcripción del audio: ${esc(q.s)}</div>`:''}${ok||it.retry?'':'<div class="mut sm" style="margin-top:6px">Volverá a salir al final de la sesión.</div>'}</div>`;
  $('#chk').textContent='Continuar';save();window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})}
 function next(){run.n++;ex()}
 document.addEventListener('keydown',e=>{if(!run)return;const t=e.target.tagName;if(t==='INPUT'||t==='TEXTAREA')return;
@@ -594,6 +642,7 @@ function finish(){
  document.body.classList.remove('focus');
  if(r.opt.placement)return placementEnd();
  if(r.opt.final)return finalEnd(r,ok,n,pct);
+ if(r.opt.part!==undefined&&r.opt.unit)return partEnd(r,ok,n,pct);
  if(r.opt.unit){const d=S.done[r.opt.unit.id]||{best:0};d.best=Math.max(d.best,ok);S.done[r.opt.unit.id]=d}
  S.hist.push({d:today(),t:r.title,pct,n});save();renderNav();
  const by={};r.log.forEach(x=>{by[x.u.t]=by[x.u.t]||[0,0];by[x.u.t][1]++;if(x.ok)by[x.u.t][0]++});
@@ -744,6 +793,14 @@ function vStats(){
  show(`<div class="hero">${ring(mastery(),92,9)}<div><h2>Tu progreso</h2><div class="mut">${tot?Math.round(100*okk/tot)+'% de aciertos en '+tot+' respuestas':'Aún no hay datos'}</div></div></div>
  ${weekCard()}<div class="card"><h3>Temario dominado por nivel</h3><table class="t">${ORD.map(L=>`<tr><td><span class="lv ${L}">${L}</span></td><td style="width:60%"><div class="bar"><i style="width:${mastery(L)}%"></i></div></td><td style="text-align:right">${mastery(L)}%</td></tr>`).join('')}</table><p class="mut sm">Una unidad cuenta como dominada con 70 % o más de aciertos.</p></div>
  <div class="card"><h3>Aciertos por categoría</h3>${cats.length?`<table class="t">${cats.map(([c,s])=>{const p=Math.round(100*s.ok/s.n);return `<tr><td>${esc(c)}</td><td style="width:34%"><div class="bar"><i style="width:${p}%;background:${p<70?'var(--bad)':'var(--ok)'}"></i></div></td><td style="text-align:right">${p}%</td></tr>`}).join('')}</table>`:'<p class="mut">Completa alguna lección para ver tu diagnóstico.</p>'}</div>
+ <details class="card chuleta"><summary>Cómo te enseña Ascenso (y por qué funciona)</summary><ul>
+ <li><b>Poco y a menudo.</b> Partes de 2–5 minutos: repartir el estudio en varios días fija mucho mejor que darse un atracón.</li>
+ <li><b>Recordar en vez de releer.</b> Intentar sacar la respuesta de memoria (aunque cueste) es lo que más afianza lo aprendido.</li>
+ <li><b>Repaso espaciado.</b> Lo que fallas vuelve pronto; lo que aciertas, cada vez más tarde.</li>
+ <li><b>Mezclar temas.</b> Cada lección empieza con preguntas de otras anteriores: así aprendes a elegir la regla correcta, como en el examen.</li>
+ <li><b>Primero entender, luego practicar.</b> Explicación con ejemplos que entiendes, después ejercicios y corrección con el porqué.</li>
+ <li><b>Oír y decir.</b> Escucha las frases y repítelas en voz alta (shadowing): mejora la pronunciación y la comprensión oral.</li>
+ <li><b>Mucho inglés comprensible.</b> Fuera de la app, lee y escucha cosas que entiendas casi del todo (series con subtítulos en inglés, libros graduados).</li></ul></details>
  <div class="card"><h3>Últimas sesiones</h3>${S.hist.length?`<table class="t">${S.hist.slice(-8).reverse().map(h=>`<tr><td class="mut">${h.d}</td><td>${esc(h.t)}</td><td style="text-align:right">${h.pct}%</td></tr>`).join('')}</table>`:'<p class="mut">Sin sesiones todavía.</p>'}</div>`)}
 /* ================= AJUSTES ================= */
 const SKINS={"clasico": ["Clásico", "#2f6fed", "#f3f5fb", "Limpio y moderno: claro u oscuro con color a elegir"], "aula": ["Aula", "#f4cf4d", "#1d3a2e", "Pizarra con cuadrícula y bordes de tiza"], "cuaderno": ["Cuaderno", "#2b4fb8", "#fbf7ec", "Hojas de cuaderno con renglones y margen"], "londres": ["Londres", "#c8102e", "#e9edf3", "Menú como línea de metro y ruta de estaciones"], "aeropuerto": ["Aeropuerto", "#ffb300", "#0a0e14", "Panel de salidas, tarjetas de embarque y pestañas arriba"], "terminal": ["Terminal", "#39ff7a", "#030804", "Consola verde con ventanas y menú lateral"], "postal": ["Postal", "#b3261e", "#f2e8d0", "Postales con sello y menú flotante en píldora"], "biblioteca": ["Biblioteca", "#e0b04c", "#24160f", "Madera, lomos de libro y letra con serifa"], "montana": ["Montaña", "#ffb86b", "#1b2a49", "Cumbres al atardecer, cristal y botón de menú flotante"], "tokio": ["Tokio de noche", "#3cf0ff", "#05061a", "Neón y lluvia, línea del tiempo y menú vertical flotante"], "aurora": ["Aurora boreal", "#3dffb0", "#050b1a", "Cielo con auroras, cristal y anillo de progreso"], "liquido": ["Cristal líquido", "#6c4cf6", "#f3e8ff", "Burbujas de color, cristal y bloques; menú tipo dock"]};

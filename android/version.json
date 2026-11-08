@@ -1,10 +1,10 @@
 {
- "versionCode": 21,
- "versionName": "2.2.0",
+ "versionCode": 22,
+ "versionName": "2.3.0",
  "apk": "Ascenso.apk",
- "size": 40437751,
- "sha256": "faf12b1a3ca8c70e6d9740979aab2f771ca1c6ca2faa565716f976b805e36f62",
+ "size": 40440570,
+ "sha256": "e2610eb8005497ca79221a3a9604e1074eb75bd5660bc44a714e114141f3483b",
  "notes": [
-  "Explicaciones nuevas en las 71 lecciones: paso a paso, en español sencillo, con ejemplos traducidos y con voz, errores típicos y resumen final"
+  "Lecciones divididas en partes cortas de 2-5 minutos con progreso guardado, minijuego de palabras, repaso intercalado, repetir en voz alta, rachas y celebraciones"
  ]
 }
