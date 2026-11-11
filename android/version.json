@@ -1,10 +1,13 @@
 {
- "versionCode": 22,
- "versionName": "2.3.0",
+ "versionCode": 23,
+ "versionName": "2.4.0",
  "apk": "Ascenso.apk",
- "size": 40440570,
- "sha256": "e2610eb8005497ca79221a3a9604e1074eb75bd5660bc44a714e114141f3483b",
+ "size": 45401553,
+ "sha256": "8bcab64de78e76555101549b2522ce09e4bb42e1788ace5f2d224dcd0aaaca5a",
  "notes": [
-  "Lecciones divididas en partes cortas de 2-5 minutos con progreso guardado, minijuego de palabras, repaso intercalado, repetir en voz alta, rachas y celebraciones"
+  "Lecciones y ejercicios relacionados por regla; correcciones de inglés y ayuda al fallar",
+  "Audio natural incluido sin conexión; borradores guardados y micrófono detenido al salir",
+  "Avance de nivel coherente y diagnóstico progresivo; examen con preguntas nuevas y práctica escrita y oral",
+  "Diez lecciones nuevas en A2 y B1; títulos completos y progreso sin rachas ni confeti"
  ]
 }
